@@ -116,12 +116,14 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
     top_100_products = df["ProductID"].value_counts().head(100).index
     df["top_100_product"] = df["ProductID"].isin(top_100_products).astype(int)
 
+    """
     # Feature: Define efficient user as those with average pick time in top 50% and total picks in top 50%
     worker_stats = df.groupby("UserID")["Time_Delta_sec"].agg(["mean", "count"])
     worker_stats["mean"] = worker_stats["mean"].rank(pct=True)
     worker_stats["count"] = worker_stats["count"].rank(pct=True)
     df = df.merge(worker_stats, on="UserID", how="left")
     df["efficient_user"] = ((df["mean"] <= 0.5) & (df["count"] <= 0.5)).astype(int)
+    """
 
     # Final feature lists
     feature_cols = [
@@ -138,7 +140,7 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
         "UOM_group",
         "day_of_week",
         "top_100_product",
-        "efficient_user",
+        # "efficient_user",
     ]
 
     cat_cols = [
@@ -151,7 +153,7 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
         "UOM_group",
         "day_of_week",
         "top_100_product",
-        "efficient_user",
+        # "efficient_user",
     ]
 
     return df, feature_cols, cat_cols
