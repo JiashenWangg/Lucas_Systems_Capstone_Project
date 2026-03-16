@@ -45,7 +45,13 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
         & (df["WorkCode"] == work_code)
     ].copy()
 
-    # Feature: Aisle Grouping
+    # Feature: Aisle Grouping, top-5 encoding
+    top_aisles = df["Aisle"].value_counts().head(5).index
+    df["Aisle"] = pd.to_numeric(df["Aisle"], errors="coerce").fillna(-1).astype(int)
+    df["Aisle_group"] = df["Aisle"].apply(
+        lambda a: str(a) if a in top_aisles else "other"
+    )
+    """
     if warehouse == "OE":
         if work_code == "30":
             freq_aisles = [39, 40, 41, 42]
@@ -65,6 +71,7 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
     df["Aisle_group"] = df["Aisle"].apply(
         lambda a: str(a) if a in freq_aisles else "other"
     )
+    """
 
     # Feature: Level Grouping
     def level_group(l):
