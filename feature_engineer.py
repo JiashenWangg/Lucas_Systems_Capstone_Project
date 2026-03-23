@@ -53,9 +53,6 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
     )
 
     df["Aisle"] = pd.to_numeric(df["Aisle"], errors="coerce").fillna(-1).astype(int)
-    df["Aisle_group"] = df["Aisle"].apply(
-        lambda a: str(a) if a in freq_aisles else "other"
-    )
 
     # Feature: Level Grouping
     def level_group(l):
@@ -112,7 +109,7 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
     worker_stats["mean"] = worker_stats["mean"].rank(pct=True)
     worker_stats["count"] = worker_stats["count"].rank(pct=True)
     df = df.merge(worker_stats, on="UserID", how="left")
-    df["efficient_user"] = ((df["mean"] <= 0.5) & (df["count"] <= 0.5)).astype(int)
+#    df["efficient_user"] = ((df["mean"] <= 0.5) & (df["count"] <= 0.5)).astype(int)
 
     # Final feature lists
     feature_cols = [
