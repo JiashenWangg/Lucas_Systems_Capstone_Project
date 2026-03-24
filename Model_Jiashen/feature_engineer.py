@@ -17,7 +17,7 @@ import numpy as np
 from pathlib import Path
 
 
-def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
+def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code=["30"]):
     """
     Loads data and applies preprocessing/feature engineering
     Args:
@@ -37,12 +37,17 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
     for col in ["Time_Delta_sec", "Weight", "Cube", "Quantity", "Travel_Distance"]:
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce")
+
     df["WorkCode"] = df["WorkCode"].astype(str)
+    df["WorkCode"] = df["WorkCode"].apply(
+        lambda x: x.split(".")[0] if isinstance(x, str) else x
+    )
+
     df = df.dropna(subset=["Timestamp"]).copy()
     df = df[
         (df["Time_Delta_sec"] < max_time)
         & (df["Travel_Distance"] >= 0)
-        & (df["WorkCode"] == work_code)
+        & (df["WorkCode"].isin(work_code))
     ].copy()
 
     # Feature: Aisle Grouping, top-5 encoding
@@ -164,7 +169,12 @@ def get_engineered_df_allWC(file_path, warehouse="OE", max_time=300):
     for col in ["Time_Delta_sec", "Weight", "Cube", "Quantity", "Travel_Distance"]:
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce")
+
     df["WorkCode"] = df["WorkCode"].astype(str)
+    df["WorkCode"] = df["WorkCode"].apply(
+        lambda x: x.split(".")[0] if isinstance(x, str) else x
+    )
+
     df = df.dropna(subset=["Timestamp"]).copy()
     df = df[(df["Time_Delta_sec"] < max_time) & (df["Travel_Distance"] >= 0)].copy()
 
