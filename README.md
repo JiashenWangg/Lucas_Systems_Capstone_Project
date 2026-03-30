@@ -90,4 +90,26 @@ This project enables warehouse managers to:
 - identify operational bottlenecks
 - compare efficiency across warehouses
 
+---
 
+## Scripts
+
+This section highlights the scripts that can be called.
+
+### preprocess.py
+
+* **Description:** A preprocessing script to load and validate the input warehouse data, perform data cleaning and feature engineering, and export the resulting data as parquet files for subsequent modelling.
+* **Arguments:**
+    * `data_path`: The path to the root data folder
+        * Example: `"./data"`
+    * `wh_name`: The name of the warehouse to run the preprocessing script for
+        * Example: `"OE"`
+    * `threshold`: Percentile threshold for removing outliers. Any observation have a time delta higher than the specified threshold is removed.
+        * Default: 0.98
+
+* **Output:** A processed `DataFrame` from subsequent analysis and modeling compiling data from the Activity, Locations, and Products files. It contains the following columns:
+    * `ActivityCode`: Either `AssignmentOpen` or `PickPut`. `AssignmentOpen` indicates that the observation marks the beginning of a worker's assignment. `PickPut` indicates that the observation corresponds to a task that the worker just completed.
+    * `UserID`: An ID to uniquely identify a particular worker in the warehouse.
+    * `WorkCode`: A number (e.g., 10 or 20) to identify the particular type of task that the worker is carrying out. For example, WorkCode 10 may indicate that a worker is picking items to a conveyor belt. WorkCodes may differ based on the type of task and/or the particular area in the warehouse in which the task is being carried out.
+    * `AssignmentID`: An ID that uniquely identifies a particular assignment. An assignment generally consists of multiple Units of Work (UoW). An assignment is generally only assigned to one user, and it can be assumed that assignments do not carry over to the next working day.
+    * `ProductID`: An ID that uniquely identifies a particular product in a warehouse. It served as a foreign key in the Activity data to reference the Product table.
