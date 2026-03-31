@@ -17,7 +17,7 @@ import numpy as np
 from pathlib import Path
 
 
-def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code=["30"]):
+def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
     """
     Loads data and applies preprocessing/feature engineering
     Args:
@@ -47,7 +47,7 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code=["30"])
     df = df[
         (df["Time_Delta_sec"] < max_time)
         & (df["Travel_Distance"] >= 0)
-        & (df["WorkCode"].isin(work_code))
+        & (df["WorkCode"] == work_code))
     ].copy()
 
     # Feature: Aisle Grouping, top-5 encoding
@@ -212,10 +212,10 @@ def get_engineered_df_allWC(file_path, warehouse="OE", max_time=300):
 
     df["time_of_day"] = df["hour"].apply(tod_bucket)
 
-    # Feature: UOM Grouping
-    valid_uoms = ["EA", "BX", "PK", "CA", "CS"]
+    # Feature: UOM Grouping (top-5 Encoding)
+    top_uoms = df["UnitOfMeasure"].value_counts().head(5).index
     df["UOM_group"] = df["UnitOfMeasure"].apply(
-        lambda u: u if u in valid_uoms else "other"
+        lambda u: u if u in top_uoms else "other"
     )
 
     # Feature: Day of Week
@@ -235,15 +235,6 @@ def get_engineered_df_allWC(file_path, warehouse="OE", max_time=300):
     top_100_products = df["ProductID"].value_counts().head(100).index
     df["top_100_product"] = df["ProductID"].isin(top_100_products).astype(int)
 
-    """
-    # Feature: Define efficient user as those with average pick time in top 50% and total picks in top 50%
-    worker_stats = df.groupby("UserID")["Time_Delta_sec"].agg(["mean", "count"])
-    worker_stats["mean"] = worker_stats["mean"].rank(pct=True)
-    worker_stats["count"] = worker_stats["count"].rank(pct=True)
-    df = df.merge(worker_stats, on="UserID", how="left")
-    df["efficient_user"] = ((df["mean"] <= 0.5) & (df["count"] <= 0.5)).astype(int)
-    """
-
     # Final feature lists
     feature_cols = [
         "WorkCode",
@@ -260,7 +251,6 @@ def get_engineered_df_allWC(file_path, warehouse="OE", max_time=300):
         "UOM_group",
         "day_of_week",
         "top_100_product",
-        # "efficient_user",
     ]
 
     cat_cols = [
@@ -274,7 +264,6 @@ def get_engineered_df_allWC(file_path, warehouse="OE", max_time=300):
         "UOM_group",
         "day_of_week",
         "top_100_product",
-        # "efficient_user",
     ]
 
     return df, feature_cols, cat_cols
