@@ -47,7 +47,7 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
     df = df[
         (df["Time_Delta_sec"] < max_time)
         & (df["Travel_Distance"] >= 0)
-        & (df["WorkCode"] == work_code))
+        & (df["WorkCode"] == work_code)
     ].copy()
 
     # Feature: Aisle Grouping, top-5 encoding
