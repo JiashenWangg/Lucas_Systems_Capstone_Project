@@ -5,11 +5,12 @@ DataFrame along with lists of feature columns and categorical columns for modeli
 
 Instructions:
 - Place this file in the same directory as your main modeling script (e.g., xgboost.ipynb)
-- Import the function using: from feature_engineer import get_engineered_df
+- Import the function using:
+    from feature_engineer import get_engineered_df
+    from feature_engineer import get_engineered_df_allWC
 - Example call:
     df, features, cat_cols = get_engineered_df("data/OE_30.parquet", warehouse="OE", max_time=300, work_code="30")
-
-Note: For OE and OF only, RT might have different encodings
+    df, features_allWC, cat_cols_allWC = get_engineered_df_allWC("data/OE_allWC.parquet", warehouse="OE", max_time=300)
 """
 
 import pandas as pd
@@ -21,10 +22,10 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
     """
     Loads data and applies preprocessing/feature engineering
     Args:
-    - warehouse: "OE" or "OF" to determine aisle grouping logic (default "OE")
+    - warehouse: string indicating the warehouse
     - file_path: path to the parquet file containing the data
     - max_time: maximum Time_Delta_sec to consider for filtering (default 300s)
-    - work_code: WorkCode to filter on (default '30')
+    - work_code: WorkCode to filter on
     Returns:
     - df: the processed DataFrame ready for modeling
     - feature_cols: list of columns to be used as features
@@ -32,6 +33,7 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
     """
     # Load data
     df = pd.read_parquet(file_path)
+
     # Ensure Timestamp and basic numerics
     df["Timestamp"] = pd.to_datetime(df.get("Timestamp"), errors="coerce")
     for col in ["Time_Delta_sec", "Weight", "Cube", "Quantity", "Travel_Distance"]:
@@ -53,9 +55,7 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
     # Feature: Aisle Grouping, top-5 encoding
     top_aisles = df["Aisle"].value_counts().head(5).index
     df["Aisle"] = pd.to_numeric(df["Aisle"], errors="coerce").fillna(-1).astype(int)
-    df["Aisle_group"] = df["Aisle"].apply(
-        lambda a: str(a) if a in top_aisles else "other"
-    )
+    df["aisle"] = df["Aisle"].apply(lambda a: str(a) if a in top_aisles else "other")
 
     # Feature: Level Grouping
     def level_group(l):
@@ -65,7 +65,7 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
         except:
             return str(l)
 
-    df["Level_group"] = df["Level"].apply(level_group)
+    df["level"] = df["Level"].apply(level_group)
 
     # Feature: Time of Day Buckets
     df["hour"] = df["Timestamp"].dt.hour.astype(int)
@@ -85,10 +85,8 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
     df["time_of_day"] = df["hour"].apply(tod_bucket)
 
     # Feature: UOM Grouping
-    valid_uoms = ["EA", "BX", "PK", "CA", "CS"]
-    df["UOM_group"] = df["UnitOfMeasure"].apply(
-        lambda u: u if u in valid_uoms else "other"
-    )
+    top_uoms = df["UnitOfMeasure"].value_counts().head(5).index
+    df["UoM"] = df["UnitOfMeasure"].apply(lambda u: u if u in top_uoms else "other")
 
     # Feature: Day of Week
     df["day_of_week"] = df["Timestamp"].dt.day_name()
@@ -99,22 +97,13 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
     )
     df["same_aisle"] = (df["Aisle"] == df["Prev_Aisle"]).astype(int)
     df["same_lockey"] = (df["LocKey"] == df["PrevLocKey"]).astype(int)
-    df["diff_level"] = (
-        (df["LocKey"] == df["PrevLocKey"]) & (df["Level"] != df.get("Prev_Level"))
+    df["same_level"] = (
+        (df["LocKey"] == df["PrevLocKey"]) & (df["Level"] == df.get("Prev_Level"))
     ).astype(int)
 
     # Feature: Top 100 Products
     top_100_products = df["ProductID"].value_counts().head(100).index
     df["top_100_product"] = df["ProductID"].isin(top_100_products).astype(int)
-
-    """
-    # Feature: Define efficient user as those with average pick time in top 50% and total picks in top 50%
-    worker_stats = df.groupby("UserID")["Time_Delta_sec"].agg(["mean", "count"])
-    worker_stats["mean"] = worker_stats["mean"].rank(pct=True)
-    worker_stats["count"] = worker_stats["count"].rank(pct=True)
-    df = df.merge(worker_stats, on="UserID", how="left")
-    df["efficient_user"] = ((df["mean"] <= 0.5) & (df["count"] <= 0.5)).astype(int)
-    """
 
     # Final feature lists
     feature_cols = [
@@ -122,29 +111,27 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
         "Weight",
         "Cube",
         "Quantity",
-        "Aisle_group",
-        "Level_group",
+        "aisle",
+        "level",
         "time_of_day",
         "same_aisle",
         "same_lockey",
-        "diff_level",
-        "UOM_group",
+        "same_level",
+        "UoM",
         "day_of_week",
         "top_100_product",
-        # "efficient_user",
     ]
 
     cat_cols = [
-        "Aisle_group",
-        "Level_group",
+        "aisle",
+        "level",
         "time_of_day",
         "same_aisle",
         "same_lockey",
-        "diff_level",
-        "UOM_group",
+        "same_level",
+        "UoM",
         "day_of_week",
         "top_100_product",
-        # "efficient_user",
     ]
 
     return df, feature_cols, cat_cols
@@ -154,7 +141,7 @@ def get_engineered_df_allWC(file_path, warehouse="OE", max_time=300):
     """
     Loads data and applies preprocessing/feature engineering
     Args:
-    - warehouse: "OE" or "OF" to determine aisle grouping logic (default "OE")
+    - warehouse: string indicating the warehouse
     - file_path: path to the parquet file containing the data
     - max_time: maximum Time_Delta_sec to consider for filtering (default 300s)
     Returns:
@@ -164,6 +151,7 @@ def get_engineered_df_allWC(file_path, warehouse="OE", max_time=300):
     """
     # Load data
     df = pd.read_parquet(file_path)
+
     # Ensure Timestamp and basic numerics
     df["Timestamp"] = pd.to_datetime(df.get("Timestamp"), errors="coerce")
     for col in ["Time_Delta_sec", "Weight", "Cube", "Quantity", "Travel_Distance"]:
@@ -181,9 +169,7 @@ def get_engineered_df_allWC(file_path, warehouse="OE", max_time=300):
     # Feature: Aisle Grouping, top-5 encoding
     top_aisles = df["Aisle"].value_counts().head(5).index
     df["Aisle"] = pd.to_numeric(df["Aisle"], errors="coerce").fillna(-1).astype(int)
-    df["Aisle_group"] = df["Aisle"].apply(
-        lambda a: str(a) if a in top_aisles else "other"
-    )
+    df["aisle"] = df["Aisle"].apply(lambda a: str(a) if a in top_aisles else "other")
 
     # Feature: Level Grouping
     def level_group(l):
@@ -193,7 +179,7 @@ def get_engineered_df_allWC(file_path, warehouse="OE", max_time=300):
         except:
             return str(l)
 
-    df["Level_group"] = df["Level"].apply(level_group)
+    df["level"] = df["Level"].apply(level_group)
 
     # Feature: Time of Day Buckets
     df["hour"] = df["Timestamp"].dt.hour.astype(int)
@@ -214,9 +200,7 @@ def get_engineered_df_allWC(file_path, warehouse="OE", max_time=300):
 
     # Feature: UOM Grouping (top-5 Encoding)
     top_uoms = df["UnitOfMeasure"].value_counts().head(5).index
-    df["UOM_group"] = df["UnitOfMeasure"].apply(
-        lambda u: u if u in top_uoms else "other"
-    )
+    df["UoM"] = df["UnitOfMeasure"].apply(lambda u: u if u in top_uoms else "other")
 
     # Feature: Day of Week
     df["day_of_week"] = df["Timestamp"].dt.day_name()
@@ -227,8 +211,8 @@ def get_engineered_df_allWC(file_path, warehouse="OE", max_time=300):
     )
     df["same_aisle"] = (df["Aisle"] == df["Prev_Aisle"]).astype(int)
     df["same_lockey"] = (df["LocKey"] == df["PrevLocKey"]).astype(int)
-    df["diff_level"] = (
-        (df["LocKey"] == df["PrevLocKey"]) & (df["Level"] != df.get("Prev_Level"))
+    df["same_level"] = (
+        (df["LocKey"] == df["PrevLocKey"]) & (df["Level"] == df.get("Prev_Level"))
     ).astype(int)
 
     # Feature: Top 100 Products
@@ -242,26 +226,26 @@ def get_engineered_df_allWC(file_path, warehouse="OE", max_time=300):
         "Weight",
         "Cube",
         "Quantity",
-        "Aisle_group",
-        "Level_group",
+        "aisle",
+        "level",
         "time_of_day",
         "same_aisle",
         "same_lockey",
-        "diff_level",
-        "UOM_group",
+        "same_level",
+        "UoM",
         "day_of_week",
         "top_100_product",
     ]
 
     cat_cols = [
         "WorkCode",
-        "Aisle_group",
-        "Level_group",
+        "aisle",
+        "level",
         "time_of_day",
         "same_aisle",
         "same_lockey",
-        "diff_level",
-        "UOM_group",
+        "same_level",
+        "UoM",
         "day_of_week",
         "top_100_product",
     ]
