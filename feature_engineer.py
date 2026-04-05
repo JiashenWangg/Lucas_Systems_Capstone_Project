@@ -9,8 +9,8 @@ Instructions:
     from feature_engineer import get_engineered_df
     from feature_engineer import get_engineered_df_allWC
 - Example call:
-    df, features, cat_cols = get_engineered_df("data/OE_30.parquet", warehouse="OE", max_time=300, work_code="30")
-    df, features_allWC, cat_cols_allWC = get_engineered_df_allWC("data/OE_allWC.parquet", warehouse="OE", max_time=300)
+    df, features, cat_cols = get_engineered_df("data/OE_30.parquet", warehouse="OE", max_time=300, work_code="30", sequenced=True)
+    df, features_allWC, cat_cols_allWC = get_engineered_df_allWC("data/OE_allWC.parquet", warehouse="OE", max_time=300, sequenced=True)
 """
 
 import pandas as pd
@@ -18,7 +18,9 @@ import numpy as np
 from pathlib import Path
 
 
-def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
+def get_engineered_df(
+    file_path, warehouse="OE", max_time=300, work_code="30", sequenced=True
+):
     """
     Loads data and applies preprocessing/feature engineering
     Args:
@@ -26,6 +28,8 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
     - file_path: path to the parquet file containing the data
     - max_time: maximum Time_Delta_sec to consider for filtering (default 300s)
     - work_code: WorkCode to filter on
+    - sequenced: whether to create features that depend on previous row (default True)
+     (if False, will skip features like Travel_Distance, same_aisle, same_lockey, same_level that require sequencing)
     Returns:
     - df: the processed DataFrame ready for modeling
     - feature_cols: list of columns to be used as features
@@ -36,7 +40,7 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
 
     # Ensure Timestamp and basic numerics
     df["Timestamp"] = pd.to_datetime(df.get("Timestamp"), errors="coerce")
-    for col in ["Time_Delta_sec", "Weight", "Cube", "Quantity", "Travel_Distance"]:
+    for col in ["Time_Delta_sec", "Weight", "Cube", "Quantity"]:
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce")
 
@@ -46,11 +50,7 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
     )
 
     df = df.dropna(subset=["Timestamp"]).copy()
-    df = df[
-        (df["Time_Delta_sec"] < max_time)
-        & (df["Travel_Distance"] >= 0)
-        & (df["WorkCode"] == work_code)
-    ].copy()
+    df = df[(df["Time_Delta_sec"] < max_time) & (df["WorkCode"] == work_code)].copy()
 
     # Feature: Aisle Grouping, top-5 encoding
     top_aisles = df["Aisle"].value_counts().head(5).index
@@ -74,13 +74,13 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
         if 6 <= h < 12:
             return "6-12"
         elif 12 <= h < 16:
-            return "12-4"
+            return "12-16"
         elif 16 <= h < 20:
-            return "4-8"
+            return "16-20"
         elif 20 <= h <= 23:
-            return "8-12"
+            return "20-24"
         else:
-            return "after_midnight"
+            return "0-6"
 
     df["time_of_day"] = df["hour"].apply(tod_bucket)
 
@@ -95,11 +95,6 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
     df["Prev_Aisle"] = (
         pd.to_numeric(df["Prev_Aisle"], errors="coerce").fillna(-1).astype(int)
     )
-    df["same_aisle"] = (df["Aisle"] == df["Prev_Aisle"]).astype(int)
-    df["same_lockey"] = (df["LocKey"] == df["PrevLocKey"]).astype(int)
-    df["same_level"] = (
-        (df["LocKey"] == df["PrevLocKey"]) & (df["Level"] == df.get("Prev_Level"))
-    ).astype(int)
 
     # Feature: Top 100 Products
     top_100_products = df["ProductID"].value_counts().head(100).index
@@ -107,16 +102,12 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
 
     # Final feature lists
     feature_cols = [
-        "Travel_Distance",
         "Weight",
         "Cube",
         "Quantity",
         "aisle",
         "level",
         "time_of_day",
-        "same_aisle",
-        "same_lockey",
-        "same_level",
         "UoM",
         "day_of_week",
         "top_100_product",
@@ -126,24 +117,32 @@ def get_engineered_df(file_path, warehouse="OE", max_time=300, work_code="30"):
         "aisle",
         "level",
         "time_of_day",
-        "same_aisle",
-        "same_lockey",
-        "same_level",
         "UoM",
         "day_of_week",
         "top_100_product",
     ]
 
+    if sequenced:
+        df["same_aisle"] = (df["Aisle"] == df["Prev_Aisle"]).astype(int)
+        df["same_lockey"] = (df["LocKey"] == df["PrevLocKey"]).astype(int)
+        df["same_level"] = (
+            (df["LocKey"] == df["PrevLocKey"]) & (df["Level"] == df.get("Prev_Level"))
+        ).astype(int)
+        feature_cols += ["Travel_Distance", "same_aisle", "same_lockey", "same_level"]
+        cat_cols += ["same_aisle", "same_lockey", "same_level"]
+
     return df, feature_cols, cat_cols
 
 
-def get_engineered_df_allWC(file_path, warehouse="OE", max_time=300):
+def get_engineered_df_allWC(file_path, warehouse="OE", max_time=300, sequenced=True):
     """
     Loads data and applies preprocessing/feature engineering
     Args:
     - warehouse: string indicating the warehouse
     - file_path: path to the parquet file containing the data
     - max_time: maximum Time_Delta_sec to consider for filtering (default 300s)
+    - sequenced: whether to create features that depend on previous row (default True)
+     (if False, will skip features like Travel_Distance, same_aisle, same_lockey, same_level that require sequencing)
     Returns:
     - df: the processed DataFrame ready for modeling
     - feature_cols: list of columns to be used as features
@@ -154,7 +153,7 @@ def get_engineered_df_allWC(file_path, warehouse="OE", max_time=300):
 
     # Ensure Timestamp and basic numerics
     df["Timestamp"] = pd.to_datetime(df.get("Timestamp"), errors="coerce")
-    for col in ["Time_Delta_sec", "Weight", "Cube", "Quantity", "Travel_Distance"]:
+    for col in ["Time_Delta_sec", "Weight", "Cube", "Quantity"]:
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce")
 
@@ -164,7 +163,7 @@ def get_engineered_df_allWC(file_path, warehouse="OE", max_time=300):
     )
 
     df = df.dropna(subset=["Timestamp"]).copy()
-    df = df[(df["Time_Delta_sec"] < max_time) & (df["Travel_Distance"] >= 0)].copy()
+    df = df[(df["Time_Delta_sec"] < max_time)].copy()
 
     # Feature: Aisle Grouping, top-5 encoding
     top_aisles = df["Aisle"].value_counts().head(5).index
@@ -205,16 +204,6 @@ def get_engineered_df_allWC(file_path, warehouse="OE", max_time=300):
     # Feature: Day of Week
     df["day_of_week"] = df["Timestamp"].dt.day_name()
 
-    # Feature: Relationship with Previous Row
-    df["Prev_Aisle"] = (
-        pd.to_numeric(df["Prev_Aisle"], errors="coerce").fillna(-1).astype(int)
-    )
-    df["same_aisle"] = (df["Aisle"] == df["Prev_Aisle"]).astype(int)
-    df["same_lockey"] = (df["LocKey"] == df["PrevLocKey"]).astype(int)
-    df["same_level"] = (
-        (df["LocKey"] == df["PrevLocKey"]) & (df["Level"] == df.get("Prev_Level"))
-    ).astype(int)
-
     # Feature: Top 100 Products
     top_100_products = df["ProductID"].value_counts().head(100).index
     df["top_100_product"] = df["ProductID"].isin(top_100_products).astype(int)
@@ -222,16 +211,12 @@ def get_engineered_df_allWC(file_path, warehouse="OE", max_time=300):
     # Final feature lists
     feature_cols = [
         "WorkCode",
-        "Travel_Distance",
         "Weight",
         "Cube",
         "Quantity",
         "aisle",
         "level",
         "time_of_day",
-        "same_aisle",
-        "same_lockey",
-        "same_level",
         "UoM",
         "day_of_week",
         "top_100_product",
@@ -242,12 +227,22 @@ def get_engineered_df_allWC(file_path, warehouse="OE", max_time=300):
         "aisle",
         "level",
         "time_of_day",
-        "same_aisle",
-        "same_lockey",
-        "same_level",
         "UoM",
         "day_of_week",
         "top_100_product",
     ]
+
+    if sequenced:
+        # Feature: Relationship with Previous Row
+        df["Prev_Aisle"] = (
+            pd.to_numeric(df["Prev_Aisle"], errors="coerce").fillna(-1).astype(int)
+        )
+        df["same_aisle"] = (df["Aisle"] == df["Prev_Aisle"]).astype(int)
+        df["same_lockey"] = (df["LocKey"] == df["PrevLocKey"]).astype(int)
+        df["same_level"] = (
+            (df["LocKey"] == df["PrevLocKey"]) & (df["Level"] == df.get("Prev_Level"))
+        ).astype(int)
+        feature_cols += ["Travel_Distance", "same_aisle", "same_lockey", "same_level"]
+        cat_cols += ["same_aisle", "same_lockey", "same_level"]
 
     return df, feature_cols, cat_cols
