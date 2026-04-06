@@ -96,9 +96,34 @@ def get_engineered_df(
         pd.to_numeric(df["Prev_Aisle"], errors="coerce").fillna(-1).astype(int)
     )
 
-    # Feature: Top 100 Products
-    top_100_products = df["ProductID"].value_counts().head(100).index
-    df["top_100_product"] = df["ProductID"].isin(top_100_products).astype(int)
+    # Feature: Top Products that accounts for [25%, 25-50, 50-75, rest] of occurrences
+    product_counts = df["ProductID"].value_counts()
+    t25_products = product_counts[
+        product_counts.cumsum() <= 0.25 * product_counts.sum()
+    ].index
+    t25_50_products = product_counts[
+        (product_counts.cumsum() > 0.25 * product_counts.sum())
+        & (product_counts.cumsum() <= 0.5 * product_counts.sum())
+    ].index
+    t50_75_products = product_counts[
+        (product_counts.cumsum() > 0.5 * product_counts.sum())
+        & (product_counts.cumsum() <= 0.75 * product_counts.sum())
+    ].index
+    other_products = product_counts[
+        product_counts.cumsum() > 0.75 * product_counts.sum()
+    ].index
+    df["t25_products"] = df["ProductID"].apply(
+        lambda p: "1" if p in t25_products else "0"
+    )
+    df["t25_50_products"] = df["ProductID"].apply(
+        lambda p: "1" if p in t25_50_products else "0"
+    )
+    df["t50_75_products"] = df["ProductID"].apply(
+        lambda p: "1" if p in t50_75_products else "0"
+    )
+    df["other_products"] = df["ProductID"].apply(
+        lambda p: "1" if p in other_products else "0"
+    )
 
     # Final feature lists
     feature_cols = [
@@ -110,7 +135,10 @@ def get_engineered_df(
         "time_of_day",
         "UoM",
         "day_of_week",
-        "top_100_product",
+        "t25_products",
+        "t25_50_products",
+        "t50_75_products",
+        "other_products",
     ]
 
     cat_cols = [
@@ -119,7 +147,10 @@ def get_engineered_df(
         "time_of_day",
         "UoM",
         "day_of_week",
-        "top_100_product",
+        "t25_products",
+        "t25_50_products",
+        "t50_75_products",
+        "other_products",
     ]
 
     if sequenced:
@@ -204,9 +235,32 @@ def get_engineered_df_allWC(file_path, warehouse="OE", max_time=300, sequenced=T
     # Feature: Day of Week
     df["day_of_week"] = df["Timestamp"].dt.day_name()
 
-    # Feature: Top 100 Products
-    top_100_products = df["ProductID"].value_counts().head(100).index
-    df["top_100_product"] = df["ProductID"].isin(top_100_products).astype(int)
+    # Feature: Top Products that accounts for [25%, 25-50, 50-75, rest] of occurrences
+    product_counts = df["ProductID"].value_counts()
+    t25_products = product_counts[product_counts <= product_counts.quantile(0.25)].index
+    t25_50_products = product_counts[
+        (product_counts > product_counts.quantile(0.25))
+        & (product_counts <= product_counts.quantile(0.5))
+    ].index
+    t50_75_products = product_counts[
+        (product_counts > product_counts.quantile(0.5))
+        & (product_counts <= product_counts.quantile(0.75))
+    ].index
+    other_products = product_counts[
+        product_counts > product_counts.quantile(0.75)
+    ].index
+    df["t25_products"] = df["ProductID"].apply(
+        lambda p: "1" if p in t25_products else "0"
+    )
+    df["t25_50_products"] = df["ProductID"].apply(
+        lambda p: "1" if p in t25_50_products else "0"
+    )
+    df["t50_75_products"] = df["ProductID"].apply(
+        lambda p: "1" if p in t50_75_products else "0"
+    )
+    df["other_products"] = df["ProductID"].apply(
+        lambda p: "1" if p in other_products else "0"
+    )
 
     # Final feature lists
     feature_cols = [
@@ -219,7 +273,10 @@ def get_engineered_df_allWC(file_path, warehouse="OE", max_time=300, sequenced=T
         "time_of_day",
         "UoM",
         "day_of_week",
-        "top_100_product",
+        "t25_products",
+        "t25_50_products",
+        "t50_75_products",
+        "other_products",
     ]
 
     cat_cols = [
@@ -229,7 +286,10 @@ def get_engineered_df_allWC(file_path, warehouse="OE", max_time=300, sequenced=T
         "time_of_day",
         "UoM",
         "day_of_week",
-        "top_100_product",
+        "t25_products",
+        "t25_50_products",
+        "t50_75_products",
+        "other_products",
     ]
 
     if sequenced:
