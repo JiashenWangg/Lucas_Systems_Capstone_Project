@@ -346,39 +346,7 @@ def print_comparison(warehouse, workcodes, block_results_df,
     print(f"\nWarehouse: {warehouse} | Block size: {BLOCK_SIZE} tasks")
     print(pd.DataFrame(rows).to_string(index=False))
 
-
-def plot_actual_vs_predicted(warehouse, block_detail_df):
-    """Scatter plot of actual vs predicted block times."""
-    plot_df = block_detail_df[
-        (block_detail_df["Warehouse"] == warehouse) &
-        (block_detail_df["pred"].notna())
-    ].copy()
-
-    if plot_df.empty:
-        print("No data to plot.")
-        return
-
-    plt.figure(figsize=(8, 6))
-    plt.scatter(plot_df["actual_time"], plot_df["pred"], alpha=0.6)
-    plt.plot(
-        [plot_df["actual_time"].min(), plot_df["actual_time"].max()],
-        [plot_df["actual_time"].min(), plot_df["actual_time"].max()],
-        color="red", linestyle="--"
-    )
-    plt.xlabel("Actual total time (sec) per block")
-    plt.ylabel("Predicted total time (sec) per block")
-    plt.title(
-        f"XGBoost (deployment-safe) — Actual vs Predicted at Block Level\n"
-        f"Warehouse: {warehouse} | Block size: {BLOCK_SIZE}"
-    )
-    plt.grid(True)
-    plt.tight_layout()
-    plt.savefig(f"actual_vs_predicted_{warehouse.lower()}.png", dpi=150)
-    plt.show()
-    print(f"Plot saved to actual_vs_predicted_{warehouse.lower()}.png")
-
-
-# ── Main ───────────────────────────────────────────────────────────────────────
+# ── Main ─────────────────────────────────────────────────────────────────────
 def main():
     parser = argparse.ArgumentParser(
         description="Chunk-level XGBoost with worker random intercept effects."
@@ -416,8 +384,6 @@ def main():
     clean["mae"] = clean["mae"].round(1)
     print(clean.drop(columns=["rmse", "Warehouse"], errors="ignore").to_string(index=False))
 
-    # Plot baseline actual vs predicted
-    plot_actual_vs_predicted(warehouse, block_detail_df)
 
     # Run worker effects
     print("\n" + "="*60)
@@ -432,11 +398,11 @@ def main():
     print_comparison(warehouse, workcodes, block_results_df, block_results_w_df)
 
     # Save results to CSV
-    out_base = f"results_baseline_{warehouse.lower()}.csv"
-    out_work = f"results_worker_{warehouse.lower()}.csv"
-    block_results_df.to_csv(out_base, index=False)
-    block_results_w_df.to_csv(out_work, index=False)
-    print(f"\nResults saved to {out_base} and {out_work}")
+    # out_base = f"results_baseline_{warehouse.lower()}.csv"
+    # out_work = f"results_worker_{warehouse.lower()}.csv"
+    # block_results_df.to_csv(out_base, index=False)
+    # block_results_w_df.to_csv(out_work, index=False)
+    # print(f"\nResults saved to {out_base} and {out_work}")
 
 
 if __name__ == "__main__":
