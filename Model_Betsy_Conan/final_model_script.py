@@ -1,15 +1,15 @@
 """
-chunk_xgboost.py
+final_model_script.py
 ----------------
 Chunk-level XGBoost with worker random intercept effects.
 Trains on deployment-safe features only — no distance, sequential, or time features.
 Discovers WorkCodes automatically from the parquet file.
 
 Usage:
-    python chunk_xgboost.py --warehouse OE
-    python chunk_xgboost.py --warehouse OF
-    python chunk_xgboost.py --warehouse RT
-    python chunk_xgboost.py --warehouse OE --data_dir /path/to/data/processed
+    python final_model_script.py --warehouse OE
+    python final_model_script.py --warehouse OF
+    python final_model_script.py --warehouse RT
+    python final_model_script.py --warehouse OE --data_dir /path/to/data/processed
 """
 
 import argparse
