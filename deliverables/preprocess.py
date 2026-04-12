@@ -1,319 +1,233 @@
 """
 preprocess.py
 -------------
-Load, clean and join raw warehouse CSVs into a single parquet for training.
+Load and preprocess raw warehouse Activity data into a clean parquet file
+ready for model training, evaluation, and incremental updates.
 
-First time (full preprocess):
+Usage:
     python preprocess.py OE
-
-Daily update (append new picks to existing parquet):
-    python preprocess.py OE --new_data daily_activity.csv
-    python preprocess.py OE --new_data daily_activity.csv --max_days 180
+    python preprocess.py OE --data_dir training_data
 
 Args:
     warehouse:   Warehouse code (OE, OF, RT)
-    --new_data:  Optional CSV of new completed picks to append
-    --data_path: Root training_data directory (default: training_data)
-    --threshold: Quantile threshold for time delta filtering (default: 0.98)
-    --max_days:  Trim parquet to last N days after update (default: no limit)
+    --data_dir:  Root training_data directory (default: training_data)
+
+Input (in training_data/WH/):
+    WH_Activity.csv
+    WH_Locations.csv
+    WH_Products.csv
+    WH_Distance_Matrix.csv  (optional)
 
 Output:
-    training_data/WH/WH_startdate_enddate.parquet
-    Log: rows loaded, percentage dropped, day range, number of days
+    training_data/WH/WH_Processed.parquet
+    logs/WH/preprocess_YYYY-MM-DD.log
+
+Processing steps:
+    1. Load Activity, Locations, Products (and Distance if available)
+    2. Sort each user's picks chronologically, compute Time_Delta_sec
+    3. Filter: remove top 2% of Time_Delta_sec globally, then cap at 600s
+    4. Join Locations and Products attributes onto each pick row
+    5. If Distance matrix available, join Travel_Distance per pick
+    6. Save to parquet
 """
 
 import argparse
 import logging
+import sys
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 
-logging.basicConfig(level=logging.INFO,
-                    format="%(asctime)s - %(levelname)s - %(message)s")
-logger = logging.getLogger(__name__)
+sys.path.insert(0, str(Path(__file__).parent))
+from utils.io import (
+    load_activity_csv,
+    load_distance_matrix,
+    load_reference_tables,
+    save_parquet,
+    setup_logging,
+)
 
-COLUMN_NAMES = {
-    "Activity":  ["ActivityCode", "UserID", "WorkCode", "AssignmentID",
-                  "ProductID", "Quantity", "Timestamp", "LocationID"],
-    "Locations": ["LocationID", "Aisle", "Bay", "Level", "Slot"],
-    "Products":  ["ProductID", "ProductCode", "UnitOfMeasure", "Weight", "Cube",
-                  "Length", "Width", "Height"],
-}
+MAX_TIME   = 600
+PERCENTILE = 98
 
 
-# CLI ────────────────────────────────────────────────────────────────────────
 def parse_args():
-    parser = argparse.ArgumentParser(description="Preprocess warehouse training data")
-    parser.add_argument("warehouse",   help="Warehouse code e.g. OE, OF, RT")
-    parser.add_argument("--new_data",  default=None,
-                        help="CSV of new completed picks to append to existing parquet")
-    parser.add_argument("--data_path", default="training_data",
-                        help="Root training_data directory (default: training_data)")
-    parser.add_argument("--threshold", type=float, default=0.98,
-                        help="Quantile threshold for time delta filtering (default: 0.98)")
-    parser.add_argument("--max_days",  type=int, default=None,
-                        help="Trim parquet to last N days after update (default: no limit)")
+    parser = argparse.ArgumentParser(
+        description="Preprocess raw warehouse Activity data to parquet"
+    )
+    parser.add_argument("warehouse", help="Warehouse code e.g. OE, OF, RT")
+    parser.add_argument(
+        "--data_dir", default="training_data",
+        help="Root training_data directory (default: training_data)"
+    )
     return parser.parse_args()
 
 
-# Helpers ────────────────────────────────────────────────────────────────────
-def to_int(df, cols):
-    for c in cols:
-        df[c] = pd.to_numeric(df[c], errors="coerce").astype("Int64")
+def compute_time_delta(df):
+    """
+    Sort each user's picks by Timestamp and compute Time_Delta_sec as the
+    elapsed seconds since their previous pick. First pick per user gets NaN.
+    """
+    df = df.sort_values(["UserID", "Timestamp"]).reset_index(drop=True)
+    df["Prev_Timestamp"] = df.groupby("UserID")["Timestamp"].shift(1)
+    df["Prev_LocationID"] = df.groupby("UserID")["LocationID"].shift(1)
+    df["Time_Delta_sec"] = (
+        df["Timestamp"] - df["Prev_Timestamp"]
+    ).dt.total_seconds()
+    return df
 
 
-def find_existing_parquet(wh_dir, warehouse):
-    """Find the most recent processed parquet if one exists."""
-    parquets = sorted(wh_dir.glob(f"{warehouse.upper()}_*.parquet"))
-    return parquets[-1] if parquets else None
+def filter_time(df, logger):
+    """
+    Two-stage time filter:
+      Stage 1 — remove top (100 - PERCENTILE)% of Time_Delta_sec globally.
+      Stage 2 — hard cap at MAX_TIME seconds.
+    """
+    n_start = len(df)
 
+    threshold = df["Time_Delta_sec"].quantile(PERCENTILE / 100)
+    df = df[df["Time_Delta_sec"] <= threshold].copy()
+    n_after_pct = len(df)
 
-def make_parquet_name(warehouse, df):
-    """Generate parquet filename from date range in data."""
-    ts = pd.to_datetime(df["Timestamp"], errors="coerce")
-    start_date = ts.min().strftime("%Y%m%d")
-    end_date = ts.max().strftime("%Y%m%d")
-    return f"{warehouse.upper()}_{start_date}_{end_date}.parquet"
+    df = df[df["Time_Delta_sec"] <= MAX_TIME].copy()
+    n_after_cap = len(df)
 
+    dropped_pct = n_start - n_after_pct
+    dropped_cap = n_after_pct - n_after_cap
+    total       = n_start - n_after_cap
 
-# Load ───────────────────────────────────────────────────────────────────────
-def load_tables(wh_dir, warehouse):
-    wh        = warehouse.upper()
-    activity  = pd.read_csv(wh_dir / f"{wh}_Activity.csv",
-                            header=0, names=COLUMN_NAMES["Activity"])
-    locations = pd.read_csv(wh_dir / f"{wh}_Locations.csv",
-                            header=0, names=COLUMN_NAMES["Locations"])
-    products  = pd.read_csv(wh_dir / f"{wh}_Products.csv",
-                            header=0, names=COLUMN_NAMES["Products"])
-
-    logger.info(f"Loaded Activity:  {len(activity):,} rows")
-    logger.info(f"Loaded Locations: {len(locations):,} rows")
-    logger.info(f"Loaded Products:  {len(products):,} rows")
-
-    return activity, locations, products
-
-
-# Clean ──────────────────────────────────────────────────────────────────────
-def clean_activity(activity):
-    to_int(activity, ["ProductID", "Quantity", "LocationID"])
-    activity["Timestamp"] = pd.to_datetime(activity["Timestamp"],
-                                           errors="coerce")
-    activity["UserID"] = activity["UserID"].astype(str)
-    activity["WorkCode"] = activity["WorkCode"].astype(str).apply(
-        lambda x: x.split(".")[0] if isinstance(x, str) else x
+    logger.info(
+        f"  Time filter:  {n_start:,} rows in"
     )
-    activity["AssignmentID"] = activity["AssignmentID"].astype(str)
-    activity = activity.dropna(subset=["Timestamp"]).copy()
-
-    if activity.empty:
-        raise ValueError("Activity data is empty after cleaning — check input file")
-
-    return activity
-
-
-def clean_locations(locations):
-    to_int(locations, ["LocationID", "Bay", "Level", "Slot"])
-    return locations
-
-
-def clean_products(products):
-    to_int(products, ["ProductID"])
-    return products[["ProductID", "ProductCode", "UnitOfMeasure",
-                     "Weight", "Cube"]]
-
-
-# Process ────────────────────────────────────────────────────────────────────
-def compute_time_deltas(activity, threshold_q):
-    df = activity.sort_values(["UserID", "Timestamp"]).reset_index(drop=True)
-
-    g = df.groupby("UserID", sort=False)
-    df["Prev_Timestamp"] = g["Timestamp"].shift(1)
-    df["Prev_LocationID"] = g["LocationID"].shift(1)
-    df["Time_Delta_sec"] = (df["Timestamp"] - df["Prev_Timestamp"]).dt.total_seconds()
-
-    n_before = df["Time_Delta_sec"].notna().sum()
-    threshold = df["Time_Delta_sec"].quantile(threshold_q)
-    df.loc[df["Time_Delta_sec"] > threshold, "Time_Delta_sec"] = np.nan
-    n_after = df["Time_Delta_sec"].notna().sum()
-    pct_drop = 100 * (1 - n_after / n_before) if n_before > 0 else 0
-
-    logger.info(f"Time delta threshold ({threshold_q:.0%}): {threshold:.1f}s")
-    logger.info(f"Valid time deltas: {n_after:,} ({pct_drop:.1f}% dropped)")
-
+    logger.info(
+        f"    p{PERCENTILE} cut (≤ {threshold:.1f}s): "
+        f"removed {dropped_pct:,} rows"
+    )
+    logger.info(
+        f"    {MAX_TIME}s hard cap:          "
+        f"removed {dropped_cap:,} rows"
+    )
+    logger.info(
+        f"    Total dropped: {total:,} "
+        f"({100 * total / n_start:.1f}%)"
+    )
+    logger.info(f"    Rows retained: {n_after_cap:,}")
     return df
 
 
-def join_data(activity, products, locations):
-    df = activity.merge(products, on="ProductID", how="left")
-    df = df.merge(locations, on="LocationID", how="left")
-
-    missing_products = df["ProductCode"].isna().mean()
-    missing_locations = df["Aisle"].isna().mean()
-    if missing_products > 0.1:
-        logger.warning(f"{missing_products:.1%} of rows missing product info")
-    if missing_locations > 0.1:
-        logger.warning(f"{missing_locations:.1%} of rows missing location info")
-
-    return df
-
-
-def drop_assignment_open(df):
-    """Drop AssignmentOpen rows and the first pick after them."""
-    if "ActivityCode" not in df.columns:
-        return df
-    open_idx = df[df["ActivityCode"] == "AssignmentOpen"].index
-    first_idx = open_idx + 1
-    to_drop = open_idx.union(first_idx).intersection(df.index)
-    return df.drop(to_drop).reset_index(drop=True)
-
-
-# Full preprocess ────────────────────────────────────────────────────────────
-def run_full_preprocess(wh_dir, warehouse, threshold_q):
-    """
-    Process all historical CSVs from scratch.
-    Called on first run or when doing a full retrain.
-    """
-    logger.info("Running full preprocess on all historical data...")
-
-    activity, locations, products = load_tables(wh_dir, warehouse)
-
-    n_raw = len(activity)
-    activity = clean_activity(activity)
-    locations = clean_locations(locations)
-    products = clean_products(products)
-
-    activity_prepped = compute_time_deltas(activity, threshold_q)
-    df = join_data(activity_prepped, products, locations)
-    df = drop_assignment_open(df)
-
-    pct_drop = 100 * (1 - len(df) / n_raw)
-    logger.info(f"Raw rows: {n_raw:,} → Final rows: {len(df):,} ({pct_drop:.1f}% dropped)")
-
-    return df, locations, products
-
-
-# Incremental append ─────────────────────────────────────────────────────────
-def run_incremental_preprocess(new_data_csv, locations, products, threshold_q):
-    """
-    Process only new picks from a daily CSV and return processed rows
-    ready to append to the existing parquet.
-    """
-    logger.info(f"Running incremental preprocess on: {new_data_csv}")
-
-    new_activity = pd.read_csv(new_data_csv,
-                               header=0, names=COLUMN_NAMES["Activity"])
-    logger.info(f"New rows loaded: {len(new_activity):,}")
-
-    n_raw = len(new_activity)
-    new_activity = clean_activity(new_activity)
-    new_prepped = compute_time_deltas(new_activity, threshold_q)
-    df_new = join_data(new_prepped, products, locations)
-    df_new = drop_assignment_open(df_new)
-
-    pct_drop = 100 * (1 - len(df_new) / n_raw)
-    logger.info(f"New rows: {n_raw:,} → Processed: {len(df_new):,} ({pct_drop:.1f}% dropped)")
-
-    return df_new
-
-
-# Export ─────────────────────────────────────────────────────────────────────
-def export_parquet(df, wh_dir, warehouse, existing_parquet=None):
-    """
-    Save parquet with date-range filename: WH_startdate_enddate.parquet
-    Removes old parquet if filename changes due to updated date range.
-    """
-    filename = make_parquet_name(warehouse, df)
-    out_path = wh_dir / filename
-    df.to_parquet(out_path, index=False)
-
-    if existing_parquet and existing_parquet != out_path and existing_parquet.exists():
-        existing_parquet.unlink()
-        logger.info(f"Removed old parquet: {existing_parquet.name}")
-
-    return out_path
-
-
-def log_summary(df, warehouse):
-    ts = pd.to_datetime(df["Timestamp"], errors="coerce")
-    start_date = ts.min().strftime("%Y-%m-%d")
-    end_date = ts.max().strftime("%Y-%m-%d")
-    n_days = ts.dt.date.nunique()
-    workcodes = sorted(df["WorkCode"].dropna().unique().tolist())
-
-    logger.info(f"\n{'='*50}")
-    logger.info(f"PREPROCESS COMPLETE — {warehouse}")
-    logger.info(f"{'='*50}")
-    logger.info(f"  Rows:       {len(df):,}")
-    logger.info(f"  Date range: {start_date} — {end_date} ({n_days} days)")
-    logger.info(f"  WorkCodes:  {workcodes}")
-    logger.info(f"{'='*50}")
-
-
-# Main ───────────────────────────────────────────────────────────────────────
 def main():
-    args = parse_args()
+    args      = parse_args()
     warehouse = args.warehouse.upper()
-    wh_dir = Path(args.data_path) / warehouse
+    data_dir  = args.data_dir
 
-    if not wh_dir.exists():
-        raise FileNotFoundError(f"Warehouse directory not found: {wh_dir}")
+    setup_logging("preprocess", warehouse)
+    logger = logging.getLogger(__name__)
 
-    existing_parquet = find_existing_parquet(wh_dir, warehouse)
+    logger.info(f"{'='*60}")
+    logger.info(f"PREPROCESS — {warehouse}")
+    logger.info(f"{'='*60}")
 
-    if args.new_data is None:
-        # Full preprocess ────────────────────────────────────────────────────
-        df, locations, products = run_full_preprocess(
-            wh_dir, warehouse, args.threshold
+    wh_dir = Path(data_dir) / warehouse
+
+    # ── Load Activity ─────────────────────────────────────────────────────────
+    activity_path = wh_dir / f"{warehouse}_Activity.csv"
+    logger.info(f"Loading Activity: {activity_path}")
+    df = load_activity_csv(activity_path, warehouse)
+    n_raw = len(df)
+    logger.info(f"  Rows loaded: {n_raw:,}")
+
+    df = df.dropna(subset=["Timestamp"]).copy()
+    n_after_ts = len(df)
+    if n_after_ts < n_raw:
+        logger.info(
+            f"  Dropped {n_raw - n_after_ts:,} rows with invalid Timestamp"
         )
 
+    # ── Compute time deltas ───────────────────────────────────────────────────
+    logger.info("Computing time deltas ...")
+    df = compute_time_delta(df)
+
+    n_before_filter = df["Time_Delta_sec"].notna().sum()
+    df = df.dropna(subset=["Time_Delta_sec"]).copy()
+    df = df[df["Time_Delta_sec"] > 0].copy()
+    logger.info(
+        f"  {len(df):,} rows with valid positive Time_Delta_sec "
+        f"(first pick per user dropped)"
+    )
+
+    # ── Filter outliers ───────────────────────────────────────────────────────
+    logger.info("Filtering time outliers ...")
+    df = filter_time(df, logger)
+
+    # ── Load reference tables ─────────────────────────────────────────────────
+    logger.info("Loading Locations and Products ...")
+    locations_df, products_df = load_reference_tables(data_dir, warehouse)
+    logger.info(
+        f"  Locations: {len(locations_df):,} rows  |  "
+        f"Products: {len(products_df):,} rows"
+    )
+
+    # ── Join Locations and Products ───────────────────────────────────────────
+    logger.info("Joining Locations and Products ...")
+    df = df.merge(products_df,  on="ProductID",  how="left")
+    df = df.merge(locations_df, on="LocationID", how="left")
+
+    # Join previous location attributes (for sequenced mode later)
+    prev_loc_cols = locations_df[["LocationID", "Aisle", "Level"]].rename(columns={
+        "LocationID": "Prev_LocationID",
+        "Aisle":      "Prev_Aisle",
+        "Level":      "Prev_Level",
+    })
+    df = df.merge(prev_loc_cols, on="Prev_LocationID", how="left")
+
+    # ── Load Distance matrix (optional) ──────────────────────────────────────
+    logger.info("Checking for Distance matrix ...")
+    distance_df = load_distance_matrix(data_dir, warehouse)
+    if distance_df is not None:
+        logger.info(
+            f"  Distance matrix found ({len(distance_df):,} location pairs) — joining"
+        )
+        # Build LocKey for current and previous location to join distance
+        df["LocKey"]     = df["LocationID"].astype(str)
+        df["PrevLocKey"] = df["Prev_LocationID"].astype(str)
+
+        distance_df = distance_df.rename(columns={
+            "FromLoc":  "PrevLocKey",
+            "ToLoc":    "LocKey",
+        })
+        distance_df["PrevLocKey"] = distance_df["PrevLocKey"].astype(str)
+        distance_df["LocKey"]     = distance_df["LocKey"].astype(str)
+
+        df = df.merge(distance_df, on=["PrevLocKey", "LocKey"], how="left")
+        df["Travel_Distance"] = df["distance"].fillna(0.0)
+        df = df.drop(columns=["distance"], errors="ignore")
     else:
-        # Incremental append ─────────────────────────────────────────────────
-        if existing_parquet is None:
-            logger.warning(
-                "No existing parquet found — running full preprocess instead of append"
-            )
-            df, locations, products = run_full_preprocess(
-                wh_dir, warehouse, args.threshold
-            )
-        else:
-            logger.info(f"Existing parquet: {existing_parquet.name}")
+        logger.info(
+            "  No distance matrix found — Travel_Distance column will be absent. "
+            "Sequenced prediction will not be available unless distance matrix "
+            "is added and preprocess.py is rerun."
+        )
 
-            _, locations, products = load_tables(wh_dir, warehouse)
-            locations = clean_locations(locations)
-            products = clean_products(products)
+    # ── Summary stats ─────────────────────────────────────────────────────────
+    date_min = df["Timestamp"].dt.date.min()
+    date_max = df["Timestamp"].dt.date.max()
+    n_days   = (date_max - date_min).days + 1
+    wc_counts = df["WorkCode"].value_counts().to_dict()
 
-            df_new = run_incremental_preprocess(
-                args.new_data, locations, products, args.threshold
-            )
+    logger.info(f"\nSummary:")
+    logger.info(f"  Date range:    {date_min} → {date_max}  ({n_days} days)")
+    logger.info(f"  Final rows:    {len(df):,}")
+    logger.info(f"  Workers:       {df['UserID'].nunique():,}")
+    logger.info(f"  WorkCodes:     {wc_counts}")
+    logger.info(
+        f"  Total dropped: {n_raw - len(df):,} "
+        f"({100*(n_raw - len(df))/n_raw:.1f}%)"
+    )
 
-            df_existing = pd.read_parquet(existing_parquet)
-            df = pd.concat([df_existing, df_new], ignore_index=True)
-            df = df.drop_duplicates(
-                subset=["UserID", "Timestamp", "LocationID"], keep="last"
-            )
-            df = df.sort_values(["UserID", "Timestamp"]).reset_index(drop=True)
-            logger.info(
-                f"Appended {len(df_new):,} new rows — total: {len(df):,} rows"
-            )
-
-    # Trim to max_days if specified
-    if args.max_days is not None:
-        ts = pd.to_datetime(df["Timestamp"], errors="coerce")
-        all_days = sorted(ts.dt.date.dropna().unique())
-        if len(all_days) > args.max_days:
-            cutoff = all_days[-args.max_days]
-            n_before = len(df)
-            df = df[ts.dt.date >= cutoff].copy()
-            logger.info(
-                f"Trimmed to last {args.max_days} days: "
-                f"{n_before:,} → {len(df):,} rows (cutoff: {cutoff})"
-            )
-
-    out_path = export_parquet(df, wh_dir, warehouse, existing_parquet)
-    logger.info(f"Saved: {out_path}")
-
-    log_summary(df, warehouse)
+    # ── Save ──────────────────────────────────────────────────────────────────
+    out_path = save_parquet(df, data_dir, warehouse)
+    logger.info(f"\nSaved: {out_path}")
+    logger.info(f"{'='*60}")
 
 
 if __name__ == "__main__":

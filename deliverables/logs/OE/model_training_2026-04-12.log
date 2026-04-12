@@ -1,0 +1,48 @@
+2026-04-12 14:39:45  INFO      Logging to logs/OE/model_training_2026-04-12.log
+2026-04-12 14:39:45  INFO      ============================================================
+2026-04-12 14:39:45  INFO      MODEL TRAINING — OE
+2026-04-12 14:39:45  INFO        sequenced  = False
+2026-04-12 14:39:45  INFO        trees      = 1200
+2026-04-12 14:39:45  INFO        min_rows   = 500
+2026-04-12 14:39:45  INFO      ============================================================
+2026-04-12 14:39:45  INFO      WorkCodes found: ['10', '20', '30']
+2026-04-12 14:39:45  INFO      
+--------------------------------------------------
+2026-04-12 14:39:45  INFO      WorkCode 10
+2026-04-12 14:39:45  INFO        Encodings computed from 4,820 rows (WC 10, sequenced=False)
+2026-04-12 14:39:45  INFO        Rows: 4,820
+2026-04-12 14:39:45  INFO        Estimating worker effects ...
+2026-04-12 14:39:45  INFO        Training (1200 trees) ...
+2026-04-12 14:39:45  INFO        Done in 0.5s
+2026-04-12 14:39:45  INFO        Model saved: models/OE/OE_WC10.json
+2026-04-12 14:39:45  INFO        Workers: 17  |  Levels — L1: 4  L2: 3  L3: 3  L4: 3  L5: 4
+2026-04-12 14:39:45  INFO      
+--------------------------------------------------
+2026-04-12 14:39:45  INFO      WorkCode 20
+2026-04-12 14:39:45  INFO        Encodings computed from 22,019 rows (WC 20, sequenced=False)
+2026-04-12 14:39:45  INFO        Rows: 22,019
+2026-04-12 14:39:45  INFO        Estimating worker effects ...
+2026-04-12 14:39:46  INFO        Training (1200 trees) ...
+2026-04-12 14:39:47  INFO        Done in 1.0s
+2026-04-12 14:39:47  INFO        Model saved: models/OE/OE_WC20.json
+2026-04-12 14:39:47  INFO        Workers: 23  |  Levels — L1: 5  L2: 4  L3: 5  L4: 4  L5: 5
+2026-04-12 14:39:47  INFO      
+--------------------------------------------------
+2026-04-12 14:39:47  INFO      WorkCode 30
+2026-04-12 14:39:47  INFO        Encodings computed from 66,454 rows (WC 30, sequenced=False)
+2026-04-12 14:39:47  INFO        Rows: 66,454
+2026-04-12 14:39:47  INFO        Estimating worker effects ...
+2026-04-12 14:39:47  INFO        Training (1200 trees) ...
+2026-04-12 14:39:49  INFO        Done in 1.6s
+2026-04-12 14:39:49  INFO        Model saved: models/OE/OE_WC30.json
+2026-04-12 14:39:49  INFO        Workers: 37  |  Levels — L1: 8  L2: 7  L3: 7  L4: 7  L5: 8
+2026-04-12 14:39:49  INFO      
+meta.pkl saved: models/OE/meta.pkl
+2026-04-12 14:39:49  INFO      
+============================================================
+2026-04-12 14:39:49  INFO      TRAINING COMPLETE — OE
+2026-04-12 14:39:49  INFO      ============================================================
+2026-04-12 14:39:49  INFO        WorkCodes trained:  ['10', '20', '30']
+2026-04-12 14:39:49  INFO        sequenced:          False
+2026-04-12 14:39:49  INFO        Trees per model:    1200
+2026-04-12 14:39:49  INFO      ============================================================
