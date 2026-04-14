@@ -1,0 +1,46 @@
+2026-04-12 15:31:58  INFO      Logging to logs/OE/update_model_2026-04-12.log
+2026-04-12 15:31:58  INFO      ============================================================
+2026-04-12 15:31:58  INFO      UPDATE MODEL — OE  (2026-04-12)
+2026-04-12 15:31:58  INFO        new_data   = /Users/betsyfrdmn/Downloads/new_incremental.csv
+2026-04-12 15:31:58  INFO        trees/run  = 150  |  lr = 0.005
+2026-04-12 15:31:58  INFO        alert_pct  = 20%
+2026-04-12 15:31:58  INFO        sequenced  = False
+2026-04-12 15:31:58  INFO      ============================================================
+2026-04-12 15:31:58  INFO      
+--------------------------------------------------
+2026-04-12 15:31:58  INFO      WorkCode 10
+2026-04-12 15:31:59  INFO       [OE WC10 new data] Time filter: 95,164 → 93,260 rows kept (p98 cut: -1,904, 600s cap: -0, total dropped: 1,904 = 2.0%)
+2026-04-12 15:31:59  INFO        New rows: 4,820
+2026-04-12 15:31:59  INFO        All 17 workers seen in training
+2026-04-12 15:31:59  INFO        MAE before: 30.419s  |  Trees: 1200
+2026-04-12 15:31:59  INFO        MAE after:  30.111s ↓  |  Trees: 1200 → 1350 (+150)
+2026-04-12 15:31:59  INFO        Baseline MAE set: 30.419s (first update run)
+2026-04-12 15:31:59  INFO        Trend: 2026-04-12 30.111s
+2026-04-12 15:31:59  INFO      
+--------------------------------------------------
+2026-04-12 15:31:59  INFO      WorkCode 20
+2026-04-12 15:31:59  INFO       [OE WC20 new data] Time filter: 95,164 → 93,260 rows kept (p98 cut: -1,904, 600s cap: -0, total dropped: 1,904 = 2.0%)
+2026-04-12 15:31:59  INFO        New rows: 22,020
+2026-04-12 15:31:59  INFO        All 23 workers seen in training
+2026-04-12 15:31:59  INFO        MAE before: 48.973s  |  Trees: 1200
+2026-04-12 15:31:59  INFO        MAE after:  48.935s ↓  |  Trees: 1200 → 1350 (+150)
+2026-04-12 15:31:59  INFO        Baseline MAE set: 48.973s (first update run)
+2026-04-12 15:31:59  INFO        Trend: 2026-04-12 48.935s
+2026-04-12 15:31:59  INFO      
+--------------------------------------------------
+2026-04-12 15:31:59  INFO      WorkCode 30
+2026-04-12 15:32:00  INFO       [OE WC30 new data] Time filter: 95,164 → 93,260 rows kept (p98 cut: -1,904, 600s cap: -0, total dropped: 1,904 = 2.0%)
+2026-04-12 15:32:00  INFO        New rows: 66,420
+2026-04-12 15:32:00  INFO        All 37 workers seen in training
+2026-04-12 15:32:00  INFO        MAE before: 30.310s  |  Trees: 1200
+2026-04-12 15:32:01  INFO        MAE after:  30.274s ↓  |  Trees: 1200 → 1350 (+150)
+2026-04-12 15:32:01  INFO        Baseline MAE set: 30.310s (first update run)
+2026-04-12 15:32:01  INFO        Trend: 2026-04-12 30.274s
+2026-04-12 15:32:01  INFO      
+============================================================
+2026-04-12 15:32:01  INFO      UPDATE COMPLETE — OE  (2026-04-12)
+2026-04-12 15:32:01  INFO      ============================================================
+2026-04-12 15:32:01  INFO        WorkCodes updated:  ['10', '20', '30']
+2026-04-12 15:32:01  INFO        New workers added:  0
+2026-04-12 15:32:01  INFO        Trees added/WC:     150  (lr=0.005)
+2026-04-12 15:32:01  INFO      ============================================================

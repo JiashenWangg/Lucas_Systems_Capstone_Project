@@ -1,0 +1,32 @@
+2026-04-12 15:47:41  INFO      Logging to logs/OE/predict_primary_2026-04-12.log
+2026-04-12 15:47:41  INFO      ============================================================
+2026-04-12 15:47:41  INFO      PREDICT PRIMARY — OE
+2026-04-12 15:47:41  INFO        input:      /Users/betsyfrdmn/Downloads/new_predict.csv
+2026-04-12 15:47:41  INFO        sequenced:  False
+2026-04-12 15:47:41  INFO        user_level: 4
+2026-04-12 15:47:41  INFO      ============================================================
+2026-04-12 15:47:41  INFO        WorkCode detected: 30
+2026-04-12 15:47:41  INFO        Tasks: 34
+2026-04-12 15:47:41  INFO        User level 4 → worker_effect = -28.276s
+2026-04-12 15:47:41  INFO      
+  Tasks:              34
+2026-04-12 15:47:41  INFO        Predicted total:    1412.2s  (23.54 min)
+2026-04-12 15:47:41  INFO      
+  Output saved: predict_data/OE/OE_30_prediction.csv
+2026-04-12 15:47:41  INFO      ============================================================
+2026-04-12 15:49:21  INFO      Logging to logs/OE/predict_primary_2026-04-12.log
+2026-04-12 15:49:21  INFO      ============================================================
+2026-04-12 15:49:21  INFO      PREDICT PRIMARY — OE
+2026-04-12 15:49:21  INFO        input:      /Users/betsyfrdmn/Downloads/new_predict.csv
+2026-04-12 15:49:21  INFO        sequenced:  False
+2026-04-12 15:49:21  INFO        user_level: grand mean
+2026-04-12 15:49:21  INFO      ============================================================
+2026-04-12 15:49:21  INFO        WorkCode detected: 30
+2026-04-12 15:49:21  INFO        Tasks: 34
+2026-04-12 15:49:21  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-12 15:49:21  INFO      
+  Tasks:              34
+2026-04-12 15:49:21  INFO        Predicted total:    1697.2s  (28.29 min)
+2026-04-12 15:49:21  INFO      
+  Output saved: predict_data/OE/OE_30_prediction.csv
+2026-04-12 15:49:21  INFO      ============================================================
