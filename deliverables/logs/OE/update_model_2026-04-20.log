@@ -1,0 +1,177 @@
+2026-04-20 03:32:03  INFO      Logging to logs/OE/update_model_2026-04-20.log
+2026-04-20 03:32:03  INFO      ============================================================
+2026-04-20 03:32:03  INFO      UPDATE MODEL — OE  (2026-04-20)
+2026-04-20 03:32:03  INFO        new_data   = /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts_wc30/n_0001/update_day_2025-09-09_wc30.csv
+2026-04-20 03:32:03  INFO        trees/run  = 150  |  adaptive lr by m/n ratio
+2026-04-20 03:32:03  INFO        alert_pct  = 20%
+2026-04-20 03:32:03  INFO        sequenced  = False
+2026-04-20 03:32:03  INFO      ============================================================
+2026-04-20 03:32:03  INFO      
+--------------------------------------------------
+2026-04-20 03:32:03  INFO      WorkCode 30
+2026-04-20 03:32:03  INFO       [OE WC30 new data] Time filter: 6,088 → 5,966 rows kept (p98 cut: -122, 600s cap: -0, total dropped: 122 = 2.0%)
+2026-04-20 03:32:03  INFO        New rows: 5,966
+2026-04-20 03:32:03  INFO        Days seen so far (n): 1  |  new batch days (m): 1  |  m/n=1.000  |  update lr: 0.03
+2026-04-20 03:32:03  INFO        New workers: ['322', '434', '444', '461', '473', '498'] — estimating effects
+2026-04-20 03:32:03  INFO        1 worker(s) with < 10 picks assigned effect = 0.0
+2026-04-20 03:32:04  INFO        MAE before: 35.875s  |  Trees: 1200
+2026-04-20 03:32:04  INFO        Using CV-tuned params from meta.pkl
+2026-04-20 03:32:04  INFO        MAE after:  32.171s ↓  |  Trees: 1200 → 1350 (+150)
+2026-04-20 03:32:04  INFO        Baseline MAE set: 35.875s (first update run)
+2026-04-20 03:32:04  INFO        Trend: 2026-04-20 32.171s
+2026-04-20 03:32:04  INFO        Days seen after update: 2
+2026-04-20 03:32:04  INFO      
+============================================================
+2026-04-20 03:32:04  INFO      UPDATE COMPLETE — OE  (2026-04-20)
+2026-04-20 03:32:04  INFO      ============================================================
+2026-04-20 03:32:04  INFO        WorkCodes updated:  ['30']
+2026-04-20 03:32:04  INFO        New workers added:  6
+2026-04-20 03:32:04  INFO        Trees added/WC:     150  (adaptive lr by m/n)
+2026-04-20 03:32:04  INFO      ============================================================
+2026-04-20 03:32:10  INFO      Logging to logs/OE/update_model_2026-04-20.log
+2026-04-20 03:32:10  INFO      ============================================================
+2026-04-20 03:32:10  INFO      UPDATE MODEL — OE  (2026-04-20)
+2026-04-20 03:32:10  INFO        new_data   = /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts_wc30/n_0002/update_day_2025-11-10_wc30.csv
+2026-04-20 03:32:10  INFO        trees/run  = 150  |  adaptive lr by m/n ratio
+2026-04-20 03:32:10  INFO        alert_pct  = 20%
+2026-04-20 03:32:10  INFO        sequenced  = False
+2026-04-20 03:32:10  INFO      ============================================================
+2026-04-20 03:32:10  INFO      
+--------------------------------------------------
+2026-04-20 03:32:10  INFO      WorkCode 30
+2026-04-20 03:32:10  INFO       [OE WC30 new data] Time filter: 10,155 → 9,951 rows kept (p98 cut: -204, 600s cap: -0, total dropped: 204 = 2.0%)
+2026-04-20 03:32:10  INFO        New rows: 9,951
+2026-04-20 03:32:10  INFO        Days seen so far (n): 2  |  new batch days (m): 1  |  m/n=0.500  |  update lr: 0.015
+2026-04-20 03:32:10  INFO        New workers: ['217', '323'] — estimating effects
+2026-04-20 03:32:10  WARNING   Fewer than 2 workers with >= 10 picks — returning zero effects for all.
+2026-04-20 03:32:10  INFO        MAE before: 33.726s  |  Trees: 1200
+2026-04-20 03:32:10  INFO        Using CV-tuned params from meta.pkl
+2026-04-20 03:32:10  INFO        MAE after:  30.100s ↓  |  Trees: 1200 → 1350 (+150)
+2026-04-20 03:32:10  INFO        Baseline MAE set: 33.726s (first update run)
+2026-04-20 03:32:10  INFO        Trend: 2026-04-20 30.100s
+2026-04-20 03:32:10  INFO        Days seen after update: 3
+2026-04-20 03:32:10  INFO      
+============================================================
+2026-04-20 03:32:10  INFO      UPDATE COMPLETE — OE  (2026-04-20)
+2026-04-20 03:32:10  INFO      ============================================================
+2026-04-20 03:32:10  INFO        WorkCodes updated:  ['30']
+2026-04-20 03:32:10  INFO        New workers added:  2
+2026-04-20 03:32:10  INFO        Trees added/WC:     150  (adaptive lr by m/n)
+2026-04-20 03:32:10  INFO      ============================================================
+2026-04-20 03:32:16  INFO      Logging to logs/OE/update_model_2026-04-20.log
+2026-04-20 03:32:16  INFO      ============================================================
+2026-04-20 03:32:16  INFO      UPDATE MODEL — OE  (2026-04-20)
+2026-04-20 03:32:16  INFO        new_data   = /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts_wc30/n_0003/update_day_2025-11-11_wc30.csv
+2026-04-20 03:32:16  INFO        trees/run  = 150  |  adaptive lr by m/n ratio
+2026-04-20 03:32:16  INFO        alert_pct  = 20%
+2026-04-20 03:32:16  INFO        sequenced  = False
+2026-04-20 03:32:16  INFO      ============================================================
+2026-04-20 03:32:16  INFO      
+--------------------------------------------------
+2026-04-20 03:32:16  INFO      WorkCode 30
+2026-04-20 03:32:16  INFO       [OE WC30 new data] Time filter: 6,866 → 6,728 rows kept (p98 cut: -138, 600s cap: -0, total dropped: 138 = 2.0%)
+2026-04-20 03:32:16  INFO        New rows: 6,728
+2026-04-20 03:32:16  INFO        Days seen so far (n): 3  |  new batch days (m): 1  |  m/n=0.333  |  update lr: 0.015
+2026-04-20 03:32:16  INFO        All 28 workers seen in training
+2026-04-20 03:32:16  INFO        MAE before: 33.323s  |  Trees: 1200
+2026-04-20 03:32:16  INFO        Using CV-tuned params from meta.pkl
+2026-04-20 03:32:17  INFO        MAE after:  30.112s ↓  |  Trees: 1200 → 1350 (+150)
+2026-04-20 03:32:17  INFO        Baseline MAE set: 33.323s (first update run)
+2026-04-20 03:32:17  INFO        Trend: 2026-04-20 30.112s
+2026-04-20 03:32:17  INFO        Days seen after update: 4
+2026-04-20 03:32:17  INFO      
+============================================================
+2026-04-20 03:32:17  INFO      UPDATE COMPLETE — OE  (2026-04-20)
+2026-04-20 03:32:17  INFO      ============================================================
+2026-04-20 03:32:17  INFO        WorkCodes updated:  ['30']
+2026-04-20 03:32:17  INFO        New workers added:  0
+2026-04-20 03:32:17  INFO        Trees added/WC:     150  (adaptive lr by m/n)
+2026-04-20 03:32:17  INFO      ============================================================
+2026-04-20 03:32:23  INFO      Logging to logs/OE/update_model_2026-04-20.log
+2026-04-20 03:32:23  INFO      ============================================================
+2026-04-20 03:32:23  INFO      UPDATE MODEL — OE  (2026-04-20)
+2026-04-20 03:32:23  INFO        new_data   = /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts_wc30/n_0004/update_day_2025-11-12_wc30.csv
+2026-04-20 03:32:23  INFO        trees/run  = 150  |  adaptive lr by m/n ratio
+2026-04-20 03:32:23  INFO        alert_pct  = 20%
+2026-04-20 03:32:23  INFO        sequenced  = False
+2026-04-20 03:32:23  INFO      ============================================================
+2026-04-20 03:32:23  INFO      
+--------------------------------------------------
+2026-04-20 03:32:23  INFO      WorkCode 30
+2026-04-20 03:32:23  INFO       [OE WC30 new data] Time filter: 7,267 → 7,121 rows kept (p98 cut: -146, 600s cap: -0, total dropped: 146 = 2.0%)
+2026-04-20 03:32:23  INFO        New rows: 7,121
+2026-04-20 03:32:23  INFO        Days seen so far (n): 4  |  new batch days (m): 1  |  m/n=0.250  |  update lr: 0.008
+2026-04-20 03:32:23  INFO        All 27 workers seen in training
+2026-04-20 03:32:23  INFO        MAE before: 31.185s  |  Trees: 1200
+2026-04-20 03:32:23  INFO        Using CV-tuned params from meta.pkl
+2026-04-20 03:32:24  INFO        MAE after:  29.787s ↓  |  Trees: 1200 → 1350 (+150)
+2026-04-20 03:32:24  INFO        Baseline MAE set: 31.185s (first update run)
+2026-04-20 03:32:24  INFO        Trend: 2026-04-20 29.787s
+2026-04-20 03:32:24  INFO        Days seen after update: 5
+2026-04-20 03:32:24  INFO      
+============================================================
+2026-04-20 03:32:24  INFO      UPDATE COMPLETE — OE  (2026-04-20)
+2026-04-20 03:32:24  INFO      ============================================================
+2026-04-20 03:32:24  INFO        WorkCodes updated:  ['30']
+2026-04-20 03:32:24  INFO        New workers added:  0
+2026-04-20 03:32:24  INFO        Trees added/WC:     150  (adaptive lr by m/n)
+2026-04-20 03:32:24  INFO      ============================================================
+2026-04-20 03:32:30  INFO      Logging to logs/OE/update_model_2026-04-20.log
+2026-04-20 03:32:30  INFO      ============================================================
+2026-04-20 03:32:30  INFO      UPDATE MODEL — OE  (2026-04-20)
+2026-04-20 03:32:30  INFO        new_data   = /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts_wc30/n_0005/update_day_2025-11-13_wc30.csv
+2026-04-20 03:32:30  INFO        trees/run  = 150  |  adaptive lr by m/n ratio
+2026-04-20 03:32:30  INFO        alert_pct  = 20%
+2026-04-20 03:32:30  INFO        sequenced  = False
+2026-04-20 03:32:30  INFO      ============================================================
+2026-04-20 03:32:30  INFO      
+--------------------------------------------------
+2026-04-20 03:32:30  INFO      WorkCode 30
+2026-04-20 03:32:30  INFO       [OE WC30 new data] Time filter: 8,366 → 8,198 rows kept (p98 cut: -168, 600s cap: -0, total dropped: 168 = 2.0%)
+2026-04-20 03:32:30  INFO        New rows: 8,198
+2026-04-20 03:32:30  INFO        Days seen so far (n): 5  |  new batch days (m): 1  |  m/n=0.200  |  update lr: 0.008
+2026-04-20 03:32:30  INFO        New workers: ['348', '502'] — estimating effects
+2026-04-20 03:32:30  WARNING   Fewer than 2 workers with >= 10 picks — returning zero effects for all.
+2026-04-20 03:32:31  INFO        MAE before: 30.562s  |  Trees: 1200
+2026-04-20 03:32:31  INFO        Using CV-tuned params from meta.pkl
+2026-04-20 03:32:31  INFO        MAE after:  27.795s ↓  |  Trees: 1200 → 1350 (+150)
+2026-04-20 03:32:31  INFO        Baseline MAE set: 30.562s (first update run)
+2026-04-20 03:32:31  INFO        Trend: 2026-04-20 27.795s
+2026-04-20 03:32:31  INFO        Days seen after update: 6
+2026-04-20 03:32:31  INFO      
+============================================================
+2026-04-20 03:32:31  INFO      UPDATE COMPLETE — OE  (2026-04-20)
+2026-04-20 03:32:31  INFO      ============================================================
+2026-04-20 03:32:31  INFO        WorkCodes updated:  ['30']
+2026-04-20 03:32:31  INFO        New workers added:  2
+2026-04-20 03:32:31  INFO        Trees added/WC:     150  (adaptive lr by m/n)
+2026-04-20 03:32:31  INFO      ============================================================
+2026-04-20 03:32:38  INFO      Logging to logs/OE/update_model_2026-04-20.log
+2026-04-20 03:32:38  INFO      ============================================================
+2026-04-20 03:32:38  INFO      UPDATE MODEL — OE  (2026-04-20)
+2026-04-20 03:32:38  INFO        new_data   = /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts_wc30/n_0006/update_day_2025-12-01_wc30.csv
+2026-04-20 03:32:38  INFO        trees/run  = 150  |  adaptive lr by m/n ratio
+2026-04-20 03:32:38  INFO        alert_pct  = 20%
+2026-04-20 03:32:38  INFO        sequenced  = False
+2026-04-20 03:32:38  INFO      ============================================================
+2026-04-20 03:32:38  INFO      
+--------------------------------------------------
+2026-04-20 03:32:38  INFO      WorkCode 30
+2026-04-20 03:32:38  INFO       [OE WC30 new data] Time filter: 10,928 → 10,709 rows kept (p98 cut: -219, 600s cap: -0, total dropped: 219 = 2.0%)
+2026-04-20 03:32:38  INFO        New rows: 10,709
+2026-04-20 03:32:38  INFO        Days seen so far (n): 6  |  new batch days (m): 1  |  m/n=0.167  |  update lr: 0.008
+2026-04-20 03:32:38  INFO        New workers: ['458', '504'] — estimating effects
+2026-04-20 03:32:38  INFO        MAE before: 31.393s  |  Trees: 1200
+2026-04-20 03:32:38  INFO        Using CV-tuned params from meta.pkl
+2026-04-20 03:32:39  INFO        MAE after:  29.301s ↓  |  Trees: 1200 → 1350 (+150)
+2026-04-20 03:32:39  INFO        Baseline MAE set: 31.393s (first update run)
+2026-04-20 03:32:39  INFO        Trend: 2026-04-20 29.302s
+2026-04-20 03:32:39  INFO        Days seen after update: 7
+2026-04-20 03:32:39  INFO      
+============================================================
+2026-04-20 03:32:39  INFO      UPDATE COMPLETE — OE  (2026-04-20)
+2026-04-20 03:32:39  INFO      ============================================================
+2026-04-20 03:32:39  INFO        WorkCodes updated:  ['30']
+2026-04-20 03:32:39  INFO        New workers added:  2
+2026-04-20 03:32:39  INFO        Trees added/WC:     150  (adaptive lr by m/n)
+2026-04-20 03:32:39  INFO      ============================================================
