@@ -1,0 +1,476 @@
+2026-04-18 18:56:15  INFO      Logging to logs/OE/model_training_2026-04-18.log
+2026-04-18 18:56:15  INFO      ============================================================
+2026-04-18 18:56:15  INFO      MODEL TRAINING — OE
+2026-04-18 18:56:15  INFO        sequenced  = False
+2026-04-18 18:56:15  INFO        trees      = 1200
+2026-04-18 18:56:15  INFO        min_rows   = 500
+2026-04-18 18:56:15  INFO      ============================================================
+2026-04-18 18:56:15  INFO      WorkCodes found: ['10', '20', '30']
+2026-04-18 18:56:15  INFO      
+--------------------------------------------------
+2026-04-18 18:56:15  INFO      WorkCode 10
+2026-04-18 18:56:15  INFO        Encodings computed from 670 rows (WC 10, sequenced=False)
+2026-04-18 18:56:15  INFO        Rows: 670
+2026-04-18 18:56:15  INFO        Estimating worker effects ...
+2026-04-18 18:56:15  INFO        1 worker(s) with < 10 picks assigned effect = 0.0
+2026-04-18 18:56:15  INFO        Training (1200 trees) ...
+2026-04-18 18:56:15  INFO        Done in 0.4s
+2026-04-18 18:56:15  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0001/models/OE/OE_WC10.json
+2026-04-18 18:56:15  INFO        Workers: 6  |  Levels — L1: 2  L2: 1  L3: 1  L4: 1  L5: 1
+2026-04-18 18:56:15  INFO      
+--------------------------------------------------
+2026-04-18 18:56:15  INFO      WorkCode 20
+2026-04-18 18:56:15  INFO        Encodings computed from 3,288 rows (WC 20, sequenced=False)
+2026-04-18 18:56:15  INFO        Rows: 3,288
+2026-04-18 18:56:15  INFO        Estimating worker effects ...
+2026-04-18 18:56:15  INFO        1 worker(s) with < 10 picks assigned effect = 0.0
+2026-04-18 18:56:15  INFO        Training (1200 trees) ...
+2026-04-18 18:56:16  INFO        Done in 0.9s
+2026-04-18 18:56:16  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0001/models/OE/OE_WC20.json
+2026-04-18 18:56:16  INFO        Workers: 13  |  Levels — L1: 3  L2: 2  L3: 3  L4: 2  L5: 3
+2026-04-18 18:56:16  INFO      
+--------------------------------------------------
+2026-04-18 18:56:16  INFO      WorkCode 30
+2026-04-18 18:56:16  INFO        Encodings computed from 9,637 rows (WC 30, sequenced=False)
+2026-04-18 18:56:16  INFO        Rows: 9,637
+2026-04-18 18:56:16  INFO        Estimating worker effects ...
+2026-04-18 18:56:16  INFO        1 worker(s) with < 10 picks assigned effect = 0.0
+2026-04-18 18:56:16  INFO        Training (1200 trees) ...
+2026-04-18 18:56:17  INFO        Done in 0.7s
+2026-04-18 18:56:17  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0001/models/OE/OE_WC30.json
+2026-04-18 18:56:17  INFO        Workers: 25  |  Levels — L1: 5  L2: 5  L3: 5  L4: 5  L5: 5
+2026-04-18 18:56:17  INFO      
+meta.pkl saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0001/models/OE/meta.pkl
+2026-04-18 18:56:17  INFO      
+============================================================
+2026-04-18 18:56:17  INFO      TRAINING COMPLETE — OE
+2026-04-18 18:56:17  INFO      ============================================================
+2026-04-18 18:56:17  INFO        WorkCodes trained:  ['10', '20', '30']
+2026-04-18 18:56:17  INFO        sequenced:          False
+2026-04-18 18:56:17  INFO        Trees per model:    1200
+2026-04-18 18:56:17  INFO      ============================================================
+2026-04-18 18:56:23  INFO      Logging to logs/OE/model_training_2026-04-18.log
+2026-04-18 18:56:23  INFO      ============================================================
+2026-04-18 18:56:23  INFO      MODEL TRAINING — OE
+2026-04-18 18:56:23  INFO        sequenced  = False
+2026-04-18 18:56:23  INFO        trees      = 1200
+2026-04-18 18:56:23  INFO        min_rows   = 500
+2026-04-18 18:56:23  INFO      ============================================================
+2026-04-18 18:56:23  INFO      WorkCodes found: ['10', '20', '30']
+2026-04-18 18:56:23  INFO      
+--------------------------------------------------
+2026-04-18 18:56:23  INFO      WorkCode 10
+2026-04-18 18:56:23  INFO        Encodings computed from 1,512 rows (WC 10, sequenced=False)
+2026-04-18 18:56:23  INFO        Rows: 1,512
+2026-04-18 18:56:23  INFO        Estimating worker effects ...
+2026-04-18 18:56:23  INFO        1 worker(s) with < 10 picks assigned effect = 0.0
+2026-04-18 18:56:23  INFO        Training (1200 trees) ...
+2026-04-18 18:56:23  INFO        Done in 0.5s
+2026-04-18 18:56:23  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0002/models/OE/OE_WC10.json
+2026-04-18 18:56:23  INFO        Workers: 14  |  Levels — L1: 3  L2: 3  L3: 2  L4: 3  L5: 3
+2026-04-18 18:56:23  INFO      
+--------------------------------------------------
+2026-04-18 18:56:23  INFO      WorkCode 20
+2026-04-18 18:56:23  INFO        Encodings computed from 5,330 rows (WC 20, sequenced=False)
+2026-04-18 18:56:23  INFO        Rows: 5,330
+2026-04-18 18:56:23  INFO        Estimating worker effects ...
+2026-04-18 18:56:23  INFO        2 worker(s) with < 10 picks assigned effect = 0.0
+2026-04-18 18:56:23  INFO        Training (1200 trees) ...
+2026-04-18 18:56:24  INFO        Done in 0.5s
+2026-04-18 18:56:24  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0002/models/OE/OE_WC20.json
+2026-04-18 18:56:24  INFO        Workers: 16  |  Levels — L1: 4  L2: 3  L3: 3  L4: 3  L5: 3
+2026-04-18 18:56:24  INFO      
+--------------------------------------------------
+2026-04-18 18:56:24  INFO      WorkCode 30
+2026-04-18 18:56:24  INFO        Encodings computed from 15,753 rows (WC 30, sequenced=False)
+2026-04-18 18:56:24  INFO        Rows: 15,753
+2026-04-18 18:56:24  INFO        Estimating worker effects ...
+2026-04-18 18:56:24  INFO        2 worker(s) with < 10 picks assigned effect = 0.0
+2026-04-18 18:56:24  INFO        Training (1200 trees) ...
+2026-04-18 18:56:25  INFO        Done in 1.0s
+2026-04-18 18:56:25  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0002/models/OE/OE_WC30.json
+2026-04-18 18:56:25  INFO        Workers: 31  |  Levels — L1: 7  L2: 7  L3: 5  L4: 6  L5: 6
+2026-04-18 18:56:25  INFO      
+meta.pkl saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0002/models/OE/meta.pkl
+2026-04-18 18:56:25  INFO      
+============================================================
+2026-04-18 18:56:25  INFO      TRAINING COMPLETE — OE
+2026-04-18 18:56:25  INFO      ============================================================
+2026-04-18 18:56:25  INFO        WorkCodes trained:  ['10', '20', '30']
+2026-04-18 18:56:25  INFO        sequenced:          False
+2026-04-18 18:56:25  INFO        Trees per model:    1200
+2026-04-18 18:56:25  INFO      ============================================================
+2026-04-18 18:56:30  INFO      Logging to logs/OE/model_training_2026-04-18.log
+2026-04-18 18:56:30  INFO      ============================================================
+2026-04-18 18:56:30  INFO      MODEL TRAINING — OE
+2026-04-18 18:56:30  INFO        sequenced  = False
+2026-04-18 18:56:30  INFO        trees      = 1200
+2026-04-18 18:56:30  INFO        min_rows   = 500
+2026-04-18 18:56:30  INFO      ============================================================
+2026-04-18 18:56:30  INFO      WorkCodes found: ['10', '20', '30']
+2026-04-18 18:56:30  INFO      
+--------------------------------------------------
+2026-04-18 18:56:30  INFO      WorkCode 10
+2026-04-18 18:56:30  INFO        Encodings computed from 1,961 rows (WC 10, sequenced=False)
+2026-04-18 18:56:30  INFO        Rows: 1,961
+2026-04-18 18:56:30  INFO        Estimating worker effects ...
+2026-04-18 18:56:30  INFO        1 worker(s) with < 10 picks assigned effect = 0.0
+2026-04-18 18:56:30  INFO        Training (1200 trees) ...
+2026-04-18 18:56:30  INFO        Done in 0.5s
+2026-04-18 18:56:30  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0003/models/OE/OE_WC10.json
+2026-04-18 18:56:30  INFO        Workers: 15  |  Levels — L1: 3  L2: 3  L3: 3  L4: 3  L5: 3
+2026-04-18 18:56:30  INFO      
+--------------------------------------------------
+2026-04-18 18:56:30  INFO      WorkCode 20
+2026-04-18 18:56:30  INFO        Encodings computed from 8,855 rows (WC 20, sequenced=False)
+2026-04-18 18:56:31  INFO        Rows: 8,855
+2026-04-18 18:56:31  INFO        Estimating worker effects ...
+2026-04-18 18:56:31  INFO        1 worker(s) with < 10 picks assigned effect = 0.0
+2026-04-18 18:56:31  INFO        Training (1200 trees) ...
+2026-04-18 18:56:31  INFO        Done in 0.5s
+2026-04-18 18:56:31  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0003/models/OE/OE_WC20.json
+2026-04-18 18:56:31  INFO        Workers: 19  |  Levels — L1: 4  L2: 4  L3: 3  L4: 4  L5: 4
+2026-04-18 18:56:31  INFO      
+--------------------------------------------------
+2026-04-18 18:56:31  INFO      WorkCode 30
+2026-04-18 18:56:31  INFO        Encodings computed from 25,936 rows (WC 30, sequenced=False)
+2026-04-18 18:56:31  INFO        Rows: 25,936
+2026-04-18 18:56:31  INFO        Estimating worker effects ...
+2026-04-18 18:56:31  INFO        3 worker(s) with < 10 picks assigned effect = 0.0
+2026-04-18 18:56:31  INFO        Training (1200 trees) ...
+2026-04-18 18:56:32  INFO        Done in 1.1s
+2026-04-18 18:56:32  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0003/models/OE/OE_WC30.json
+2026-04-18 18:56:32  INFO        Workers: 33  |  Levels — L1: 7  L2: 8  L3: 5  L4: 6  L5: 7
+2026-04-18 18:56:32  INFO      
+meta.pkl saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0003/models/OE/meta.pkl
+2026-04-18 18:56:32  INFO      
+============================================================
+2026-04-18 18:56:32  INFO      TRAINING COMPLETE — OE
+2026-04-18 18:56:32  INFO      ============================================================
+2026-04-18 18:56:32  INFO        WorkCodes trained:  ['10', '20', '30']
+2026-04-18 18:56:32  INFO        sequenced:          False
+2026-04-18 18:56:32  INFO        Trees per model:    1200
+2026-04-18 18:56:32  INFO      ============================================================
+2026-04-18 18:56:37  INFO      Logging to logs/OE/model_training_2026-04-18.log
+2026-04-18 18:56:37  INFO      ============================================================
+2026-04-18 18:56:37  INFO      MODEL TRAINING — OE
+2026-04-18 18:56:37  INFO        sequenced  = False
+2026-04-18 18:56:37  INFO        trees      = 1200
+2026-04-18 18:56:37  INFO        min_rows   = 500
+2026-04-18 18:56:37  INFO      ============================================================
+2026-04-18 18:56:37  INFO      WorkCodes found: ['10', '20', '30']
+2026-04-18 18:56:37  INFO      
+--------------------------------------------------
+2026-04-18 18:56:37  INFO      WorkCode 10
+2026-04-18 18:56:37  INFO        Encodings computed from 2,619 rows (WC 10, sequenced=False)
+2026-04-18 18:56:37  INFO        Rows: 2,619
+2026-04-18 18:56:37  INFO        Estimating worker effects ...
+2026-04-18 18:56:37  INFO        Training (1200 trees) ...
+2026-04-18 18:56:38  INFO        Done in 0.4s
+2026-04-18 18:56:38  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0004/models/OE/OE_WC10.json
+2026-04-18 18:56:38  INFO        Workers: 15  |  Levels — L1: 3  L2: 3  L3: 3  L4: 3  L5: 3
+2026-04-18 18:56:38  INFO      
+--------------------------------------------------
+2026-04-18 18:56:38  INFO      WorkCode 20
+2026-04-18 18:56:38  INFO        Encodings computed from 10,947 rows (WC 20, sequenced=False)
+2026-04-18 18:56:38  INFO        Rows: 10,947
+2026-04-18 18:56:38  INFO        Estimating worker effects ...
+2026-04-18 18:56:38  INFO        1 worker(s) with < 10 picks assigned effect = 0.0
+2026-04-18 18:56:38  INFO        Training (1200 trees) ...
+2026-04-18 18:56:39  INFO        Done in 0.8s
+2026-04-18 18:56:39  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0004/models/OE/OE_WC20.json
+2026-04-18 18:56:39  INFO        Workers: 19  |  Levels — L1: 4  L2: 4  L3: 3  L4: 4  L5: 4
+2026-04-18 18:56:39  INFO      
+--------------------------------------------------
+2026-04-18 18:56:39  INFO      WorkCode 30
+2026-04-18 18:56:39  INFO        Encodings computed from 32,830 rows (WC 30, sequenced=False)
+2026-04-18 18:56:39  INFO        Rows: 32,830
+2026-04-18 18:56:39  INFO        Estimating worker effects ...
+2026-04-18 18:56:39  INFO        1 worker(s) with < 10 picks assigned effect = 0.0
+2026-04-18 18:56:39  INFO        Training (1200 trees) ...
+2026-04-18 18:56:40  INFO        Done in 1.1s
+2026-04-18 18:56:40  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0004/models/OE/OE_WC30.json
+2026-04-18 18:56:40  INFO        Workers: 33  |  Levels — L1: 7  L2: 6  L3: 7  L4: 6  L5: 7
+2026-04-18 18:56:40  INFO      
+meta.pkl saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0004/models/OE/meta.pkl
+2026-04-18 18:56:40  INFO      
+============================================================
+2026-04-18 18:56:40  INFO      TRAINING COMPLETE — OE
+2026-04-18 18:56:40  INFO      ============================================================
+2026-04-18 18:56:40  INFO        WorkCodes trained:  ['10', '20', '30']
+2026-04-18 18:56:40  INFO        sequenced:          False
+2026-04-18 18:56:40  INFO        Trees per model:    1200
+2026-04-18 18:56:40  INFO      ============================================================
+2026-04-18 18:56:45  INFO      Logging to logs/OE/model_training_2026-04-18.log
+2026-04-18 18:56:45  INFO      ============================================================
+2026-04-18 18:56:45  INFO      MODEL TRAINING — OE
+2026-04-18 18:56:45  INFO        sequenced  = False
+2026-04-18 18:56:45  INFO        trees      = 1200
+2026-04-18 18:56:45  INFO        min_rows   = 500
+2026-04-18 18:56:45  INFO      ============================================================
+2026-04-18 18:56:45  INFO      WorkCodes found: ['10', '20', '30']
+2026-04-18 18:56:45  INFO      
+--------------------------------------------------
+2026-04-18 18:56:45  INFO      WorkCode 10
+2026-04-18 18:56:45  INFO        Encodings computed from 3,195 rows (WC 10, sequenced=False)
+2026-04-18 18:56:45  INFO        Rows: 3,195
+2026-04-18 18:56:45  INFO        Estimating worker effects ...
+2026-04-18 18:56:45  INFO        Training (1200 trees) ...
+2026-04-18 18:56:45  INFO        Done in 0.5s
+2026-04-18 18:56:45  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0005/models/OE/OE_WC10.json
+2026-04-18 18:56:45  INFO        Workers: 15  |  Levels — L1: 3  L2: 3  L3: 3  L4: 3  L5: 3
+2026-04-18 18:56:45  INFO      
+--------------------------------------------------
+2026-04-18 18:56:45  INFO      WorkCode 20
+2026-04-18 18:56:46  INFO        Encodings computed from 13,314 rows (WC 20, sequenced=False)
+2026-04-18 18:56:46  INFO        Rows: 13,314
+2026-04-18 18:56:46  INFO        Estimating worker effects ...
+2026-04-18 18:56:46  INFO        1 worker(s) with < 10 picks assigned effect = 0.0
+2026-04-18 18:56:46  INFO        Training (1200 trees) ...
+2026-04-18 18:56:47  INFO        Done in 0.9s
+2026-04-18 18:56:47  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0005/models/OE/OE_WC20.json
+2026-04-18 18:56:47  INFO        Workers: 19  |  Levels — L1: 4  L2: 4  L3: 3  L4: 4  L5: 4
+2026-04-18 18:56:47  INFO      
+--------------------------------------------------
+2026-04-18 18:56:47  INFO      WorkCode 30
+2026-04-18 18:56:47  INFO        Encodings computed from 40,124 rows (WC 30, sequenced=False)
+2026-04-18 18:56:47  INFO        Rows: 40,124
+2026-04-18 18:56:47  INFO        Estimating worker effects ...
+2026-04-18 18:56:47  INFO        1 worker(s) with < 10 picks assigned effect = 0.0
+2026-04-18 18:56:47  INFO        Training (1200 trees) ...
+2026-04-18 18:56:48  INFO        Done in 1.2s
+2026-04-18 18:56:48  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0005/models/OE/OE_WC30.json
+2026-04-18 18:56:48  INFO        Workers: 33  |  Levels — L1: 7  L2: 6  L3: 7  L4: 6  L5: 7
+2026-04-18 18:56:48  INFO      
+meta.pkl saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0005/models/OE/meta.pkl
+2026-04-18 18:56:48  INFO      
+============================================================
+2026-04-18 18:56:48  INFO      TRAINING COMPLETE — OE
+2026-04-18 18:56:48  INFO      ============================================================
+2026-04-18 18:56:48  INFO        WorkCodes trained:  ['10', '20', '30']
+2026-04-18 18:56:48  INFO        sequenced:          False
+2026-04-18 18:56:48  INFO        Trees per model:    1200
+2026-04-18 18:56:48  INFO      ============================================================
+2026-04-18 18:56:53  INFO      Logging to logs/OE/model_training_2026-04-18.log
+2026-04-18 18:56:53  INFO      ============================================================
+2026-04-18 18:56:53  INFO      MODEL TRAINING — OE
+2026-04-18 18:56:53  INFO        sequenced  = False
+2026-04-18 18:56:53  INFO        trees      = 1200
+2026-04-18 18:56:53  INFO        min_rows   = 500
+2026-04-18 18:56:53  INFO      ============================================================
+2026-04-18 18:56:53  INFO      WorkCodes found: ['10', '20', '30']
+2026-04-18 18:56:53  INFO      
+--------------------------------------------------
+2026-04-18 18:56:53  INFO      WorkCode 10
+2026-04-18 18:56:53  INFO        Encodings computed from 3,684 rows (WC 10, sequenced=False)
+2026-04-18 18:56:53  INFO        Rows: 3,684
+2026-04-18 18:56:53  INFO        Estimating worker effects ...
+2026-04-18 18:56:53  INFO        Training (1200 trees) ...
+2026-04-18 18:56:53  INFO        Done in 0.5s
+2026-04-18 18:56:53  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0006/models/OE/OE_WC10.json
+2026-04-18 18:56:53  INFO        Workers: 16  |  Levels — L1: 4  L2: 3  L3: 3  L4: 3  L5: 3
+2026-04-18 18:56:53  INFO      
+--------------------------------------------------
+2026-04-18 18:56:53  INFO      WorkCode 20
+2026-04-18 18:56:53  INFO        Encodings computed from 15,829 rows (WC 20, sequenced=False)
+2026-04-18 18:56:54  INFO        Rows: 15,829
+2026-04-18 18:56:54  INFO        Estimating worker effects ...
+2026-04-18 18:56:54  INFO        Training (1200 trees) ...
+2026-04-18 18:56:55  INFO        Done in 1.0s
+2026-04-18 18:56:55  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0006/models/OE/OE_WC20.json
+2026-04-18 18:56:55  INFO        Workers: 22  |  Levels — L1: 5  L2: 4  L3: 4  L4: 4  L5: 5
+2026-04-18 18:56:55  INFO      
+--------------------------------------------------
+2026-04-18 18:56:55  INFO      WorkCode 30
+2026-04-18 18:56:55  INFO        Encodings computed from 48,517 rows (WC 30, sequenced=False)
+2026-04-18 18:56:55  INFO        Rows: 48,517
+2026-04-18 18:56:55  INFO        Estimating worker effects ...
+2026-04-18 18:56:55  INFO        1 worker(s) with < 10 picks assigned effect = 0.0
+2026-04-18 18:56:55  INFO        Training (1200 trees) ...
+2026-04-18 18:56:56  INFO        Done in 1.2s
+2026-04-18 18:56:56  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0006/models/OE/OE_WC30.json
+2026-04-18 18:56:56  INFO        Workers: 35  |  Levels — L1: 7  L2: 7  L3: 7  L4: 7  L5: 7
+2026-04-18 18:56:56  INFO      
+meta.pkl saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts/n_0006/models/OE/meta.pkl
+2026-04-18 18:56:56  INFO      
+============================================================
+2026-04-18 18:56:56  INFO      TRAINING COMPLETE — OE
+2026-04-18 18:56:56  INFO      ============================================================
+2026-04-18 18:56:56  INFO        WorkCodes trained:  ['10', '20', '30']
+2026-04-18 18:56:56  INFO        sequenced:          False
+2026-04-18 18:56:56  INFO        Trees per model:    1200
+2026-04-18 18:56:56  INFO      ============================================================
+2026-04-18 23:11:04  INFO      Logging to logs/OE/model_training_2026-04-18.log
+2026-04-18 23:11:04  INFO      ============================================================
+2026-04-18 23:11:04  INFO      MODEL TRAINING — OE
+2026-04-18 23:11:04  INFO        sequenced  = False
+2026-04-18 23:11:04  INFO        trees      = 1200
+2026-04-18 23:11:04  INFO        min_rows   = 500
+2026-04-18 23:11:04  INFO      ============================================================
+2026-04-18 23:11:04  INFO      WorkCodes found: ['30']
+2026-04-18 23:11:04  INFO      
+--------------------------------------------------
+2026-04-18 23:11:04  INFO      WorkCode 30
+2026-04-18 23:11:04  INFO        Encodings computed from 9,637 rows (WC 30, sequenced=False)
+2026-04-18 23:11:04  INFO        Rows: 9,637
+2026-04-18 23:11:04  INFO        Estimating worker effects ...
+2026-04-18 23:11:05  INFO        1 worker(s) with < 10 picks assigned effect = 0.0
+2026-04-18 23:11:05  INFO        Training (1200 trees) ...
+2026-04-18 23:11:05  INFO        Done in 0.8s
+2026-04-18 23:11:05  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts_wc30/n_0001/models/OE/OE_WC30.json
+2026-04-18 23:11:05  INFO        Workers: 25  |  Levels — L1: 5  L2: 5  L3: 5  L4: 5  L5: 5
+2026-04-18 23:11:05  INFO      
+meta.pkl saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts_wc30/n_0001/models/OE/meta.pkl
+2026-04-18 23:11:05  INFO      
+============================================================
+2026-04-18 23:11:05  INFO      TRAINING COMPLETE — OE
+2026-04-18 23:11:05  INFO      ============================================================
+2026-04-18 23:11:05  INFO        WorkCodes trained:  ['30']
+2026-04-18 23:11:05  INFO        sequenced:          False
+2026-04-18 23:11:05  INFO        Trees per model:    1200
+2026-04-18 23:11:05  INFO      ============================================================
+2026-04-18 23:11:08  INFO      Logging to logs/OE/model_training_2026-04-18.log
+2026-04-18 23:11:08  INFO      ============================================================
+2026-04-18 23:11:08  INFO      MODEL TRAINING — OE
+2026-04-18 23:11:08  INFO        sequenced  = False
+2026-04-18 23:11:08  INFO        trees      = 1200
+2026-04-18 23:11:08  INFO        min_rows   = 500
+2026-04-18 23:11:08  INFO      ============================================================
+2026-04-18 23:11:08  INFO      WorkCodes found: ['30']
+2026-04-18 23:11:08  INFO      
+--------------------------------------------------
+2026-04-18 23:11:08  INFO      WorkCode 30
+2026-04-18 23:11:08  INFO        Encodings computed from 15,753 rows (WC 30, sequenced=False)
+2026-04-18 23:11:08  INFO        Rows: 15,753
+2026-04-18 23:11:08  INFO        Estimating worker effects ...
+2026-04-18 23:11:08  INFO        2 worker(s) with < 10 picks assigned effect = 0.0
+2026-04-18 23:11:08  INFO        Training (1200 trees) ...
+2026-04-18 23:11:09  INFO        Done in 0.9s
+2026-04-18 23:11:09  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts_wc30/n_0002/models/OE/OE_WC30.json
+2026-04-18 23:11:09  INFO        Workers: 31  |  Levels — L1: 7  L2: 7  L3: 5  L4: 6  L5: 6
+2026-04-18 23:11:09  INFO      
+meta.pkl saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts_wc30/n_0002/models/OE/meta.pkl
+2026-04-18 23:11:09  INFO      
+============================================================
+2026-04-18 23:11:09  INFO      TRAINING COMPLETE — OE
+2026-04-18 23:11:09  INFO      ============================================================
+2026-04-18 23:11:09  INFO        WorkCodes trained:  ['30']
+2026-04-18 23:11:09  INFO        sequenced:          False
+2026-04-18 23:11:09  INFO        Trees per model:    1200
+2026-04-18 23:11:09  INFO      ============================================================
+2026-04-18 23:11:12  INFO      Logging to logs/OE/model_training_2026-04-18.log
+2026-04-18 23:11:12  INFO      ============================================================
+2026-04-18 23:11:12  INFO      MODEL TRAINING — OE
+2026-04-18 23:11:12  INFO        sequenced  = False
+2026-04-18 23:11:12  INFO        trees      = 1200
+2026-04-18 23:11:12  INFO        min_rows   = 500
+2026-04-18 23:11:12  INFO      ============================================================
+2026-04-18 23:11:12  INFO      WorkCodes found: ['30']
+2026-04-18 23:11:12  INFO      
+--------------------------------------------------
+2026-04-18 23:11:12  INFO      WorkCode 30
+2026-04-18 23:11:12  INFO        Encodings computed from 25,936 rows (WC 30, sequenced=False)
+2026-04-18 23:11:13  INFO        Rows: 25,936
+2026-04-18 23:11:13  INFO        Estimating worker effects ...
+2026-04-18 23:11:13  INFO        3 worker(s) with < 10 picks assigned effect = 0.0
+2026-04-18 23:11:13  INFO        Training (1200 trees) ...
+2026-04-18 23:11:14  INFO        Done in 1.1s
+2026-04-18 23:11:14  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts_wc30/n_0003/models/OE/OE_WC30.json
+2026-04-18 23:11:14  INFO        Workers: 33  |  Levels — L1: 7  L2: 8  L3: 5  L4: 6  L5: 7
+2026-04-18 23:11:14  INFO      
+meta.pkl saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts_wc30/n_0003/models/OE/meta.pkl
+2026-04-18 23:11:14  INFO      
+============================================================
+2026-04-18 23:11:14  INFO      TRAINING COMPLETE — OE
+2026-04-18 23:11:14  INFO      ============================================================
+2026-04-18 23:11:14  INFO        WorkCodes trained:  ['30']
+2026-04-18 23:11:14  INFO        sequenced:          False
+2026-04-18 23:11:14  INFO        Trees per model:    1200
+2026-04-18 23:11:14  INFO      ============================================================
+2026-04-18 23:11:16  INFO      Logging to logs/OE/model_training_2026-04-18.log
+2026-04-18 23:11:16  INFO      ============================================================
+2026-04-18 23:11:16  INFO      MODEL TRAINING — OE
+2026-04-18 23:11:16  INFO        sequenced  = False
+2026-04-18 23:11:16  INFO        trees      = 1200
+2026-04-18 23:11:16  INFO        min_rows   = 500
+2026-04-18 23:11:16  INFO      ============================================================
+2026-04-18 23:11:16  INFO      WorkCodes found: ['30']
+2026-04-18 23:11:16  INFO      
+--------------------------------------------------
+2026-04-18 23:11:16  INFO      WorkCode 30
+2026-04-18 23:11:16  INFO        Encodings computed from 32,830 rows (WC 30, sequenced=False)
+2026-04-18 23:11:17  INFO        Rows: 32,830
+2026-04-18 23:11:17  INFO        Estimating worker effects ...
+2026-04-18 23:11:17  INFO        1 worker(s) with < 10 picks assigned effect = 0.0
+2026-04-18 23:11:17  INFO        Training (1200 trees) ...
+2026-04-18 23:11:18  INFO        Done in 1.3s
+2026-04-18 23:11:18  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts_wc30/n_0004/models/OE/OE_WC30.json
+2026-04-18 23:11:18  INFO        Workers: 33  |  Levels — L1: 7  L2: 6  L3: 7  L4: 6  L5: 7
+2026-04-18 23:11:18  INFO      
+meta.pkl saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts_wc30/n_0004/models/OE/meta.pkl
+2026-04-18 23:11:18  INFO      
+============================================================
+2026-04-18 23:11:18  INFO      TRAINING COMPLETE — OE
+2026-04-18 23:11:18  INFO      ============================================================
+2026-04-18 23:11:18  INFO        WorkCodes trained:  ['30']
+2026-04-18 23:11:18  INFO        sequenced:          False
+2026-04-18 23:11:18  INFO        Trees per model:    1200
+2026-04-18 23:11:18  INFO      ============================================================
+2026-04-18 23:11:21  INFO      Logging to logs/OE/model_training_2026-04-18.log
+2026-04-18 23:11:21  INFO      ============================================================
+2026-04-18 23:11:21  INFO      MODEL TRAINING — OE
+2026-04-18 23:11:21  INFO        sequenced  = False
+2026-04-18 23:11:21  INFO        trees      = 1200
+2026-04-18 23:11:21  INFO        min_rows   = 500
+2026-04-18 23:11:21  INFO      ============================================================
+2026-04-18 23:11:21  INFO      WorkCodes found: ['30']
+2026-04-18 23:11:21  INFO      
+--------------------------------------------------
+2026-04-18 23:11:21  INFO      WorkCode 30
+2026-04-18 23:11:21  INFO        Encodings computed from 40,124 rows (WC 30, sequenced=False)
+2026-04-18 23:11:21  INFO        Rows: 40,124
+2026-04-18 23:11:21  INFO        Estimating worker effects ...
+2026-04-18 23:11:21  INFO        1 worker(s) with < 10 picks assigned effect = 0.0
+2026-04-18 23:11:22  INFO        Training (1200 trees) ...
+2026-04-18 23:11:23  INFO        Done in 1.4s
+2026-04-18 23:11:23  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts_wc30/n_0005/models/OE/OE_WC30.json
+2026-04-18 23:11:23  INFO        Workers: 33  |  Levels — L1: 7  L2: 6  L3: 7  L4: 6  L5: 7
+2026-04-18 23:11:23  INFO      
+meta.pkl saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts_wc30/n_0005/models/OE/meta.pkl
+2026-04-18 23:11:23  INFO      
+============================================================
+2026-04-18 23:11:23  INFO      TRAINING COMPLETE — OE
+2026-04-18 23:11:23  INFO      ============================================================
+2026-04-18 23:11:23  INFO        WorkCodes trained:  ['30']
+2026-04-18 23:11:23  INFO        sequenced:          False
+2026-04-18 23:11:23  INFO        Trees per model:    1200
+2026-04-18 23:11:23  INFO      ============================================================
+2026-04-18 23:11:26  INFO      Logging to logs/OE/model_training_2026-04-18.log
+2026-04-18 23:11:26  INFO      ============================================================
+2026-04-18 23:11:26  INFO      MODEL TRAINING — OE
+2026-04-18 23:11:26  INFO        sequenced  = False
+2026-04-18 23:11:26  INFO        trees      = 1200
+2026-04-18 23:11:26  INFO        min_rows   = 500
+2026-04-18 23:11:26  INFO      ============================================================
+2026-04-18 23:11:26  INFO      WorkCodes found: ['30']
+2026-04-18 23:11:26  INFO      
+--------------------------------------------------
+2026-04-18 23:11:26  INFO      WorkCode 30
+2026-04-18 23:11:26  INFO        Encodings computed from 48,517 rows (WC 30, sequenced=False)
+2026-04-18 23:11:26  INFO        Rows: 48,517
+2026-04-18 23:11:26  INFO        Estimating worker effects ...
+2026-04-18 23:11:26  INFO        1 worker(s) with < 10 picks assigned effect = 0.0
+2026-04-18 23:11:26  INFO        Training (1200 trees) ...
+2026-04-18 23:11:27  INFO        Done in 1.4s
+2026-04-18 23:11:27  INFO        Model saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts_wc30/n_0006/models/OE/OE_WC30.json
+2026-04-18 23:11:27  INFO        Workers: 35  |  Levels — L1: 7  L2: 7  L3: 7  L4: 7  L5: 7
+2026-04-18 23:11:27  INFO      
+meta.pkl saved: /Users/jiashenwang/Desktop/Lucas_Systems_Capstone_Project/Model_Jiashen/incremental_eval_artifacts_wc30/n_0006/models/OE/meta.pkl
+2026-04-18 23:11:27  INFO      
+============================================================
+2026-04-18 23:11:27  INFO      TRAINING COMPLETE — OE
+2026-04-18 23:11:27  INFO      ============================================================
+2026-04-18 23:11:27  INFO        WorkCodes trained:  ['30']
+2026-04-18 23:11:27  INFO        sequenced:          False
+2026-04-18 23:11:27  INFO        Trees per model:    1200
+2026-04-18 23:11:27  INFO      ============================================================

@@ -6,6 +6,9 @@ Train XGBoost pick-time models for all WorkCodes in a warehouse.
 Trains on ALL available data — no train/test split. For evaluation
 with a proper holdout, use eval.py instead.
 
+For each WorkCode, runs 5-fold CV to tune XGBoost hyperparameters,
+then trains the final model with the CV-selected params.
+
 Usage:
     python model_training.py OE
     python model_training.py OE --data_dir training_data --models_dir models
@@ -20,10 +23,13 @@ Args:
                    training_data/WH/. Saves as WH_WCxx_seq.json.
     --trees:       Number of boosting rounds (default: 1200)
     --min_rows:    Skip WorkCodes with fewer rows than this (default: 500)
+    --min_days:    Advisory threshold for unique dates. If below this, training
+                   still runs but logs a warning (default: 3).
 
 Output (in models/WH/):
     WH_WCxx.json or WH_WCxx_seq.json   — one per WorkCode
-    meta.pkl                            — encodings, worker effects, column order
+    meta.pkl                            — encodings, worker effects, column order,
+                                          tuned xgb params and cv rounds
     logs/WH/model_training_YYYY-MM-DD.log
 """
 
@@ -46,14 +52,7 @@ from utils.io import (
 from utils.worker_effects import compute_worker_levels, estimate_worker_effects
 
 
-XGB_PARAMS = dict(
-    learning_rate=0.03,
-    max_depth=6,
-    min_child_weight=3,
-    subsample=0.8,
-    colsample_bytree=0.8,
-    reg_alpha=0.0,
-    reg_lambda=1.0,
+XGB_FIXED_PARAMS = dict(
     objective="reg:tweedie",
     tweedie_variance_power=1.3,
     tree_method="hist",
@@ -62,6 +61,46 @@ XGB_PARAMS = dict(
 
 DEFAULT_TREES   = 1200
 DEFAULT_MIN_ROWS = 500
+DEFAULT_MIN_DAYS = 3
+CV_FOLDS = 5
+CV_EARLY_STOPPING = 50
+CV_EVAL_METRIC = "mae"
+
+# Candidate parameter sets for 5-fold CV tuning.
+CV_PARAM_CANDIDATES = [
+    dict(
+        learning_rate=0.03, max_depth=6, min_child_weight=3,
+        subsample=0.8, colsample_bytree=0.8, reg_alpha=0.0, reg_lambda=1.0,
+    ),
+    dict(
+        learning_rate=0.02, max_depth=6, min_child_weight=3,
+        subsample=0.8, colsample_bytree=0.8, reg_alpha=0.0, reg_lambda=1.0,
+    ),
+    dict(
+        learning_rate=0.05, max_depth=6, min_child_weight=3,
+        subsample=0.8, colsample_bytree=0.8, reg_alpha=0.0, reg_lambda=1.0,
+    ),
+    dict(
+        learning_rate=0.03, max_depth=4, min_child_weight=3,
+        subsample=0.9, colsample_bytree=0.9, reg_alpha=0.0, reg_lambda=1.0,
+    ),
+    dict(
+        learning_rate=0.03, max_depth=8, min_child_weight=3,
+        subsample=0.8, colsample_bytree=0.8, reg_alpha=0.0, reg_lambda=1.0,
+    ),
+    dict(
+        learning_rate=0.03, max_depth=6, min_child_weight=1,
+        subsample=0.8, colsample_bytree=0.8, reg_alpha=0.0, reg_lambda=1.0,
+    ),
+    dict(
+        learning_rate=0.03, max_depth=6, min_child_weight=5,
+        subsample=0.8, colsample_bytree=0.8, reg_alpha=0.0, reg_lambda=1.0,
+    ),
+    dict(
+        learning_rate=0.03, max_depth=6, min_child_weight=3,
+        subsample=0.8, colsample_bytree=0.8, reg_alpha=0.1, reg_lambda=2.0,
+    ),
+]
 
 
 def parse_args():
@@ -75,6 +114,7 @@ def parse_args():
                         help="Train with sequence features (requires distance matrix)")
     parser.add_argument("--trees",        type=int, default=DEFAULT_TREES)
     parser.add_argument("--min_rows",     type=int, default=DEFAULT_MIN_ROWS)
+    parser.add_argument("--min_days",     type=int, default=DEFAULT_MIN_DAYS)
     return parser.parse_args()
 
 
@@ -90,6 +130,50 @@ def discover_workcodes(data_dir, warehouse):
     return sorted(wcs)
 
 
+def tune_xgb_params_cv(dtrain, num_boost_round, logger):
+    """
+    Run 5-fold CV over a small candidate set and return the best params.
+    """
+    best_params = None
+    best_rounds = None
+    best_score = float("inf")
+
+    logger.info(
+        f"  CV tuning: {CV_FOLDS}-fold, metric={CV_EVAL_METRIC}, "
+        f"candidates={len(CV_PARAM_CANDIDATES)}"
+    )
+
+    for i, candidate in enumerate(CV_PARAM_CANDIDATES, start=1):
+        params = {**XGB_FIXED_PARAMS, **candidate}
+        cv = xgb.cv(
+            params=params,
+            dtrain=dtrain,
+            num_boost_round=num_boost_round,
+            nfold=CV_FOLDS,
+            stratified=False,
+            metrics=(CV_EVAL_METRIC,),
+            early_stopping_rounds=CV_EARLY_STOPPING,
+            seed=2026,
+            shuffle=True,
+            verbose_eval=False,
+        )
+
+        metric_col = f"test-{CV_EVAL_METRIC}-mean"
+        score = float(cv[metric_col].min())
+        rounds = int(cv[metric_col].idxmin()) + 1
+        logger.info(
+            f"    CV candidate {i:02d}: best_{CV_EVAL_METRIC}={score:.4f}, "
+            f"best_rounds={rounds}, params={candidate}"
+        )
+
+        if score < best_score:
+            best_score = score
+            best_rounds = rounds
+            best_params = params
+
+    return best_params, int(best_rounds), float(best_score)
+
+
 def main():
     args      = parse_args()
     warehouse = args.warehouse.upper()
@@ -102,6 +186,7 @@ def main():
     logger.info(f"  sequenced  = {args.sequenced}")
     logger.info(f"  trees      = {args.trees}")
     logger.info(f"  min_rows   = {args.min_rows}")
+    logger.info(f"  min_days   = {args.min_days}")
     logger.info(f"{'='*60}")
 
     workcodes = discover_workcodes(args.data_dir, warehouse)
@@ -118,6 +203,11 @@ def main():
         "level_medians":    {},
         "mae_history":      {},
         "baseline_mae":     {},
+        "seen_dates":       {},   # unique YYYY-MM-DD dates observed per WC
+        "days_trained":     {},   # len(seen_dates[wc]); kept for convenience
+        "xgb_params":       {},   # tuned params per WC from 5-fold CV
+        "xgb_best_rounds":  {},   # best boosting rounds from CV per WC
+        "xgb_cv_mae":       {},   # best CV MAE per WC
     }
 
     trained_wcs = []
@@ -149,6 +239,14 @@ def main():
             skipped_wcs.append(wc)
             continue
 
+        unique_days = int(df["Timestamp"].dropna().dt.date.nunique())
+        if unique_days < args.min_days:
+            logger.warning(
+                f"  Only {unique_days} unique day(s) — below "
+                f"min_days={args.min_days}. Continuing training, but "
+                "performance may be unstable. Recommended: 3+ days."
+            )
+
         logger.info(f"  Rows: {len(df):,}")
 
         # ── Worker effects ────────────────────────────────────────────────────
@@ -166,13 +264,34 @@ def main():
         X["worker_effect"] = df["worker_effect"].values
         train_columns = X.columns.tolist()
 
-        # ── Train ─────────────────────────────────────────────────────────────
-        logger.info(f"  Training ({args.trees} trees) ...")
-        t0     = time.time()
         dtrain = xgb.DMatrix(X, label=y)
-        model  = xgb.train(
-            XGB_PARAMS, dtrain,
-            num_boost_round=args.trees,
+
+        # ── CV tune and train ────────────────────────────────────────────────
+        t0 = time.time()
+        try:
+            best_params, best_rounds, best_cv_mae = tune_xgb_params_cv(
+                dtrain=dtrain,
+                num_boost_round=args.trees,
+                logger=logger,
+            )
+        except Exception as e:
+            logger.warning(
+                f"  CV tuning failed ({e}) — falling back to baseline params."
+            )
+            best_params = {
+                **XGB_FIXED_PARAMS,
+                **CV_PARAM_CANDIDATES[0],
+            }
+            best_rounds = args.trees
+            best_cv_mae = float("nan")
+
+        logger.info(
+            f"  Training final model with CV params "
+            f"(rounds={best_rounds}, cv_{CV_EVAL_METRIC}={best_cv_mae:.4f}) ..."
+        )
+        model = xgb.train(
+            best_params, dtrain,
+            num_boost_round=best_rounds,
             verbose_eval=False,
         )
         elapsed = time.time() - t0
@@ -197,6 +316,15 @@ def main():
         meta["level_medians"][wc]    = level_medians
         meta["mae_history"][wc]      = []
         meta["baseline_mae"][wc]     = None   # set on first update run
+        meta["xgb_params"][wc]       = best_params
+        meta["xgb_best_rounds"][wc]  = best_rounds
+        meta["xgb_cv_mae"][wc]       = best_cv_mae
+        seen_dates = sorted({
+            ts.date().isoformat()
+            for ts in df["Timestamp"].dropna()
+        })
+        meta["seen_dates"][wc]       = seen_dates
+        meta["days_trained"][wc]     = len(seen_dates)
 
         trained_wcs.append(wc)
         logger.info(
@@ -205,7 +333,8 @@ def main():
             "  ".join(
                 f"L{lv}: {(effects_levelled['level']==lv).sum()}"
                 for lv in range(1, 6)
-            )
+            ) +
+            f"  |  Days seen: {meta['days_trained'][wc]}"
         )
 
     # ── Save meta ─────────────────────────────────────────────────────────────

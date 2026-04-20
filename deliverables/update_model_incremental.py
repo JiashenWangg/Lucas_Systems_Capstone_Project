@@ -8,24 +8,27 @@ Each run:
   2. Runs preprocessing steps: computes time delta, joins Products/Locations,
      filters outliers
   3. Applies saved feature encodings from meta.pkl (never recomputed)
-  4. Adds UPDATE_TREES new trees using a low learning rate (0.005)
+  4. Adds UPDATE_TREES new trees using adaptive learning rate based on
+     m/n (m=new batch days, n=historical days), while reusing the
+     CV-tuned base parameters saved by model_training.py
   5. Updates worker effects for any new workers
   6. Saves updated model files and meta.pkl
   7. Tracks batch MAE before and after update; alerts if degradation detected
 
-Why low learning rate (0.005 vs 0.03 at training time):
-  Each day's batch is small relative to the full training history. At the
-  training learning rate, new trees overfit to that day's noise and pull
-  predictions in random directions. At 0.005, each tree contributes ~6x
-  less — real patterns that persist across many days accumulate, noise
-  averages out.
+Adaptive incremental LR policy:
+  Let n = historical days already fit for the WorkCode,
+      m = unique days in the incoming update batch for that WorkCode.
+  Then:
+      m/n <= 0.10          -> lr = 0.005
+      0.10 < m/n <= 0.25   -> lr = 0.008
+      0.25 < m/n <= 0.50   -> lr = 0.015
+      m/n > 0.50           -> lr = 0.03
 
 Usage:
     python update_model_incremental.py OE --new_data daily_activity.csv
     python update_model_incremental.py OE --new_data daily_activity.csv --trees 50
     python update_model_incremental.py OE --new_data daily_activity.csv --sequenced
     python update_model_incremental.py OE --new_data daily_activity.csv --alert_pct 20
-
 Args:
     warehouse:    Warehouse code (OE, OF, RT)
     --new_data:   Path to today's raw Activity CSV (completed picks with Timestamps)
@@ -55,16 +58,16 @@ from utils.io import (
     save_model,
     setup_logging,
 )
-from utils.worker_effects import (
-    compute_worker_levels,
-    estimate_worker_effects,
-)
+from utils.worker_effects import compute_worker_levels, estimate_worker_effects
 
-UPDATE_LR        = 0.005
-DEFAULT_TREES    = 150
+DEFAULT_TREES = 150
 DEFAULT_ALERT_PCT = 20
+LR_SMALL = 0.005
+LR_MEDIUM = 0.008
+LR_LARGE = 0.015
+LR_FULL = 0.03
 
-XGB_PARAMS_BASE = dict(
+XGB_PARAMS_FALLBACK = dict(
     max_depth=6,
     min_child_weight=3,
     subsample=0.8,
@@ -98,6 +101,27 @@ def compute_batch_mae(model, X, y):
     return float(np.mean(np.abs(preds - y.values)))
 
 
+def choose_incremental_lr(n_days, m_days):
+    """
+    Choose incremental LR by ratio m/n:
+      m/n <= 0.10          -> 0.005
+      0.10 < m/n <= 0.25   -> 0.008
+      0.25 < m/n <= 0.50   -> 0.015
+      m/n > 0.50           -> 0.03
+    """
+    n = max(int(n_days), 1)  # avoid divide-by-zero for legacy/meta edge cases
+    m = max(int(m_days), 1)
+    ratio = m / n
+
+    if ratio <= 0.10:
+        return LR_SMALL, ratio
+    if ratio <= 0.25:
+        return LR_MEDIUM, ratio
+    if ratio <= 0.50:
+        return LR_LARGE, ratio
+    return LR_FULL, ratio
+
+
 def main():
     args      = parse_args()
     warehouse = args.warehouse.upper()
@@ -109,12 +133,16 @@ def main():
     logger.info(f"{'='*60}")
     logger.info(f"UPDATE MODEL — {warehouse}  ({today})")
     logger.info(f"  new_data   = {args.new_data}")
-    logger.info(f"  trees/run  = {args.trees}  |  lr = {UPDATE_LR}")
+    logger.info(f"  trees/run  = {args.trees}  |  adaptive lr by m/n ratio")
     logger.info(f"  alert_pct  = {args.alert_pct}%")
     logger.info(f"  sequenced  = {args.sequenced}")
     logger.info(f"{'='*60}")
 
     meta = load_meta(args.models_dir, warehouse)
+    # Backward compatibility with older meta.pkl files.
+    meta.setdefault("seen_dates", {})
+    meta.setdefault("days_trained", {})
+    meta.setdefault("xgb_params", {})
 
     if meta.get("sequenced", False) != args.sequenced:
         logger.warning(
@@ -154,6 +182,21 @@ def main():
             continue
 
         logger.info(f"  New rows: {len(df):,}")
+        # m = unique days in incoming batch, n = days already fit in model
+        batch_seen = {
+            ts.date().isoformat()
+            for ts in df["Timestamp"].dropna()
+        }
+        prev_days = int(meta["days_trained"].get(wc, 0))
+        if prev_days <= 0:
+            prev_days = len(meta["seen_dates"].get(wc, []))
+
+        lr, ratio = choose_incremental_lr(prev_days, len(batch_seen))
+        logger.info(
+            f"  Days seen so far (n): {prev_days}  |  "
+            f"new batch days (m): {len(batch_seen)}  |  "
+            f"m/n={ratio:.3f}  |  update lr: {lr}"
+        )
 
         # ── Worker effects ────────────────────────────────────────────────────
         existing_effects  = meta["worker_effects"].get(wc)
@@ -222,7 +265,19 @@ def main():
         )
 
         # ── Update ────────────────────────────────────────────────────────────
-        xgb_params = {**XGB_PARAMS_BASE, "learning_rate": UPDATE_LR}
+        saved_params = meta["xgb_params"].get(wc, {})
+        if saved_params:
+            logger.info("  Using CV-tuned params from meta.pkl")
+        else:
+            logger.warning(
+                "  No saved CV params for this WorkCode — using fallback params."
+            )
+
+        xgb_params = {
+            **XGB_PARAMS_FALLBACK,
+            **saved_params,
+            "learning_rate": lr,  # update policy overrides training LR
+        }
         updated_model = xgb.train(
             xgb_params, d_new,
             num_boost_round=args.trees,
@@ -281,6 +336,15 @@ def main():
         )
         logger.info(f"  Trend: {trend}")
 
+        # ── Persist observed-date history ───────────────────────────────────
+        prev_seen = set(meta["seen_dates"].get(wc, []))
+        all_seen = sorted(prev_seen | batch_seen)
+        meta["seen_dates"][wc] = all_seen
+        meta["days_trained"][wc] = len(all_seen)
+        logger.info(
+            f"  Days seen after update: {meta['days_trained'][wc]}"
+        )
+
         # ── Save model ────────────────────────────────────────────────────────
         save_model(updated_model, args.models_dir, warehouse, wc,
                    sequenced=args.sequenced)
@@ -297,7 +361,7 @@ def main():
     if skipped_wcs:
         logger.info(f"  WorkCodes skipped:  {skipped_wcs}")
     logger.info(f"  New workers added:  {new_workers_total}")
-    logger.info(f"  Trees added/WC:     {args.trees}  (lr={UPDATE_LR})")
+    logger.info(f"  Trees added/WC:     {args.trees}  (adaptive lr by m/n)")
     if alerted_wcs:
         logger.warning(
             f"  ⚠ ALERTS fired for: {alerted_wcs} — "
