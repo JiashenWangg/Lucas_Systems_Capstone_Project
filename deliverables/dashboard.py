@@ -17,7 +17,7 @@ st.set_page_config(page_title="Warehouse Labor Forecaster", layout="wide")
 
 st.title("📊 Warehouse Labor Prediction Dashboard")
 st.markdown("""
-Upload your **Future Work Queue**. 
+Upload your **Future Assignment**. 
 The system will automatically link reference data (Locations/Products) from your local project directories.
 """)
 
@@ -29,7 +29,7 @@ is_sequenced = st.sidebar.toggle("Use Sequenced Logic", value=False)
 
 st.sidebar.divider()
 st.sidebar.header("📁 Input Assignment")
-act_file = st.sidebar.file_uploader("Upload Work Queue CSV", type=["csv"], 
+act_file = st.sidebar.file_uploader("Upload Assignment CSV", type=["csv"], 
                                    help="Required columns: ProductID, Quantity, LocationID, WorkCode")
 
 # Hard cap from your notebook
@@ -147,4 +147,4 @@ if act_file:
                     st.error(f"Prediction Pipeline Error: {e}")
 
 else:
-    st.info("👈 Please upload your work queue CSV in the sidebar.")
+    st.info("👈 Please upload your new assignment CSV in the sidebar.")

@@ -21,7 +21,7 @@ Args:
     --data_dir:     Root training_data directory (default: training_data)
     --models_dir:   Root models directory (default: models)
     --sequenced:    Use sequenced model — rows must be in pick order
-    --user_level:   Worker performance level 1-5 (1=slowest, 5=fastest).
+    --user_level:   Worker performance level 1-5 (1=fastest, 5=slowest).
                     Applied uniformly to all rows in the assignment.
                     If omitted, uses grand mean (level 3 equivalent).
     --out:          Output CSV path (default: predict_data/WH/prediction.csv)
@@ -62,7 +62,7 @@ def parse_args():
                         help="Use sequenced model (rows must be in pick order)")
     parser.add_argument("--user_level",  type=int, default=None,
                         choices=[1, 2, 3, 4, 5],
-                        help="Worker level 1-5 (1=slowest, 5=fastest). "
+                        help="Worker level 1-5 (1=fastest, 5=slowest). "
                              "Default: grand mean (level 3 equivalent).")
     parser.add_argument("--out",         default=None,
                         help="Output CSV path")

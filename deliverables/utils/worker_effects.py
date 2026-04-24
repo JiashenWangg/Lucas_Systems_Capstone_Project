@@ -7,8 +7,8 @@ Worker effects capture how much faster or slower each worker is relative
 to the warehouse average, fit as random intercepts in a mixed effects model.
 
 Level convention (consistent across all scripts):
-    Level 5 = fastest workers  (most negative effect)
-    Level 1 = slowest workers  (most positive effect)
+    Level 5 = slowest workers  (most positive effect)
+    Level 1 = fastest workers  (most negative effect)
 
 Public API
 ----------
@@ -117,13 +117,13 @@ def estimate_worker_effects(df, min_picks=10):
 
 # Percentile boundaries for the 5 levels.
 # Effect is positive = slow, negative = fast.
-# Level 5 = fastest = lowest (most negative) effects = bottom percentile.
+# Level 1 = fastest = lowest (most negative) effects = bottom percentile.
 LEVEL_PERCENTILES = {
-    5: (0,   20),   # fastest 20%
-    4: (20,  40),
+    1: (0,   20),   # fastest 20%
+    2: (20,  40),
     3: (40,  60),   # middle (average)
-    2: (60,  80),
-    1: (80, 100),   # slowest 20%
+    4: (60,  80),
+    5: (80, 100),   # slowest 20%
 }
 
 
@@ -187,8 +187,8 @@ def level_to_effect(level, level_medians):
     Convert a user-supplied level (1-5) to a numeric worker_effect value
     using the median effect of workers at that level from training data.
 
-    Level 5 = fastest = most negative effect.
-    Level 1 = slowest = most positive effect.
+    Level 5 = slowest = most positive effect.
+    Level 1 = fastest = most negative effect.
 
     Args:
         level:         Int 1-5 supplied by the client at predict time.

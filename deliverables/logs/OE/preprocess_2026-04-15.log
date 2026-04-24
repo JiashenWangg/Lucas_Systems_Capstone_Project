@@ -1,0 +1,29 @@
+2026-04-15 01:47:54  INFO      Logging to logs/OE/preprocess_2026-04-15.log
+2026-04-15 01:47:54  INFO      ============================================================
+2026-04-15 01:47:54  INFO      PREPROCESS — OE
+2026-04-15 01:47:54  INFO      ============================================================
+2026-04-15 01:47:54  INFO      Loading Activity: training_data/OE/OE_Activity.csv
+2026-04-15 01:47:54  INFO        Rows loaded: 95,237
+2026-04-15 01:47:54  INFO      Computing time deltas ...
+2026-04-15 01:47:54  INFO        95,197 rows with valid positive Time_Delta_sec (first pick per user dropped)
+2026-04-15 01:47:54  INFO      Filtering time outliers ...
+2026-04-15 01:47:54  INFO        Time filter:  95,197 rows in
+2026-04-15 01:47:54  INFO          p98 cut (≤ 575.1s): removed 1,904 rows
+2026-04-15 01:47:54  INFO          600s hard cap:          removed 0 rows
+2026-04-15 01:47:54  INFO          Total dropped: 1,904 (2.0%)
+2026-04-15 01:47:54  INFO          Rows retained: 93,293
+2026-04-15 01:47:54  INFO      Loading Locations and Products ...
+2026-04-15 01:47:54  INFO        Locations: 33,518 rows  |  Products: 57,670 rows
+2026-04-15 01:47:54  INFO      Joining Locations and Products ...
+2026-04-15 01:47:54  INFO      Checking for Distance matrix ...
+2026-04-15 01:47:55  INFO        Distance matrix found (1,552,516 location pairs) — joining
+2026-04-15 01:47:55  INFO      
+Summary:
+2026-04-15 01:47:55  INFO        Date range:    2025-09-08 → 2025-12-02  (86 days)
+2026-04-15 01:47:55  INFO        Final rows:    93,293
+2026-04-15 01:47:55  INFO        Workers:       40
+2026-04-15 01:47:55  INFO        WorkCodes:     {'30': 66454, '20': 22019, '10': 4820}
+2026-04-15 01:47:55  INFO        Total dropped: 1,944 (2.0%)
+2026-04-15 01:47:55  INFO      
+Saved: training_data/OE/OE_Processed.parquet
+2026-04-15 01:47:55  INFO      ============================================================
