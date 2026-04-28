@@ -26,6 +26,7 @@ Args:
     --min_days:    Advisory threshold for unique dates. If below this, training
                    still runs but logs a warning (default: 3).
     --cv:          Enable 5-fold CV parameter tuning (default: False)
+    --coverage:    Theoretical coverage level of prediction intervals as a percentage (default: 95%)
 
 Output (in models/WH/):
     WH_WCxx.json or WH_WCxx_seq.json   — one per WorkCode
@@ -73,6 +74,7 @@ XGB_BASELINE_TRAIN_PARAMS = dict(
 DEFAULT_TREES = 1200
 DEFAULT_MIN_ROWS = 500
 DEFAULT_MIN_DAYS = 3
+DEFAULT_COVERAGE = 95
 CV_FOLDS = 5
 CV_EARLY_STOPPING = 50
 CV_EVAL_METRIC = "mae"
@@ -174,6 +176,7 @@ def parse_args():
         action="store_true",
         help="Enable 5-fold CV parameter tuning before final training.",
     )
+    parser.add_argument("--coverage", type=int, default=DEFAULT_COVERAGE)
     return parser.parse_args()
 
 
@@ -370,11 +373,43 @@ def main():
         elapsed = time.time() - t0
         logger.info(f"  Done in {elapsed:.1f}s")
 
+        best_params_PI = best_params
+        best_params_PI.update({"objective": "reg:quantileerror"})
+        best_params_PI.pop("tweedie_variance_power", None)
+        best_params_PI.pop("reg_alpha", None)
+        best_params_PI.pop("reg_lambda", None)
+
+        best_params_PI.update({"quantile_alpha": (100-args.coverage)/200})
+
+        model_LB = xgb.train(
+            best_params_PI,
+            dtrain,
+            verbose_eval=False
+        )
+
+        best_params_PI.update({"quantile_alpha": (50+(args.coverage/2))/100})
+
+        model_UB = xgb.train(
+            best_params_PI,
+            dtrain,
+            verbose_eval=False
+        )
+
         # ── Save model ────────────────────────────────────────────────────────
         model_file = save_model(
             model, args.models_dir, warehouse, wc, sequenced=args.sequenced
         )
         logger.info(f"  Model saved: {model_file}")
+
+        model_file_LB = save_model(
+            model_LB, args.models_dir, warehouse, wc, sequenced=args.sequenced, lower=True
+        )
+        logger.info(f"  Model saved: {model_file_LB}")
+
+        model_file_UB = save_model(
+            model_UB, args.models_dir, warehouse, wc, sequenced=args.sequenced, upper=True
+        )
+        logger.info(f"  Model saved: {model_file_UB}")
 
         # ── Populate meta ─────────────────────────────────────────────────────
         meta["workcodes"].append(wc)

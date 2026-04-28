@@ -231,7 +231,7 @@ def save_parquet(df, data_dir, warehouse):
 
 # ── Model I/O ────────────────────────────────────────────────────────────────
 
-def model_path(models_dir, warehouse, wc, sequenced=False):
+def model_path(models_dir, warehouse, wc, sequenced=False, lower=False, upper=False):
     """
     Return the Path object for a model file.
     Naming convention:
@@ -239,15 +239,17 @@ def model_path(models_dir, warehouse, wc, sequenced=False):
         Sequenced:     models/WH/WH_WCxx_seq.json
     """
     suffix = "_seq" if sequenced else ""
+    suffix = (suffix + "LB") if lower else suffix
+    suffix = (suffix + "UB") if upper else suffix
     return (
         Path(models_dir) / warehouse.upper()
         / f"{warehouse.upper()}_WC{wc}{suffix}.json"
     )
 
 
-def load_model(models_dir, warehouse, wc, sequenced=False):
+def load_model(models_dir, warehouse, wc, sequenced=False, lower=False, upper=False):
     """Load a saved XGBoost Booster. Raises FileNotFoundError if missing."""
-    path = model_path(models_dir, warehouse, wc, sequenced)
+    path = model_path(models_dir, warehouse, wc, sequenced, lower, upper)
     if not path.exists():
         raise FileNotFoundError(
             f"Model file not found: {path}. "
@@ -258,9 +260,9 @@ def load_model(models_dir, warehouse, wc, sequenced=False):
     return booster
 
 
-def save_model(model, models_dir, warehouse, wc, sequenced=False):
+def save_model(model, models_dir, warehouse, wc, sequenced=False, lower=False, upper=False):
     """Save an XGBoost Booster. Creates directories if needed."""
-    path = model_path(models_dir, warehouse, wc, sequenced)
+    path = model_path(models_dir, warehouse, wc, sequenced, lower, upper)
     path.parent.mkdir(parents=True, exist_ok=True)
     model.save_model(str(path))
     return path

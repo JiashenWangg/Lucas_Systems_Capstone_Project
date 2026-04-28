@@ -1,0 +1,254 @@
+2026-04-28 18:47:36  INFO      Logging to logs/OE/predict_primary_2026-04-28.log
+2026-04-28 18:47:36  INFO      ============================================================
+2026-04-28 18:47:36  INFO      PREDICT PRIMARY — OE
+2026-04-28 18:47:36  INFO        input:      temp_dashboard_queue.csv
+2026-04-28 18:47:36  INFO        sequenced:  False
+2026-04-28 18:47:36  INFO        user_level: grand mean
+2026-04-28 18:47:36  INFO      ============================================================
+2026-04-28 18:47:36  INFO        WorkCode detected: 30
+2026-04-28 18:47:36  INFO        Tasks: 34
+2026-04-28 18:47:36  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-28 18:47:36  INFO      
+  Tasks:              34
+2026-04-28 18:47:36  INFO        Predicted total:    1704.7s  (28.41 min)
+2026-04-28 18:47:36  INFO      
+  Output saved: predict_data/OE/OE_30_prediction.csv
+2026-04-28 18:47:36  INFO      ============================================================
+2026-04-28 18:51:13  INFO      Logging to logs/OE/predict_primary_2026-04-28.log
+2026-04-28 18:51:13  INFO      ============================================================
+2026-04-28 18:51:13  INFO      PREDICT PRIMARY — OE
+2026-04-28 18:51:13  INFO        input:      temp_dashboard_queue.csv
+2026-04-28 18:51:13  INFO        sequenced:  False
+2026-04-28 18:51:13  INFO        user_level: grand mean
+2026-04-28 18:51:13  INFO      ============================================================
+2026-04-28 18:51:14  INFO        WorkCode detected: 30
+2026-04-28 18:51:14  INFO        Tasks: 34
+2026-04-28 18:51:14  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-28 18:51:14  INFO      
+  Tasks:              34
+2026-04-28 18:51:14  INFO        Predicted total:    1704.7s  (28.41 min)
+2026-04-28 18:51:14  INFO      
+  Output saved: predict_data/OE/OE_30_prediction.csv
+2026-04-28 18:51:14  INFO      ============================================================
+2026-04-28 18:57:15  INFO      Logging to logs/OE/predict_primary_2026-04-28.log
+2026-04-28 18:57:15  INFO      ============================================================
+2026-04-28 18:57:15  INFO      PREDICT PRIMARY — OE
+2026-04-28 18:57:15  INFO        input:      temp_dashboard_queue.csv
+2026-04-28 18:57:15  INFO        sequenced:  False
+2026-04-28 18:57:15  INFO        user_level: grand mean
+2026-04-28 18:57:15  INFO      ============================================================
+2026-04-28 18:57:15  INFO        WorkCode detected: 30
+2026-04-28 18:57:15  INFO        Tasks: 34
+2026-04-28 18:57:15  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-28 18:57:16  INFO      
+  Tasks:              34
+2026-04-28 18:57:16  INFO        Predicted total:    1704.7s  (28.41 min)
+2026-04-28 18:57:16  INFO      
+  Output saved: predict_data/OE/OE_30_prediction.csv
+2026-04-28 18:57:16  INFO      ============================================================
+2026-04-28 19:03:40  INFO      Logging to logs/OE/predict_primary_2026-04-28.log
+2026-04-28 19:03:40  INFO      ============================================================
+2026-04-28 19:03:40  INFO      PREDICT PRIMARY — OE
+2026-04-28 19:03:40  INFO        input:      temp_dashboard_queue.csv
+2026-04-28 19:03:40  INFO        sequenced:  False
+2026-04-28 19:03:40  INFO        user_level: grand mean
+2026-04-28 19:03:40  INFO      ============================================================
+2026-04-28 19:03:40  INFO        WorkCode detected: 30
+2026-04-28 19:03:40  INFO        Tasks: 34
+2026-04-28 19:03:40  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-28 19:03:41  INFO      
+  Tasks:              34
+2026-04-28 19:03:41  INFO        Predicted total:    1704.7s  (28.41 min)
+2026-04-28 19:03:41  INFO      
+  Output saved: predict_data/OE/OE_30_prediction.csv
+2026-04-28 19:03:41  INFO      ============================================================
+2026-04-28 19:05:28  INFO      Logging to logs/OE/predict_primary_2026-04-28.log
+2026-04-28 19:05:28  INFO      ============================================================
+2026-04-28 19:05:28  INFO      PREDICT PRIMARY — OE
+2026-04-28 19:05:28  INFO        input:      temp_dashboard_queue.csv
+2026-04-28 19:05:28  INFO        sequenced:  False
+2026-04-28 19:05:28  INFO        user_level: grand mean
+2026-04-28 19:05:28  INFO      ============================================================
+2026-04-28 19:05:29  INFO        WorkCode detected: 30
+2026-04-28 19:05:29  INFO        Tasks: 34
+2026-04-28 19:05:29  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-28 19:05:29  INFO      
+  Tasks:              34
+2026-04-28 19:05:29  INFO        Predicted total:    1704.7s  (28.41 min)
+2026-04-28 19:05:29  INFO      
+  Output saved: predict_data/OE/OE_30_prediction.csv
+2026-04-28 19:05:29  INFO      ============================================================
+2026-04-28 19:12:01  INFO      Logging to logs/OE/predict_primary_2026-04-28.log
+2026-04-28 19:12:01  INFO      ============================================================
+2026-04-28 19:12:01  INFO      PREDICT PRIMARY — OE
+2026-04-28 19:12:01  INFO        input:      temp_dashboard_queue.csv
+2026-04-28 19:12:01  INFO        sequenced:  False
+2026-04-28 19:12:01  INFO        user_level: grand mean
+2026-04-28 19:12:01  INFO      ============================================================
+2026-04-28 19:12:01  INFO        WorkCode detected: 30
+2026-04-28 19:12:01  INFO        Tasks: 34
+2026-04-28 19:12:01  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-28 19:12:02  INFO      
+  Tasks:              34
+2026-04-28 19:12:02  INFO        Predicted total:    1704.7s  (28.41 min)
+2026-04-28 19:12:02  INFO      
+  Output saved: predict_data/OE/OE_30_prediction.csv
+2026-04-28 19:12:02  INFO      ============================================================
+2026-04-28 19:16:15  INFO      Logging to logs/OE/predict_primary_2026-04-28.log
+2026-04-28 19:16:15  INFO      ============================================================
+2026-04-28 19:16:15  INFO      PREDICT PRIMARY — OE
+2026-04-28 19:16:15  INFO        input:      temp_dashboard_queue.csv
+2026-04-28 19:16:15  INFO        sequenced:  False
+2026-04-28 19:16:15  INFO        user_level: grand mean
+2026-04-28 19:16:15  INFO      ============================================================
+2026-04-28 19:16:15  INFO        WorkCode detected: 30
+2026-04-28 19:16:15  INFO        Tasks: 34
+2026-04-28 19:16:15  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-28 19:16:16  INFO      
+  Tasks:              34
+2026-04-28 19:16:16  INFO        Predicted total:    1704.7s  (28.41 min)
+2026-04-28 19:16:16  INFO      
+  Output saved: predict_data/OE/OE_30_prediction.csv
+2026-04-28 19:16:16  INFO      ============================================================
+2026-04-28 19:17:23  INFO      Logging to logs/OE/predict_primary_2026-04-28.log
+2026-04-28 19:17:23  INFO      ============================================================
+2026-04-28 19:17:23  INFO      PREDICT PRIMARY — OE
+2026-04-28 19:17:23  INFO        input:      temp_dashboard_queue.csv
+2026-04-28 19:17:23  INFO        sequenced:  False
+2026-04-28 19:17:23  INFO        user_level: grand mean
+2026-04-28 19:17:23  INFO      ============================================================
+2026-04-28 19:17:23  INFO        WorkCode detected: 30
+2026-04-28 19:17:23  INFO        Tasks: 34
+2026-04-28 19:17:23  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-28 19:17:23  INFO      
+  Tasks:              34
+2026-04-28 19:17:23  INFO        Predicted total:    1704.7s  (28.41 min)
+2026-04-28 19:17:23  INFO      
+  Output saved: predict_data/OE/OE_30_prediction.csv
+2026-04-28 19:17:23  INFO      ============================================================
+2026-04-28 19:21:56  INFO      Logging to logs/OE/predict_primary_2026-04-28.log
+2026-04-28 19:21:56  INFO      ============================================================
+2026-04-28 19:21:56  INFO      PREDICT PRIMARY — OE
+2026-04-28 19:21:56  INFO        input:      temp_dashboard_queue.csv
+2026-04-28 19:21:56  INFO        sequenced:  False
+2026-04-28 19:21:56  INFO        user_level: grand mean
+2026-04-28 19:21:56  INFO      ============================================================
+2026-04-28 19:21:56  INFO        WorkCode detected: 30
+2026-04-28 19:21:56  INFO        Tasks: 34
+2026-04-28 19:21:56  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-28 19:21:56  INFO      
+  Tasks:              34
+2026-04-28 19:21:56  INFO        Predicted total:    1704.7s  (28.41 min)
+2026-04-28 19:21:56  INFO      
+  Output saved: predict_data/OE/OE_30_prediction.csv
+2026-04-28 19:21:56  INFO      ============================================================
+2026-04-28 19:22:34  INFO      Logging to logs/OE/predict_primary_2026-04-28.log
+2026-04-28 19:22:34  INFO      ============================================================
+2026-04-28 19:22:34  INFO      PREDICT PRIMARY — OE
+2026-04-28 19:22:34  INFO        input:      temp_dashboard_queue.csv
+2026-04-28 19:22:34  INFO        sequenced:  False
+2026-04-28 19:22:34  INFO        user_level: grand mean
+2026-04-28 19:22:34  INFO      ============================================================
+2026-04-28 19:22:34  INFO        WorkCode detected: 30
+2026-04-28 19:22:34  INFO        Tasks: 34
+2026-04-28 19:22:34  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-28 19:22:34  INFO      
+  Tasks:              34
+2026-04-28 19:22:34  INFO        Predicted total:    1704.7s  (28.41 min)
+2026-04-28 19:22:34  INFO      
+  Output saved: predict_data/OE/OE_30_prediction.csv
+2026-04-28 19:22:34  INFO      ============================================================
+2026-04-28 19:23:43  INFO      Logging to logs/OE/predict_primary_2026-04-28.log
+2026-04-28 19:23:43  INFO      ============================================================
+2026-04-28 19:23:43  INFO      PREDICT PRIMARY — OE
+2026-04-28 19:23:43  INFO        input:      temp_dashboard_queue.csv
+2026-04-28 19:23:43  INFO        sequenced:  False
+2026-04-28 19:23:43  INFO        user_level: grand mean
+2026-04-28 19:23:43  INFO      ============================================================
+2026-04-28 19:23:43  INFO        WorkCode detected: 30
+2026-04-28 19:23:43  INFO        Tasks: 34
+2026-04-28 19:23:43  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-28 19:26:42  INFO      Logging to logs/OE/predict_primary_2026-04-28.log
+2026-04-28 19:26:42  INFO      ============================================================
+2026-04-28 19:26:42  INFO      PREDICT PRIMARY — OE
+2026-04-28 19:26:42  INFO        input:      temp_dashboard_queue.csv
+2026-04-28 19:26:42  INFO        sequenced:  False
+2026-04-28 19:26:42  INFO        user_level: grand mean
+2026-04-28 19:26:42  INFO      ============================================================
+2026-04-28 19:26:42  INFO        WorkCode detected: 30
+2026-04-28 19:26:42  INFO        Tasks: 34
+2026-04-28 19:26:42  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-28 19:26:43  INFO      
+  Tasks:              34
+2026-04-28 19:26:43  INFO        Predicted total:    1704.7s  (28.41 min)
+2026-04-28 19:26:43  INFO      
+  Output saved: predict_data/OE/OE_30_prediction.csv
+2026-04-28 19:26:43  INFO      ============================================================
+2026-04-28 19:27:22  INFO      Logging to logs/OE/predict_primary_2026-04-28.log
+2026-04-28 19:27:22  INFO      ============================================================
+2026-04-28 19:27:22  INFO      PREDICT PRIMARY — OE
+2026-04-28 19:27:22  INFO        input:      temp_dashboard_queue.csv
+2026-04-28 19:27:22  INFO        sequenced:  False
+2026-04-28 19:27:22  INFO        user_level: grand mean
+2026-04-28 19:27:22  INFO      ============================================================
+2026-04-28 19:27:22  INFO        WorkCode detected: 30
+2026-04-28 19:27:22  INFO        Tasks: 34
+2026-04-28 19:27:22  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-28 19:27:22  INFO      
+  Tasks:              34
+2026-04-28 19:27:22  INFO        Predicted total:    1704.7s  (28.41 min)
+2026-04-28 19:27:22  INFO      
+  Output saved: predict_data/OE/OE_30_prediction.csv
+2026-04-28 19:27:22  INFO      ============================================================
+2026-04-28 19:29:14  INFO      Logging to logs/OE/predict_primary_2026-04-28.log
+2026-04-28 19:29:14  INFO      ============================================================
+2026-04-28 19:29:14  INFO      PREDICT PRIMARY — OE
+2026-04-28 19:29:14  INFO        input:      temp_dashboard_queue.csv
+2026-04-28 19:29:14  INFO        sequenced:  False
+2026-04-28 19:29:14  INFO        user_level: grand mean
+2026-04-28 19:29:14  INFO      ============================================================
+2026-04-28 19:29:14  INFO        WorkCode detected: 30
+2026-04-28 19:29:14  INFO        Tasks: 34
+2026-04-28 19:29:14  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-28 19:29:40  INFO      Logging to logs/OE/predict_primary_2026-04-28.log
+2026-04-28 19:29:40  INFO      ============================================================
+2026-04-28 19:29:40  INFO      PREDICT PRIMARY — OE
+2026-04-28 19:29:40  INFO        input:      temp_dashboard_queue.csv
+2026-04-28 19:29:40  INFO        sequenced:  False
+2026-04-28 19:29:40  INFO        user_level: grand mean
+2026-04-28 19:29:40  INFO      ============================================================
+2026-04-28 19:29:40  INFO        WorkCode detected: 30
+2026-04-28 19:29:40  INFO        Tasks: 34
+2026-04-28 19:29:40  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-28 19:33:14  INFO      Logging to logs/OE/predict_primary_2026-04-28.log
+2026-04-28 19:33:14  INFO      ============================================================
+2026-04-28 19:33:14  INFO      PREDICT PRIMARY — OE
+2026-04-28 19:33:14  INFO        input:      temp_dashboard_queue.csv
+2026-04-28 19:33:14  INFO        sequenced:  False
+2026-04-28 19:33:14  INFO        user_level: grand mean
+2026-04-28 19:33:14  INFO      ============================================================
+2026-04-28 19:33:14  INFO        WorkCode detected: 30
+2026-04-28 19:33:14  INFO        Tasks: 34
+2026-04-28 19:33:14  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-28 19:33:15  INFO      
+  Tasks:              34
+2026-04-28 19:33:15  INFO        Predicted total:    1704.7s  (28.41 min)
+2026-04-28 19:33:15  INFO      
+  Output saved: predict_data/OE/OE_30_prediction.csv
+2026-04-28 19:33:15  INFO      ============================================================
+2026-04-28 19:33:27  INFO      Logging to logs/OE/predict_primary_2026-04-28.log
+2026-04-28 19:33:27  INFO      ============================================================
+2026-04-28 19:33:27  INFO      PREDICT PRIMARY — OE
+2026-04-28 19:33:27  INFO        input:      temp_dashboard_queue.csv
+2026-04-28 19:33:27  INFO        sequenced:  False
+2026-04-28 19:33:27  INFO        user_level: grand mean
+2026-04-28 19:33:27  INFO      ============================================================
+2026-04-28 19:33:27  INFO        WorkCode detected: 30
+2026-04-28 19:33:27  INFO        Tasks: 34
+2026-04-28 19:33:27  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-28 19:33:27  INFO      
+  Tasks:              34
+2026-04-28 19:33:27  INFO        Predicted total:    1704.7s  (28.41 min)
+2026-04-28 19:33:27  INFO      
+  Output saved: predict_data/OE/OE_30_prediction.csv
+2026-04-28 19:33:27  INFO      ============================================================

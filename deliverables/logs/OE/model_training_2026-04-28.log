@@ -1,0 +1,298 @@
+2026-04-28 18:18:02  INFO      Logging to logs/OE/model_training_2026-04-28.log
+2026-04-28 18:18:02  INFO      ============================================================
+2026-04-28 18:18:02  INFO      MODEL TRAINING — OE
+2026-04-28 18:18:02  INFO        sequenced  = False
+2026-04-28 18:18:02  INFO        trees      = 1200
+2026-04-28 18:18:02  INFO        min_rows   = 500
+2026-04-28 18:18:02  INFO        min_days   = 3
+2026-04-28 18:18:02  INFO        cv_tuning  = False
+2026-04-28 18:18:02  INFO      ============================================================
+2026-04-28 18:18:02  INFO      WorkCodes found: ['10', '20', '30']
+2026-04-28 18:18:02  INFO      
+--------------------------------------------------
+2026-04-28 18:18:02  INFO      WorkCode 10
+2026-04-28 18:18:02  INFO        Encodings computed from 4,820 rows (WC 10, sequenced=False)
+2026-04-28 18:18:02  INFO        Rows: 4,820
+2026-04-28 18:18:02  INFO        Estimating worker effects ...
+2026-04-28 18:18:02  INFO        CV disabled — training with baseline params (rounds=1200).
+2026-04-28 18:18:03  INFO        Done in 1.5s
+2026-04-28 18:18:46  INFO      Logging to logs/OE/model_training_2026-04-28.log
+2026-04-28 18:18:46  INFO      ============================================================
+2026-04-28 18:18:46  INFO      MODEL TRAINING — OE
+2026-04-28 18:18:46  INFO        sequenced  = False
+2026-04-28 18:18:46  INFO        trees      = 1200
+2026-04-28 18:18:46  INFO        min_rows   = 500
+2026-04-28 18:18:46  INFO        min_days   = 3
+2026-04-28 18:18:46  INFO        cv_tuning  = False
+2026-04-28 18:18:46  INFO      ============================================================
+2026-04-28 18:18:46  INFO      WorkCodes found: ['10', '20', '30']
+2026-04-28 18:18:46  INFO      
+--------------------------------------------------
+2026-04-28 18:18:46  INFO      WorkCode 10
+2026-04-28 18:18:46  INFO        Encodings computed from 4,820 rows (WC 10, sequenced=False)
+2026-04-28 18:18:46  INFO        Rows: 4,820
+2026-04-28 18:18:46  INFO        Estimating worker effects ...
+2026-04-28 18:18:46  INFO        CV disabled — training with baseline params (rounds=1200).
+2026-04-28 18:18:48  INFO        Done in 1.5s
+2026-04-28 18:18:51  INFO        Model saved: models/OE/OE_WC10.json
+2026-04-28 18:18:51  INFO        Model saved: models/OE/OE_WC10LB.json
+2026-04-28 18:18:51  INFO        Model saved: models/OE/OE_WC10UB.json
+2026-04-28 18:18:51  INFO        Workers: 17  |  Levels — L1: 4  L2: 3  L3: 3  L4: 3  L5: 4  |  Days seen: 8
+2026-04-28 18:18:51  INFO      
+--------------------------------------------------
+2026-04-28 18:18:51  INFO      WorkCode 20
+2026-04-28 18:18:51  INFO        Encodings computed from 22,019 rows (WC 20, sequenced=False)
+2026-04-28 18:18:51  INFO        Rows: 22,019
+2026-04-28 18:18:51  INFO        Estimating worker effects ...
+2026-04-28 18:18:51  INFO        CV disabled — training with baseline params (rounds=1200).
+2026-04-28 18:18:53  INFO        Done in 1.7s
+2026-04-28 18:18:56  INFO        Model saved: models/OE/OE_WC20.json
+2026-04-28 18:18:56  INFO        Model saved: models/OE/OE_WC20LB.json
+2026-04-28 18:18:56  INFO        Model saved: models/OE/OE_WC20UB.json
+2026-04-28 18:18:56  INFO        Workers: 23  |  Levels — L1: 5  L2: 4  L3: 5  L4: 4  L5: 5  |  Days seen: 8
+2026-04-28 18:18:56  INFO      
+--------------------------------------------------
+2026-04-28 18:18:56  INFO      WorkCode 30
+2026-04-28 18:18:56  INFO        Encodings computed from 66,454 rows (WC 30, sequenced=False)
+2026-04-28 18:18:56  INFO        Rows: 66,454
+2026-04-28 18:18:56  INFO        Estimating worker effects ...
+2026-04-28 18:18:57  INFO        CV disabled — training with baseline params (rounds=1200).
+2026-04-28 18:18:59  INFO        Done in 2.1s
+2026-04-28 18:19:02  INFO        Model saved: models/OE/OE_WC30.json
+2026-04-28 18:19:02  INFO        Model saved: models/OE/OE_WC30LB.json
+2026-04-28 18:19:02  INFO        Model saved: models/OE/OE_WC30UB.json
+2026-04-28 18:19:03  INFO        Workers: 37  |  Levels — L1: 8  L2: 7  L3: 7  L4: 7  L5: 8  |  Days seen: 8
+2026-04-28 18:19:03  INFO      
+meta.pkl saved: models/OE/meta.pkl
+2026-04-28 18:19:03  INFO      
+============================================================
+2026-04-28 18:19:03  INFO      TRAINING COMPLETE — OE
+2026-04-28 18:19:03  INFO      ============================================================
+2026-04-28 18:19:03  INFO        WorkCodes trained:  ['10', '20', '30']
+2026-04-28 18:19:03  INFO        sequenced:          False
+2026-04-28 18:19:03  INFO        Trees per model:    1200
+2026-04-28 18:19:03  INFO      ============================================================
+2026-04-28 19:10:16  INFO      Logging to logs/OE/model_training_2026-04-28.log
+2026-04-28 19:10:16  INFO      ============================================================
+2026-04-28 19:10:16  INFO      MODEL TRAINING — OE
+2026-04-28 19:10:16  INFO        sequenced  = False
+2026-04-28 19:10:16  INFO        trees      = 1200
+2026-04-28 19:10:16  INFO        min_rows   = 500
+2026-04-28 19:10:16  INFO        min_days   = 3
+2026-04-28 19:10:16  INFO        cv_tuning  = False
+2026-04-28 19:10:16  INFO      ============================================================
+2026-04-28 19:10:16  INFO      WorkCodes found: ['10', '20', '30']
+2026-04-28 19:10:16  INFO      
+--------------------------------------------------
+2026-04-28 19:10:16  INFO      WorkCode 10
+2026-04-28 19:10:16  INFO        Encodings computed from 4,820 rows (WC 10, sequenced=False)
+2026-04-28 19:10:16  INFO        Rows: 4,820
+2026-04-28 19:10:16  INFO        Estimating worker effects ...
+2026-04-28 19:10:16  INFO        CV disabled — training with baseline params (rounds=1200).
+2026-04-28 19:10:18  INFO        Done in 1.5s
+2026-04-28 19:10:21  INFO        Model saved: models/OE/OE_WC10.json
+2026-04-28 19:10:21  INFO        Model saved: models/OE/OE_WC10LB.json
+2026-04-28 19:10:21  INFO        Model saved: models/OE/OE_WC10UB.json
+2026-04-28 19:10:21  INFO        Workers: 17  |  Levels — L1: 4  L2: 3  L3: 3  L4: 3  L5: 4  |  Days seen: 8
+2026-04-28 19:10:21  INFO      
+--------------------------------------------------
+2026-04-28 19:10:21  INFO      WorkCode 20
+2026-04-28 19:10:21  INFO        Encodings computed from 22,019 rows (WC 20, sequenced=False)
+2026-04-28 19:10:21  INFO        Rows: 22,019
+2026-04-28 19:10:21  INFO        Estimating worker effects ...
+2026-04-28 19:10:21  INFO        CV disabled — training with baseline params (rounds=1200).
+2026-04-28 19:10:23  INFO        Done in 1.7s
+2026-04-28 19:10:26  INFO        Model saved: models/OE/OE_WC20.json
+2026-04-28 19:10:26  INFO        Model saved: models/OE/OE_WC20LB.json
+2026-04-28 19:10:26  INFO        Model saved: models/OE/OE_WC20UB.json
+2026-04-28 19:10:26  INFO        Workers: 23  |  Levels — L1: 5  L2: 4  L3: 5  L4: 4  L5: 5  |  Days seen: 8
+2026-04-28 19:10:26  INFO      
+--------------------------------------------------
+2026-04-28 19:10:26  INFO      WorkCode 30
+2026-04-28 19:10:26  INFO        Encodings computed from 66,454 rows (WC 30, sequenced=False)
+2026-04-28 19:10:26  INFO        Rows: 66,454
+2026-04-28 19:10:26  INFO        Estimating worker effects ...
+2026-04-28 19:10:27  INFO        CV disabled — training with baseline params (rounds=1200).
+2026-04-28 19:10:29  INFO        Done in 2.1s
+2026-04-28 19:10:32  INFO        Model saved: models/OE/OE_WC30.json
+2026-04-28 19:10:32  INFO        Model saved: models/OE/OE_WC30LB.json
+2026-04-28 19:10:32  INFO        Model saved: models/OE/OE_WC30UB.json
+2026-04-28 19:10:33  INFO        Workers: 37  |  Levels — L1: 8  L2: 7  L3: 7  L4: 7  L5: 8  |  Days seen: 8
+2026-04-28 19:10:33  INFO      
+meta.pkl saved: models/OE/meta.pkl
+2026-04-28 19:10:33  INFO      
+============================================================
+2026-04-28 19:10:33  INFO      TRAINING COMPLETE — OE
+2026-04-28 19:10:33  INFO      ============================================================
+2026-04-28 19:10:33  INFO        WorkCodes trained:  ['10', '20', '30']
+2026-04-28 19:10:33  INFO        sequenced:          False
+2026-04-28 19:10:33  INFO        Trees per model:    1200
+2026-04-28 19:10:33  INFO      ============================================================
+2026-04-28 19:10:59  INFO      Logging to logs/OE/model_training_2026-04-28.log
+2026-04-28 19:10:59  INFO      ============================================================
+2026-04-28 19:10:59  INFO      MODEL TRAINING — OE
+2026-04-28 19:10:59  INFO        sequenced  = False
+2026-04-28 19:10:59  INFO        trees      = 1200
+2026-04-28 19:10:59  INFO        min_rows   = 500
+2026-04-28 19:10:59  INFO        min_days   = 3
+2026-04-28 19:10:59  INFO        cv_tuning  = False
+2026-04-28 19:10:59  INFO      ============================================================
+2026-04-28 19:10:59  INFO      WorkCodes found: ['10', '20', '30']
+2026-04-28 19:10:59  INFO      
+--------------------------------------------------
+2026-04-28 19:10:59  INFO      WorkCode 10
+2026-04-28 19:10:59  INFO        Encodings computed from 4,820 rows (WC 10, sequenced=False)
+2026-04-28 19:10:59  INFO        Rows: 4,820
+2026-04-28 19:10:59  INFO        Estimating worker effects ...
+2026-04-28 19:10:59  INFO        CV disabled — training with baseline params (rounds=1200).
+2026-04-28 19:11:01  INFO        Done in 1.5s
+2026-04-28 19:11:04  INFO        Model saved: models/OE/OE_WC10.json
+2026-04-28 19:11:04  INFO        Model saved: models/OE/OE_WC10LB.json
+2026-04-28 19:11:04  INFO        Model saved: models/OE/OE_WC10UB.json
+2026-04-28 19:11:04  INFO        Workers: 17  |  Levels — L1: 4  L2: 3  L3: 3  L4: 3  L5: 4  |  Days seen: 8
+2026-04-28 19:11:04  INFO      
+--------------------------------------------------
+2026-04-28 19:11:04  INFO      WorkCode 20
+2026-04-28 19:11:04  INFO        Encodings computed from 22,019 rows (WC 20, sequenced=False)
+2026-04-28 19:11:04  INFO        Rows: 22,019
+2026-04-28 19:11:04  INFO        Estimating worker effects ...
+2026-04-28 19:11:04  INFO        CV disabled — training with baseline params (rounds=1200).
+2026-04-28 19:11:06  INFO        Done in 1.7s
+2026-04-28 19:11:09  INFO        Model saved: models/OE/OE_WC20.json
+2026-04-28 19:11:09  INFO        Model saved: models/OE/OE_WC20LB.json
+2026-04-28 19:11:09  INFO        Model saved: models/OE/OE_WC20UB.json
+2026-04-28 19:11:09  INFO        Workers: 23  |  Levels — L1: 5  L2: 4  L3: 5  L4: 4  L5: 5  |  Days seen: 8
+2026-04-28 19:11:09  INFO      
+--------------------------------------------------
+2026-04-28 19:11:09  INFO      WorkCode 30
+2026-04-28 19:11:10  INFO        Encodings computed from 66,454 rows (WC 30, sequenced=False)
+2026-04-28 19:11:10  INFO        Rows: 66,454
+2026-04-28 19:11:10  INFO        Estimating worker effects ...
+2026-04-28 19:11:10  INFO        CV disabled — training with baseline params (rounds=1200).
+2026-04-28 19:11:12  INFO        Done in 2.2s
+2026-04-28 19:11:16  INFO        Model saved: models/OE/OE_WC30.json
+2026-04-28 19:11:16  INFO        Model saved: models/OE/OE_WC30LB.json
+2026-04-28 19:11:16  INFO        Model saved: models/OE/OE_WC30UB.json
+2026-04-28 19:11:16  INFO        Workers: 37  |  Levels — L1: 8  L2: 7  L3: 7  L4: 7  L5: 8  |  Days seen: 8
+2026-04-28 19:11:16  INFO      
+meta.pkl saved: models/OE/meta.pkl
+2026-04-28 19:11:16  INFO      
+============================================================
+2026-04-28 19:11:16  INFO      TRAINING COMPLETE — OE
+2026-04-28 19:11:16  INFO      ============================================================
+2026-04-28 19:11:16  INFO        WorkCodes trained:  ['10', '20', '30']
+2026-04-28 19:11:16  INFO        sequenced:          False
+2026-04-28 19:11:16  INFO        Trees per model:    1200
+2026-04-28 19:11:16  INFO      ============================================================
+2026-04-28 19:21:23  INFO      Logging to logs/OE/model_training_2026-04-28.log
+2026-04-28 19:21:23  INFO      ============================================================
+2026-04-28 19:21:23  INFO      MODEL TRAINING — OE
+2026-04-28 19:21:23  INFO        sequenced  = False
+2026-04-28 19:21:23  INFO        trees      = 1200
+2026-04-28 19:21:23  INFO        min_rows   = 500
+2026-04-28 19:21:23  INFO        min_days   = 3
+2026-04-28 19:21:23  INFO        cv_tuning  = False
+2026-04-28 19:21:23  INFO      ============================================================
+2026-04-28 19:21:23  INFO      WorkCodes found: ['10', '20', '30']
+2026-04-28 19:21:23  INFO      
+--------------------------------------------------
+2026-04-28 19:21:23  INFO      WorkCode 10
+2026-04-28 19:21:23  INFO        Encodings computed from 4,820 rows (WC 10, sequenced=False)
+2026-04-28 19:21:23  INFO        Rows: 4,820
+2026-04-28 19:21:23  INFO        Estimating worker effects ...
+2026-04-28 19:21:23  INFO        CV disabled — training with baseline params (rounds=1200).
+2026-04-28 19:21:25  INFO        Done in 1.5s
+2026-04-28 19:21:25  INFO        Model saved: models/OE/OE_WC10.json
+2026-04-28 19:21:25  INFO        Model saved: models/OE/OE_WC10LB.json
+2026-04-28 19:21:25  INFO        Model saved: models/OE/OE_WC10UB.json
+2026-04-28 19:21:25  INFO        Workers: 17  |  Levels — L1: 4  L2: 3  L3: 3  L4: 3  L5: 4  |  Days seen: 8
+2026-04-28 19:21:25  INFO      
+--------------------------------------------------
+2026-04-28 19:21:25  INFO      WorkCode 20
+2026-04-28 19:21:25  INFO        Encodings computed from 22,019 rows (WC 20, sequenced=False)
+2026-04-28 19:21:25  INFO        Rows: 22,019
+2026-04-28 19:21:25  INFO        Estimating worker effects ...
+2026-04-28 19:21:25  INFO        CV disabled — training with baseline params (rounds=1200).
+2026-04-28 19:21:27  INFO        Done in 1.7s
+2026-04-28 19:21:27  INFO        Model saved: models/OE/OE_WC20.json
+2026-04-28 19:21:27  INFO        Model saved: models/OE/OE_WC20LB.json
+2026-04-28 19:21:27  INFO        Model saved: models/OE/OE_WC20UB.json
+2026-04-28 19:21:27  INFO        Workers: 23  |  Levels — L1: 5  L2: 4  L3: 5  L4: 4  L5: 5  |  Days seen: 8
+2026-04-28 19:21:27  INFO      
+--------------------------------------------------
+2026-04-28 19:21:27  INFO      WorkCode 30
+2026-04-28 19:21:27  INFO        Encodings computed from 66,454 rows (WC 30, sequenced=False)
+2026-04-28 19:21:27  INFO        Rows: 66,454
+2026-04-28 19:21:27  INFO        Estimating worker effects ...
+2026-04-28 19:21:27  INFO        CV disabled — training with baseline params (rounds=1200).
+2026-04-28 19:21:29  INFO        Done in 2.1s
+2026-04-28 19:21:29  INFO        Model saved: models/OE/OE_WC30.json
+2026-04-28 19:21:29  INFO        Model saved: models/OE/OE_WC30LB.json
+2026-04-28 19:21:29  INFO        Model saved: models/OE/OE_WC30UB.json
+2026-04-28 19:21:29  INFO        Workers: 37  |  Levels — L1: 8  L2: 7  L3: 7  L4: 7  L5: 8  |  Days seen: 8
+2026-04-28 19:21:29  INFO      
+meta.pkl saved: models/OE/meta.pkl
+2026-04-28 19:21:29  INFO      
+============================================================
+2026-04-28 19:21:29  INFO      TRAINING COMPLETE — OE
+2026-04-28 19:21:29  INFO      ============================================================
+2026-04-28 19:21:29  INFO        WorkCodes trained:  ['10', '20', '30']
+2026-04-28 19:21:29  INFO        sequenced:          False
+2026-04-28 19:21:29  INFO        Trees per model:    1200
+2026-04-28 19:21:29  INFO      ============================================================
+2026-04-28 19:33:05  INFO      Logging to logs/OE/model_training_2026-04-28.log
+2026-04-28 19:33:05  INFO      ============================================================
+2026-04-28 19:33:05  INFO      MODEL TRAINING — OE
+2026-04-28 19:33:05  INFO        sequenced  = False
+2026-04-28 19:33:05  INFO        trees      = 1200
+2026-04-28 19:33:05  INFO        min_rows   = 500
+2026-04-28 19:33:05  INFO        min_days   = 3
+2026-04-28 19:33:05  INFO        cv_tuning  = False
+2026-04-28 19:33:05  INFO      ============================================================
+2026-04-28 19:33:05  INFO      WorkCodes found: ['10', '20', '30']
+2026-04-28 19:33:05  INFO      
+--------------------------------------------------
+2026-04-28 19:33:05  INFO      WorkCode 10
+2026-04-28 19:33:05  INFO        Encodings computed from 4,820 rows (WC 10, sequenced=False)
+2026-04-28 19:33:05  INFO        Rows: 4,820
+2026-04-28 19:33:05  INFO        Estimating worker effects ...
+2026-04-28 19:33:05  INFO        CV disabled — training with baseline params (rounds=1200).
+2026-04-28 19:33:06  INFO        Done in 1.5s
+2026-04-28 19:33:06  INFO        Model saved: models/OE/OE_WC10.json
+2026-04-28 19:33:06  INFO        Model saved: models/OE/OE_WC10LB.json
+2026-04-28 19:33:06  INFO        Model saved: models/OE/OE_WC10UB.json
+2026-04-28 19:33:06  INFO        Workers: 17  |  Levels — L1: 4  L2: 3  L3: 3  L4: 3  L5: 4  |  Days seen: 8
+2026-04-28 19:33:06  INFO      
+--------------------------------------------------
+2026-04-28 19:33:06  INFO      WorkCode 20
+2026-04-28 19:33:06  INFO        Encodings computed from 22,019 rows (WC 20, sequenced=False)
+2026-04-28 19:33:06  INFO        Rows: 22,019
+2026-04-28 19:33:06  INFO        Estimating worker effects ...
+2026-04-28 19:33:07  INFO        CV disabled — training with baseline params (rounds=1200).
+2026-04-28 19:33:08  INFO        Done in 1.7s
+2026-04-28 19:33:09  INFO        Model saved: models/OE/OE_WC20.json
+2026-04-28 19:33:09  INFO        Model saved: models/OE/OE_WC20LB.json
+2026-04-28 19:33:09  INFO        Model saved: models/OE/OE_WC20UB.json
+2026-04-28 19:33:09  INFO        Workers: 23  |  Levels — L1: 5  L2: 4  L3: 5  L4: 4  L5: 5  |  Days seen: 8
+2026-04-28 19:33:09  INFO      
+--------------------------------------------------
+2026-04-28 19:33:09  INFO      WorkCode 30
+2026-04-28 19:33:09  INFO        Encodings computed from 66,454 rows (WC 30, sequenced=False)
+2026-04-28 19:33:09  INFO        Rows: 66,454
+2026-04-28 19:33:09  INFO        Estimating worker effects ...
+2026-04-28 19:33:09  INFO        CV disabled — training with baseline params (rounds=1200).
+2026-04-28 19:33:11  INFO        Done in 2.1s
+2026-04-28 19:33:11  INFO        Model saved: models/OE/OE_WC30.json
+2026-04-28 19:33:11  INFO        Model saved: models/OE/OE_WC30LB.json
+2026-04-28 19:33:11  INFO        Model saved: models/OE/OE_WC30UB.json
+2026-04-28 19:33:11  INFO        Workers: 37  |  Levels — L1: 8  L2: 7  L3: 7  L4: 7  L5: 8  |  Days seen: 8
+2026-04-28 19:33:11  INFO      
+meta.pkl saved: models/OE/meta.pkl
+2026-04-28 19:33:11  INFO      
+============================================================
+2026-04-28 19:33:11  INFO      TRAINING COMPLETE — OE
+2026-04-28 19:33:11  INFO      ============================================================
+2026-04-28 19:33:11  INFO        WorkCodes trained:  ['10', '20', '30']
+2026-04-28 19:33:11  INFO        sequenced:          False
+2026-04-28 19:33:11  INFO        Trees per model:    1200
+2026-04-28 19:33:11  INFO      ============================================================

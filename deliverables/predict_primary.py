@@ -154,11 +154,34 @@ def main():
         model = load_model(
             args.models_dir, warehouse, wc, sequenced=args.sequenced
         )
+        model_LB = load_model(
+            args.models_dir, warehouse, wc, sequenced=args.sequenced, lower=True
+        )
+        model_UB = load_model(
+            args.models_dir, warehouse, wc, sequenced=args.sequenced, upper=True
+        )
     except FileNotFoundError as e:
         logger.error(str(e))
         sys.exit(1)
 
+    print(model_LB.attr("objective"))
+    print(model_UB.attr("objective"))
+
     preds = model.predict(xgb.DMatrix(X))
+    lowers = model_LB.predict(xgb.DMatrix(X))
+    uppers = model_UB.predict(xgb.DMatrix(X))
+    print(preds)
+    print(lowers)
+    print(uppers)
+
+    n_tasks = len(preds)
+    std = np.std(preds)
+    pred_mean = np.mean(preds)
+    lower_mean = np.mean(lowers)
+    upper_mean = np.mean(uppers)
+
+    lower_bound_width = np.sqrt(n_tasks)*(pred_mean - lower_mean) + std # not sure if this is the correct sum version
+    upper_bound_width = np.sqrt(n_tasks)*(upper_mean - pred_mean) + std
 
     # Total predicted time = sum of per-task predictions
     total_sec = float(np.sum(preds))
@@ -184,6 +207,8 @@ def main():
         "predicted_time_sec":  round(total_sec, 2),
         "predicted_time_min":  round(total_min, 4),
         "user_level_applied":  args.user_level if args.user_level else "grand_mean",
+        "lower_bound_sec":     round(total_sec - lower_bound_width, 2),
+        "upper_bound_sec":     round(total_sec + upper_bound_width, 2)
     }])
     result.to_csv(out_path, index=False)
     logger.info(f"\n  Output saved: {out_path}")

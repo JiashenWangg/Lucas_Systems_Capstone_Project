@@ -1,2 +1,2 @@
-warehouse,workcode,n_tasks,predicted_time_sec,predicted_time_min,user_level_applied
-OE,30,34,2407.36,40.1227,1
+warehouse,workcode,n_tasks,predicted_time_sec,predicted_time_min,user_level_applied,lower_bound_sec,upper_bound_sec
+OE,30,34,1704.68,28.4113,grand_mean,1407.68,2902.7
