@@ -373,26 +373,33 @@ def main():
         elapsed = time.time() - t0
         logger.info(f"  Done in {elapsed:.1f}s")
 
-        best_params_PI = best_params
-        best_params_PI.update({"objective": "reg:quantileerror"})
-        best_params_PI.pop("tweedie_variance_power", None)
-        best_params_PI.pop("reg_alpha", None)
-        best_params_PI.pop("reg_lambda", None)
+        best_params_PI = {
+            k: v for k, v in best_params.items()
+            if k not in ("tweedie_variance_power", "reg_alpha", "reg_lambda")
+        }
+        best_params_PI["objective"] = "reg:quantileerror"
 
-        best_params_PI.update({"quantile_alpha": (100-args.coverage)/200})
+        alpha_lo = (100 - args.coverage) / 200          # e.g. 0.025 for 95%
+        alpha_hi = (50 + args.coverage / 2) / 100       # e.g. 0.975 for 95%
 
+        logger.info(
+            f"  Training LB model (quantile_alpha={alpha_lo:.4f}) ..."
+        )
         model_LB = xgb.train(
-            best_params_PI,
+            {**best_params_PI, "quantile_alpha": alpha_lo},
             dtrain,
-            verbose_eval=False
+            num_boost_round=best_rounds,
+            verbose_eval=False,
         )
 
-        best_params_PI.update({"quantile_alpha": (50+(args.coverage/2))/100})
-
+        logger.info(
+            f"  Training UB model (quantile_alpha={alpha_hi:.4f}) ..."
+        )
         model_UB = xgb.train(
-            best_params_PI,
+            {**best_params_PI, "quantile_alpha": alpha_hi},
             dtrain,
-            verbose_eval=False
+            num_boost_round=best_rounds,
+            verbose_eval=False,
         )
 
         # ── Save model ────────────────────────────────────────────────────────

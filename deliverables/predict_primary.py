@@ -164,15 +164,9 @@ def main():
         logger.error(str(e))
         sys.exit(1)
 
-    print(model_LB.attr("objective"))
-    print(model_UB.attr("objective"))
-
-    preds = model.predict(xgb.DMatrix(X))
+    preds  = model.predict(xgb.DMatrix(X))
     lowers = model_LB.predict(xgb.DMatrix(X))
     uppers = model_UB.predict(xgb.DMatrix(X))
-    print(preds)
-    print(lowers)
-    print(uppers)
 
     n_tasks = len(preds)
     std = np.std(preds)
@@ -186,9 +180,13 @@ def main():
     # Total predicted time = sum of per-task predictions
     total_sec = float(np.sum(preds))
     total_min = total_sec / 60.0
+    lower_sec = total_sec - lower_bound_width
+    upper_sec = total_sec + upper_bound_width
 
     logger.info(f"\n  Tasks:              {len(df):,}")
     logger.info(f"  Predicted total:    {total_sec:.1f}s  ({total_min:.2f} min)")
+    logger.info(f"  Prediction interval:{lower_sec:.1f}s \u2013 {upper_sec:.1f}s  "
+                f"({lower_sec/60:.2f} \u2013 {upper_sec/60:.2f} min)")
 
     # ── Save output ───────────────────────────────────────────────────────────
     if args.out:
@@ -207,8 +205,8 @@ def main():
         "predicted_time_sec":  round(total_sec, 2),
         "predicted_time_min":  round(total_min, 4),
         "user_level_applied":  args.user_level if args.user_level else "grand_mean",
-        "lower_bound_sec":     round(total_sec - lower_bound_width, 2),
-        "upper_bound_sec":     round(total_sec + upper_bound_width, 2)
+        "lower_bound_sec":     round(lower_sec, 2),
+        "upper_bound_sec":     round(upper_sec, 2)
     }])
     result.to_csv(out_path, index=False)
     logger.info(f"\n  Output saved: {out_path}")
