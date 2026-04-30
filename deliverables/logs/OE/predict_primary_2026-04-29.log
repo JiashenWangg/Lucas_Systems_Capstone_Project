@@ -1,0 +1,25 @@
+2026-04-29 21:36:58  INFO      Logging to logs/OE/predict_primary_2026-04-29.log
+2026-04-29 21:36:58  INFO      ============================================================
+2026-04-29 21:36:58  INFO      PREDICT PRIMARY — OE
+2026-04-29 21:36:58  INFO        input:      temp_dashboard_queue.csv
+2026-04-29 21:36:58  INFO        sequenced:  False
+2026-04-29 21:36:58  INFO        user_level: grand mean
+2026-04-29 21:36:58  INFO      ============================================================
+2026-04-29 21:36:58  INFO        WorkCode detected: 30
+2026-04-29 21:36:58  INFO        Tasks: 34
+2026-04-29 21:36:58  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-29 21:36:59  INFO      
+  Tasks:              34
+2026-04-29 21:36:59  INFO        Predicted total:    1704.7s  (28.41 min)
+2026-04-29 21:36:59  INFO        Prediction interval:1422.5s – 3042.2s  (23.71 – 50.70 min)
+2026-04-29 21:36:59  INFO      
+  Output saved: /tmp/oe_primary_smoke.csv
+2026-04-29 21:36:59  INFO      ============================================================
+2026-04-29 21:41:20  INFO      Logging to logs/OE/predict_primary_2026-04-29.log
+2026-04-29 21:41:20  INFO      ============================================================
+2026-04-29 21:41:20  INFO      PREDICT PRIMARY — OE
+2026-04-29 21:41:20  INFO        input:      temp_dashboard_queue.csv
+2026-04-29 21:41:20  INFO        sequenced:  True
+2026-04-29 21:41:20  INFO        user_level: grand mean
+2026-04-29 21:41:20  INFO      ============================================================
+2026-04-29 21:41:21  ERROR     cannot convert NA to integer
