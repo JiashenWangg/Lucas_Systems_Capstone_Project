@@ -1,24 +1,68 @@
-2026-04-29 21:37:03  INFO      Logging to logs/OE/predict_primary_2026-04-29.log
-2026-04-29 21:37:03  INFO      ============================================================
-2026-04-29 21:37:03  INFO      PREDICT PRIMARY — OE
-2026-04-29 21:37:03  INFO        input:      deliverables/temp_dashboard_queue.csv
-2026-04-29 21:37:03  INFO        sequenced:  False
-2026-04-29 21:37:03  INFO        user_level: grand mean
-2026-04-29 21:37:03  INFO      ============================================================
-2026-04-29 21:37:13  INFO      Logging to logs/OE/predict_primary_2026-04-29.log
-2026-04-29 21:37:13  INFO      ============================================================
-2026-04-29 21:37:13  INFO      PREDICT PRIMARY — OE
-2026-04-29 21:37:13  INFO        input:      deliverables/temp_dashboard_queue.csv
-2026-04-29 21:37:13  INFO        sequenced:  False
-2026-04-29 21:37:13  INFO        user_level: grand mean
-2026-04-29 21:37:13  INFO      ============================================================
-2026-04-29 21:37:13  INFO        WorkCode detected: 30
-2026-04-29 21:37:13  INFO        Tasks: 34
-2026-04-29 21:37:13  INFO        No user level supplied — using grand mean (effect = 0.0)
-2026-04-29 21:37:13  INFO      
-  Tasks:              34
-2026-04-29 21:37:13  INFO        Predicted total:    1704.7s  (28.41 min)
-2026-04-29 21:37:13  INFO        Prediction interval:1422.5s – 3042.2s  (23.71 – 50.70 min)
-2026-04-29 21:37:13  INFO      
-  Output saved: /tmp/root_primary_explicit_paths.csv
-2026-04-29 21:37:13  INFO      ============================================================
+2026-04-29 22:11:47  INFO      Logging to logs/OE/predict_primary_2026-04-29.log
+2026-04-29 22:11:47  INFO      ============================================================
+2026-04-29 22:11:47  INFO      PREDICT PRIMARY — OE
+2026-04-29 22:11:47  INFO        input:      deliverables/KT_demo/demo_data/predict/OE/OE_predict_50.csv
+2026-04-29 22:11:47  INFO        sequenced:  False
+2026-04-29 22:11:47  INFO        user_level: grand mean
+2026-04-29 22:11:47  INFO      ============================================================
+2026-04-29 22:11:47  INFO        WorkCode detected: 20
+2026-04-29 22:11:47  INFO        Tasks: 50
+2026-04-29 22:11:47  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-29 22:11:47  INFO      
+  Tasks:              50
+2026-04-29 22:11:47  INFO        Predicted total:    2366.5s  (39.44 min)
+2026-04-29 22:11:47  INFO        Prediction interval:2032.8s – 4336.9s  (33.88 – 72.28 min)
+2026-04-29 22:11:47  INFO      
+  Output saved: deliverables/KT_demo/demo_outputs/OE_primary_before_update.csv
+2026-04-29 22:11:47  INFO      ============================================================
+2026-04-29 22:11:49  INFO      Logging to logs/OE/predict_primary_2026-04-29.log
+2026-04-29 22:11:49  INFO      ============================================================
+2026-04-29 22:11:49  INFO      PREDICT PRIMARY — OE
+2026-04-29 22:11:49  INFO        input:      deliverables/KT_demo/demo_data/predict/OE/OE_predict_50.csv
+2026-04-29 22:11:49  INFO        sequenced:  False
+2026-04-29 22:11:49  INFO        user_level: grand mean
+2026-04-29 22:11:49  INFO      ============================================================
+2026-04-29 22:11:49  INFO        WorkCode detected: 20
+2026-04-29 22:11:49  INFO        Tasks: 50
+2026-04-29 22:11:49  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-29 22:11:49  INFO      
+  Tasks:              50
+2026-04-29 22:11:49  INFO        Predicted total:    2363.2s  (39.39 min)
+2026-04-29 22:11:49  INFO        Prediction interval:2029.8s – 4334.1s  (33.83 – 72.24 min)
+2026-04-29 22:11:49  INFO      
+  Output saved: deliverables/KT_demo/demo_outputs/OE_primary_after_update.csv
+2026-04-29 22:11:49  INFO      ============================================================
+2026-04-29 22:12:11  INFO      Logging to logs/OE/predict_primary_2026-04-29.log
+2026-04-29 22:12:11  INFO      ============================================================
+2026-04-29 22:12:11  INFO      PREDICT PRIMARY — OE
+2026-04-29 22:12:11  INFO        input:      deliverables/KT_demo/demo_data/predict/OE/OE_predict_50.csv
+2026-04-29 22:12:11  INFO        sequenced:  False
+2026-04-29 22:12:11  INFO        user_level: grand mean
+2026-04-29 22:12:11  INFO      ============================================================
+2026-04-29 22:12:11  INFO        WorkCode detected: 20
+2026-04-29 22:12:11  INFO        Tasks: 50
+2026-04-29 22:12:11  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-29 22:12:11  INFO      
+  Tasks:              50
+2026-04-29 22:12:11  INFO        Predicted total:    1743.0s  (29.05 min)
+2026-04-29 22:12:11  INFO        Prediction interval:1483.5s – 3264.6s  (24.73 – 54.41 min)
+2026-04-29 22:12:11  INFO      
+  Output saved: deliverables/KT_demo/demo_outputs/OE_primary_before_update.csv
+2026-04-29 22:12:11  INFO      ============================================================
+2026-04-29 22:12:13  INFO      Logging to logs/OE/predict_primary_2026-04-29.log
+2026-04-29 22:12:13  INFO      ============================================================
+2026-04-29 22:12:13  INFO      PREDICT PRIMARY — OE
+2026-04-29 22:12:13  INFO        input:      deliverables/KT_demo/demo_data/predict/OE/OE_predict_50.csv
+2026-04-29 22:12:13  INFO        sequenced:  False
+2026-04-29 22:12:13  INFO        user_level: grand mean
+2026-04-29 22:12:13  INFO      ============================================================
+2026-04-29 22:12:14  INFO        WorkCode detected: 20
+2026-04-29 22:12:14  INFO        Tasks: 50
+2026-04-29 22:12:14  INFO        No user level supplied — using grand mean (effect = 0.0)
+2026-04-29 22:12:14  INFO      
+  Tasks:              50
+2026-04-29 22:12:14  INFO        Predicted total:    1738.9s  (28.98 min)
+2026-04-29 22:12:14  INFO        Prediction interval:1480.5s – 3260.7s  (24.67 – 54.35 min)
+2026-04-29 22:12:14  INFO      
+  Output saved: deliverables/KT_demo/demo_outputs/OE_primary_after_update.csv
+2026-04-29 22:12:14  INFO      ============================================================
