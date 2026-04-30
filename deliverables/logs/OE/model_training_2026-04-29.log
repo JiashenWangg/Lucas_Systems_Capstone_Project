@@ -1,0 +1,134 @@
+2026-04-29 21:37:14  INFO      Logging to logs/OE/model_training_2026-04-29.log
+2026-04-29 21:37:14  INFO      ============================================================
+2026-04-29 21:37:14  INFO      MODEL TRAINING — OE
+2026-04-29 21:37:14  INFO        sequenced  = False
+2026-04-29 21:37:14  INFO        trees      = 1
+2026-04-29 21:37:14  INFO        min_rows   = 999999
+2026-04-29 21:37:14  INFO        min_days   = 3
+2026-04-29 21:37:14  INFO        cv_tuning  = False
+2026-04-29 21:37:14  INFO      ============================================================
+2026-04-29 21:37:14  INFO      WorkCodes found: ['10', '20', '30']
+2026-04-29 21:37:14  INFO      
+--------------------------------------------------
+2026-04-29 21:37:14  INFO      WorkCode 10
+2026-04-29 21:37:14  INFO        Encodings computed from 4,820 rows (WC 10, sequenced=False)
+2026-04-29 21:37:14  INFO        Only 4,820 rows — below min_rows=999999. Skipping.
+2026-04-29 21:37:14  INFO      
+--------------------------------------------------
+2026-04-29 21:37:14  INFO      WorkCode 20
+2026-04-29 21:37:14  INFO        Encodings computed from 22,019 rows (WC 20, sequenced=False)
+2026-04-29 21:37:14  INFO        Only 22,019 rows — below min_rows=999999. Skipping.
+2026-04-29 21:37:14  INFO      
+--------------------------------------------------
+2026-04-29 21:37:14  INFO      WorkCode 30
+2026-04-29 21:37:14  INFO        Encodings computed from 66,454 rows (WC 30, sequenced=False)
+2026-04-29 21:37:14  INFO        Only 66,454 rows — below min_rows=999999. Skipping.
+2026-04-29 21:37:14  INFO      
+meta.pkl saved: /tmp/model_training_smoke/OE/meta.pkl
+2026-04-29 21:37:14  INFO      
+============================================================
+2026-04-29 21:37:14  INFO      TRAINING COMPLETE — OE
+2026-04-29 21:37:14  INFO      ============================================================
+2026-04-29 21:37:14  INFO        WorkCodes trained:  []
+2026-04-29 21:37:14  INFO        WorkCodes skipped:  ['10', '20', '30']
+2026-04-29 21:37:14  INFO        sequenced:          False
+2026-04-29 21:37:14  INFO        Trees per model:    1
+2026-04-29 21:37:14  INFO      ============================================================
+2026-04-29 21:40:56  INFO      Logging to logs/OE/model_training_2026-04-29.log
+2026-04-29 21:40:56  INFO      ============================================================
+2026-04-29 21:40:56  INFO      MODEL TRAINING — OE
+2026-04-29 21:40:56  INFO        sequenced  = False
+2026-04-29 21:40:56  INFO        trees      = 1
+2026-04-29 21:40:56  INFO        min_rows   = 500
+2026-04-29 21:40:56  INFO        min_days   = 3
+2026-04-29 21:40:56  INFO        cv_tuning  = False
+2026-04-29 21:40:56  INFO      ============================================================
+2026-04-29 21:40:57  INFO      WorkCodes found: ['10', '20', '30']
+2026-04-29 21:40:57  INFO      
+--------------------------------------------------
+2026-04-29 21:40:57  INFO      WorkCode 10
+2026-04-29 21:40:57  INFO        Encodings computed from 4,820 rows (WC 10, sequenced=False)
+2026-04-29 21:40:57  INFO        Rows: 4,820
+2026-04-29 21:40:57  INFO        Estimating worker effects ...
+2026-04-29 21:40:57  INFO        CV disabled — training with baseline params (rounds=1).
+2026-04-29 21:40:57  INFO        Done in 0.0s
+2026-04-29 21:40:57  INFO        Training LB model (quantile_alpha=0.0250) ...
+2026-04-29 21:40:57  INFO        Training UB model (quantile_alpha=0.9750) ...
+2026-04-29 21:40:57  INFO        Model saved: /tmp/model_training_full_smoke/OE/OE_WC10.json
+2026-04-29 21:40:57  INFO        Model saved: /tmp/model_training_full_smoke/OE/OE_WC10LB.json
+2026-04-29 21:40:57  INFO        Model saved: /tmp/model_training_full_smoke/OE/OE_WC10UB.json
+2026-04-29 21:40:57  INFO        Workers: 17  |  Levels — L1: 4  L2: 3  L3: 3  L4: 3  L5: 4  |  Days seen: 8
+2026-04-29 21:40:57  INFO      
+--------------------------------------------------
+2026-04-29 21:40:57  INFO      WorkCode 20
+2026-04-29 21:40:57  INFO        Encodings computed from 22,019 rows (WC 20, sequenced=False)
+2026-04-29 21:40:57  INFO        Rows: 22,019
+2026-04-29 21:40:57  INFO        Estimating worker effects ...
+2026-04-29 21:40:57  INFO        CV disabled — training with baseline params (rounds=1).
+2026-04-29 21:40:57  INFO        Done in 0.0s
+2026-04-29 21:40:57  INFO        Training LB model (quantile_alpha=0.0250) ...
+2026-04-29 21:40:57  INFO        Training UB model (quantile_alpha=0.9750) ...
+2026-04-29 21:40:57  INFO        Model saved: /tmp/model_training_full_smoke/OE/OE_WC20.json
+2026-04-29 21:40:57  INFO        Model saved: /tmp/model_training_full_smoke/OE/OE_WC20LB.json
+2026-04-29 21:40:57  INFO        Model saved: /tmp/model_training_full_smoke/OE/OE_WC20UB.json
+2026-04-29 21:40:57  INFO        Workers: 23  |  Levels — L1: 5  L2: 4  L3: 5  L4: 4  L5: 5  |  Days seen: 8
+2026-04-29 21:40:57  INFO      
+--------------------------------------------------
+2026-04-29 21:40:57  INFO      WorkCode 30
+2026-04-29 21:40:57  INFO        Encodings computed from 66,454 rows (WC 30, sequenced=False)
+2026-04-29 21:40:58  INFO        Rows: 66,454
+2026-04-29 21:40:58  INFO        Estimating worker effects ...
+2026-04-29 21:40:58  INFO        CV disabled — training with baseline params (rounds=1).
+2026-04-29 21:40:58  INFO        Done in 0.1s
+2026-04-29 21:40:58  INFO        Training LB model (quantile_alpha=0.0250) ...
+2026-04-29 21:40:58  INFO        Training UB model (quantile_alpha=0.9750) ...
+2026-04-29 21:40:58  INFO        Model saved: /tmp/model_training_full_smoke/OE/OE_WC30.json
+2026-04-29 21:40:58  INFO        Model saved: /tmp/model_training_full_smoke/OE/OE_WC30LB.json
+2026-04-29 21:40:58  INFO        Model saved: /tmp/model_training_full_smoke/OE/OE_WC30UB.json
+2026-04-29 21:40:58  INFO        Workers: 37  |  Levels — L1: 8  L2: 7  L3: 7  L4: 7  L5: 8  |  Days seen: 8
+2026-04-29 21:40:58  INFO      
+meta.pkl saved: /tmp/model_training_full_smoke/OE/meta.pkl
+2026-04-29 21:40:58  INFO      
+============================================================
+2026-04-29 21:40:58  INFO      TRAINING COMPLETE — OE
+2026-04-29 21:40:58  INFO      ============================================================
+2026-04-29 21:40:58  INFO        WorkCodes trained:  ['10', '20', '30']
+2026-04-29 21:40:58  INFO        sequenced:          False
+2026-04-29 21:40:58  INFO        Trees per model:    1
+2026-04-29 21:40:58  INFO      ============================================================
+2026-04-29 21:41:04  INFO      Logging to logs/OE/model_training_2026-04-29.log
+2026-04-29 21:41:04  INFO      ============================================================
+2026-04-29 21:41:04  INFO      MODEL TRAINING — OE
+2026-04-29 21:41:04  INFO        sequenced  = True
+2026-04-29 21:41:04  INFO        trees      = 1
+2026-04-29 21:41:04  INFO        min_rows   = 500
+2026-04-29 21:41:04  INFO        min_days   = 3
+2026-04-29 21:41:04  INFO        cv_tuning  = False
+2026-04-29 21:41:04  INFO      ============================================================
+2026-04-29 21:41:04  INFO      WorkCodes found: ['10', '20', '30']
+2026-04-29 21:41:04  INFO      
+--------------------------------------------------
+2026-04-29 21:41:04  INFO      WorkCode 10
+2026-04-29 21:41:04  INFO        Encodings computed from 4,820 rows (WC 10, sequenced=True)
+2026-04-29 21:41:04  WARNING     Could not load WC 10: 'Prev_Aisle' — skipping
+2026-04-29 21:41:04  INFO      
+--------------------------------------------------
+2026-04-29 21:41:04  INFO      WorkCode 20
+2026-04-29 21:41:04  INFO        Encodings computed from 22,019 rows (WC 20, sequenced=True)
+2026-04-29 21:41:04  WARNING     Could not load WC 20: 'Prev_Aisle' — skipping
+2026-04-29 21:41:04  INFO      
+--------------------------------------------------
+2026-04-29 21:41:04  INFO      WorkCode 30
+2026-04-29 21:41:04  INFO        Encodings computed from 66,454 rows (WC 30, sequenced=True)
+2026-04-29 21:41:05  WARNING     Could not load WC 30: 'Prev_Aisle' — skipping
+2026-04-29 21:41:05  INFO      
+meta.pkl saved: /tmp/model_training_seq_smoke/OE/meta.pkl
+2026-04-29 21:41:05  INFO      
+============================================================
+2026-04-29 21:41:05  INFO      TRAINING COMPLETE — OE
+2026-04-29 21:41:05  INFO      ============================================================
+2026-04-29 21:41:05  INFO        WorkCodes trained:  []
+2026-04-29 21:41:05  INFO        WorkCodes skipped:  ['10', '20', '30']
+2026-04-29 21:41:05  INFO        sequenced:          True
+2026-04-29 21:41:05  INFO        Trees per model:    1
+2026-04-29 21:41:05  INFO      ============================================================

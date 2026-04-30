@@ -1,0 +1,124 @@
+2026-04-29 22:11:45  INFO      Logging to logs/OE/model_training_2026-04-29.log
+2026-04-29 22:11:45  INFO      ============================================================
+2026-04-29 22:11:45  INFO      MODEL TRAINING — OE
+2026-04-29 22:11:45  INFO        sequenced  = False
+2026-04-29 22:11:45  INFO        trees      = 1
+2026-04-29 22:11:45  INFO        min_rows   = 500
+2026-04-29 22:11:45  INFO        min_days   = 3
+2026-04-29 22:11:45  INFO        cv_tuning  = False
+2026-04-29 22:11:45  INFO      ============================================================
+2026-04-29 22:11:45  INFO      WorkCodes found: ['10', '20', '30']
+2026-04-29 22:11:45  INFO      
+--------------------------------------------------
+2026-04-29 22:11:45  INFO      WorkCode 10
+2026-04-29 22:11:45  INFO        Encodings computed from 4,258 rows (WC 10, sequenced=False)
+2026-04-29 22:11:45  INFO        Rows: 4,258
+2026-04-29 22:11:45  INFO        Estimating worker effects ...
+2026-04-29 22:11:45  INFO        CV disabled — training with baseline params (rounds=1).
+2026-04-29 22:11:45  INFO        Done in 0.0s
+2026-04-29 22:11:45  INFO        Training LB model (quantile_alpha=0.0250) ...
+2026-04-29 22:11:45  INFO        Training UB model (quantile_alpha=0.9750) ...
+2026-04-29 22:11:45  INFO        Model saved: deliverables/KT_demo/demo_models/OE/OE_WC10.json
+2026-04-29 22:11:45  INFO        Model saved: deliverables/KT_demo/demo_models/OE/OE_WC10LB.json
+2026-04-29 22:11:45  INFO        Model saved: deliverables/KT_demo/demo_models/OE/OE_WC10UB.json
+2026-04-29 22:11:45  INFO        Workers: 16  |  Levels — L1: 3  L2: 3  L3: 3  L4: 3  L5: 4  |  Days seen: 7
+2026-04-29 22:11:45  INFO      
+--------------------------------------------------
+2026-04-29 22:11:45  INFO      WorkCode 20
+2026-04-29 22:11:45  INFO        Encodings computed from 18,885 rows (WC 20, sequenced=False)
+2026-04-29 22:11:45  INFO        Rows: 18,885
+2026-04-29 22:11:45  INFO        Estimating worker effects ...
+2026-04-29 22:11:46  INFO        CV disabled — training with baseline params (rounds=1).
+2026-04-29 22:11:46  INFO        Done in 0.0s
+2026-04-29 22:11:46  INFO        Training LB model (quantile_alpha=0.0250) ...
+2026-04-29 22:11:46  INFO        Training UB model (quantile_alpha=0.9750) ...
+2026-04-29 22:11:46  INFO        Model saved: deliverables/KT_demo/demo_models/OE/OE_WC20.json
+2026-04-29 22:11:46  INFO        Model saved: deliverables/KT_demo/demo_models/OE/OE_WC20LB.json
+2026-04-29 22:11:46  INFO        Model saved: deliverables/KT_demo/demo_models/OE/OE_WC20UB.json
+2026-04-29 22:11:46  INFO        Workers: 23  |  Levels — L1: 5  L2: 4  L3: 5  L4: 4  L5: 5  |  Days seen: 7
+2026-04-29 22:11:46  INFO      
+--------------------------------------------------
+2026-04-29 22:11:46  INFO      WorkCode 30
+2026-04-29 22:11:46  INFO        Encodings computed from 59,472 rows (WC 30, sequenced=False)
+2026-04-29 22:11:46  INFO        Rows: 59,472
+2026-04-29 22:11:46  INFO        Estimating worker effects ...
+2026-04-29 22:11:46  INFO        CV disabled — training with baseline params (rounds=1).
+2026-04-29 22:11:46  INFO        Done in 0.1s
+2026-04-29 22:11:46  INFO        Training LB model (quantile_alpha=0.0250) ...
+2026-04-29 22:11:46  INFO        Training UB model (quantile_alpha=0.9750) ...
+2026-04-29 22:11:46  INFO        Model saved: deliverables/KT_demo/demo_models/OE/OE_WC30.json
+2026-04-29 22:11:46  INFO        Model saved: deliverables/KT_demo/demo_models/OE/OE_WC30LB.json
+2026-04-29 22:11:46  INFO        Model saved: deliverables/KT_demo/demo_models/OE/OE_WC30UB.json
+2026-04-29 22:11:46  INFO        Workers: 37  |  Levels — L1: 8  L2: 7  L3: 7  L4: 7  L5: 8  |  Days seen: 7
+2026-04-29 22:11:46  INFO      
+meta.pkl saved: deliverables/KT_demo/demo_models/OE/meta.pkl
+2026-04-29 22:11:46  INFO      
+============================================================
+2026-04-29 22:11:46  INFO      TRAINING COMPLETE — OE
+2026-04-29 22:11:46  INFO      ============================================================
+2026-04-29 22:11:46  INFO        WorkCodes trained:  ['10', '20', '30']
+2026-04-29 22:11:46  INFO        sequenced:          False
+2026-04-29 22:11:46  INFO        Trees per model:    1
+2026-04-29 22:11:46  INFO      ============================================================
+2026-04-29 22:12:04  INFO      Logging to logs/OE/model_training_2026-04-29.log
+2026-04-29 22:12:04  INFO      ============================================================
+2026-04-29 22:12:04  INFO      MODEL TRAINING — OE
+2026-04-29 22:12:04  INFO        sequenced  = False
+2026-04-29 22:12:04  INFO        trees      = 300
+2026-04-29 22:12:04  INFO        min_rows   = 500
+2026-04-29 22:12:04  INFO        min_days   = 3
+2026-04-29 22:12:04  INFO        cv_tuning  = False
+2026-04-29 22:12:04  INFO      ============================================================
+2026-04-29 22:12:04  INFO      WorkCodes found: ['10', '20', '30']
+2026-04-29 22:12:04  INFO      
+--------------------------------------------------
+2026-04-29 22:12:04  INFO      WorkCode 10
+2026-04-29 22:12:04  INFO        Encodings computed from 4,258 rows (WC 10, sequenced=False)
+2026-04-29 22:12:04  INFO        Rows: 4,258
+2026-04-29 22:12:04  INFO        Estimating worker effects ...
+2026-04-29 22:12:04  INFO        CV disabled — training with baseline params (rounds=300).
+2026-04-29 22:12:04  INFO        Done in 0.1s
+2026-04-29 22:12:04  INFO        Training LB model (quantile_alpha=0.0250) ...
+2026-04-29 22:12:04  INFO        Training UB model (quantile_alpha=0.9750) ...
+2026-04-29 22:12:04  INFO        Model saved: deliverables/KT_demo/demo_models/OE/OE_WC10.json
+2026-04-29 22:12:04  INFO        Model saved: deliverables/KT_demo/demo_models/OE/OE_WC10LB.json
+2026-04-29 22:12:04  INFO        Model saved: deliverables/KT_demo/demo_models/OE/OE_WC10UB.json
+2026-04-29 22:12:04  INFO        Workers: 16  |  Levels — L1: 3  L2: 3  L3: 3  L4: 3  L5: 4  |  Days seen: 7
+2026-04-29 22:12:04  INFO      
+--------------------------------------------------
+2026-04-29 22:12:04  INFO      WorkCode 20
+2026-04-29 22:12:04  INFO        Encodings computed from 18,885 rows (WC 20, sequenced=False)
+2026-04-29 22:12:04  INFO        Rows: 18,885
+2026-04-29 22:12:04  INFO        Estimating worker effects ...
+2026-04-29 22:12:05  INFO        CV disabled — training with baseline params (rounds=300).
+2026-04-29 22:12:05  INFO        Done in 0.4s
+2026-04-29 22:12:05  INFO        Training LB model (quantile_alpha=0.0250) ...
+2026-04-29 22:12:06  INFO        Training UB model (quantile_alpha=0.9750) ...
+2026-04-29 22:12:06  INFO        Model saved: deliverables/KT_demo/demo_models/OE/OE_WC20.json
+2026-04-29 22:12:06  INFO        Model saved: deliverables/KT_demo/demo_models/OE/OE_WC20LB.json
+2026-04-29 22:12:06  INFO        Model saved: deliverables/KT_demo/demo_models/OE/OE_WC20UB.json
+2026-04-29 22:12:06  INFO        Workers: 23  |  Levels — L1: 5  L2: 4  L3: 5  L4: 4  L5: 5  |  Days seen: 7
+2026-04-29 22:12:06  INFO      
+--------------------------------------------------
+2026-04-29 22:12:06  INFO      WorkCode 30
+2026-04-29 22:12:07  INFO        Encodings computed from 59,472 rows (WC 30, sequenced=False)
+2026-04-29 22:12:07  INFO        Rows: 59,472
+2026-04-29 22:12:07  INFO        Estimating worker effects ...
+2026-04-29 22:12:07  INFO        CV disabled — training with baseline params (rounds=300).
+2026-04-29 22:12:07  INFO        Done in 0.5s
+2026-04-29 22:12:07  INFO        Training LB model (quantile_alpha=0.0250) ...
+2026-04-29 22:12:09  INFO        Training UB model (quantile_alpha=0.9750) ...
+2026-04-29 22:12:10  INFO        Model saved: deliverables/KT_demo/demo_models/OE/OE_WC30.json
+2026-04-29 22:12:10  INFO        Model saved: deliverables/KT_demo/demo_models/OE/OE_WC30LB.json
+2026-04-29 22:12:10  INFO        Model saved: deliverables/KT_demo/demo_models/OE/OE_WC30UB.json
+2026-04-29 22:12:10  INFO        Workers: 37  |  Levels — L1: 8  L2: 7  L3: 7  L4: 7  L5: 8  |  Days seen: 7
+2026-04-29 22:12:10  INFO      
+meta.pkl saved: deliverables/KT_demo/demo_models/OE/meta.pkl
+2026-04-29 22:12:10  INFO      
+============================================================
+2026-04-29 22:12:10  INFO      TRAINING COMPLETE — OE
+2026-04-29 22:12:10  INFO      ============================================================
+2026-04-29 22:12:10  INFO        WorkCodes trained:  ['10', '20', '30']
+2026-04-29 22:12:10  INFO        sequenced:          False
+2026-04-29 22:12:10  INFO        Trees per model:    300
+2026-04-29 22:12:10  INFO      ============================================================

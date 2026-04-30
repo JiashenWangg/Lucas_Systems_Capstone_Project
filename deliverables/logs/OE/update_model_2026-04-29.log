@@ -1,0 +1,55 @@
+2026-04-29 21:38:29  INFO      Logging to logs/OE/update_model_2026-04-29.log
+2026-04-29 21:38:29  INFO      ============================================================
+2026-04-29 21:38:29  INFO      UPDATE MODEL — OE  (2026-04-29)
+2026-04-29 21:38:29  INFO        new_data   = training_data/OE/OE_activity_lastday.csv
+2026-04-29 21:38:29  INFO        trees/run  = 1  |  adaptive lr by m/n ratio
+2026-04-29 21:38:29  INFO        alert_pct  = 20%
+2026-04-29 21:38:29  INFO        sequenced  = False
+2026-04-29 21:38:29  INFO      ============================================================
+2026-04-29 21:38:29  INFO      
+--------------------------------------------------
+2026-04-29 21:38:29  INFO      WorkCode 10
+2026-04-29 21:38:29  INFO       [OE WC10 new data] Time filter: 10,863 → 10,645 rows kept (p98 cut: -218, 600s cap: -0, total dropped: 218 = 2.0%)
+2026-04-29 21:38:29  INFO        New rows: 560
+2026-04-29 21:38:29  INFO        Days seen so far (n): 8  |  new batch days (m): 1  |  m/n=0.125  |  update lr: 0.008
+2026-04-29 21:38:29  INFO        All 11 workers seen in training
+2026-04-29 21:38:29  INFO        MAE before: 32.563s  |  Trees: 1200
+2026-04-29 21:38:29  INFO        Using CV-tuned params from meta.pkl
+2026-04-29 21:38:29  INFO        MAE after:  32.507s ↓  |  Trees: 1200 → 1201 (+1)
+2026-04-29 21:38:29  INFO        Baseline MAE set: 32.563s (first update run)
+2026-04-29 21:38:29  INFO        Trend: 2026-04-29 32.507s
+2026-04-29 21:38:29  INFO        Days seen after update: 8
+2026-04-29 21:38:29  INFO      
+--------------------------------------------------
+2026-04-29 21:38:29  INFO      WorkCode 20
+2026-04-29 21:38:29  INFO       [OE WC20 new data] Time filter: 10,863 → 10,645 rows kept (p98 cut: -218, 600s cap: -0, total dropped: 218 = 2.0%)
+2026-04-29 21:38:30  INFO        New rows: 3,120
+2026-04-29 21:38:30  INFO        Days seen so far (n): 8  |  new batch days (m): 1  |  m/n=0.125  |  update lr: 0.008
+2026-04-29 21:38:30  INFO        All 14 workers seen in training
+2026-04-29 21:38:30  INFO        MAE before: 48.827s  |  Trees: 1200
+2026-04-29 21:38:30  INFO        Using CV-tuned params from meta.pkl
+2026-04-29 21:38:30  INFO        MAE after:  48.816s ↓  |  Trees: 1200 → 1201 (+1)
+2026-04-29 21:38:30  INFO        Baseline MAE set: 48.827s (first update run)
+2026-04-29 21:38:30  INFO        Trend: 2026-04-29 48.816s
+2026-04-29 21:38:30  INFO        Days seen after update: 8
+2026-04-29 21:38:30  INFO      
+--------------------------------------------------
+2026-04-29 21:38:30  INFO      WorkCode 30
+2026-04-29 21:38:30  INFO       [OE WC30 new data] Time filter: 10,863 → 10,645 rows kept (p98 cut: -218, 600s cap: -0, total dropped: 218 = 2.0%)
+2026-04-29 21:38:30  INFO        New rows: 6,965
+2026-04-29 21:38:30  INFO        Days seen so far (n): 8  |  new batch days (m): 1  |  m/n=0.125  |  update lr: 0.008
+2026-04-29 21:38:30  INFO        All 28 workers seen in training
+2026-04-29 21:38:30  INFO        MAE before: 29.484s  |  Trees: 1200
+2026-04-29 21:38:30  INFO        Using CV-tuned params from meta.pkl
+2026-04-29 21:38:30  INFO        MAE after:  29.469s ↓  |  Trees: 1200 → 1201 (+1)
+2026-04-29 21:38:30  INFO        Baseline MAE set: 29.484s (first update run)
+2026-04-29 21:38:30  INFO        Trend: 2026-04-29 29.469s
+2026-04-29 21:38:30  INFO        Days seen after update: 8
+2026-04-29 21:38:30  INFO      
+============================================================
+2026-04-29 21:38:30  INFO      UPDATE COMPLETE — OE  (2026-04-29)
+2026-04-29 21:38:30  INFO      ============================================================
+2026-04-29 21:38:30  INFO        WorkCodes updated:  ['10', '20', '30']
+2026-04-29 21:38:30  INFO        New workers added:  0
+2026-04-29 21:38:30  INFO        Trees added/WC:     1  (adaptive lr by m/n)
+2026-04-29 21:38:30  INFO      ============================================================

@@ -1,0 +1,19 @@
+2026-04-29 21:36:58  INFO      Logging to logs/OE/eval_2026-04-29.log
+2026-04-29 21:36:58  INFO      ============================================================
+2026-04-29 21:36:58  INFO      EVAL — OE  goal=2  chunk=50
+2026-04-29 21:36:58  INFO        sequenced: False  |  test_pct: 0.2
+2026-04-29 21:36:58  INFO      ============================================================
+2026-04-29 21:36:58  INFO      Secondary goal evaluation is not yet implemented.
+2026-04-29 21:37:35  INFO      Logging to logs/OE/eval_2026-04-29.log
+2026-04-29 21:37:35  INFO      ============================================================
+2026-04-29 21:37:35  INFO      EVAL — OE  goal=1  chunk=50
+2026-04-29 21:37:35  INFO        sequenced: False  |  test_pct: 0.2
+2026-04-29 21:37:35  INFO      ============================================================
+2026-04-29 21:37:35  INFO      WorkCodes: ['10', '20', '30']
+2026-04-29 21:37:35  INFO      
+--------------------------------------------------
+2026-04-29 21:37:35  INFO      WorkCode 10
+2026-04-29 21:37:35  INFO        Encodings computed from 4,820 rows (WC 10, sequenced=False)
+2026-04-29 21:37:35  INFO        Train: 3,856 rows  |  Test: 964 rows
+2026-04-29 21:37:35  INFO        Encodings computed from 4,820 rows (WC 10, sequenced=False)
+2026-04-29 21:37:35  INFO        Training (1 trees) ...
